@@ -12,7 +12,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', '${PLUGIN_VERSION}', '--server', 'https://github.com/alexeyzimarev/pulumi-eventstorecloud/releases/download/0.0.1-alpha.1623235147+2e15515f.dirty'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', '${PLUGIN_VERSION}', '--server', 'https://github.com/alexeyzimarev/pulumi-eventstorecloud/releases/download/0.1.0'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print("""
