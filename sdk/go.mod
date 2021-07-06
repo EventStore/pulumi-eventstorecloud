@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/sdk
+module github.com/alexeyzimarev/pulumi-eventstorecloud/sdk
 
 go 1.14
 

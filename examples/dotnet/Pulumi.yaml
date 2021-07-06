@@ -1,0 +1,3 @@
+name: esc
+runtime: dotnet
+description: Event Store Cloud Example

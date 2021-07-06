@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package xyz
+package eventstorecloud
 
 import (
 	"fmt"
 	"path/filepath"
 	"unicode"
 
-	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
+	eventstorecloud "github.com/EventStore/terraform-provider-eventstorecloud/esc"
+	"github.com/alexeyzimarev/pulumi-eventstorecloud/provider/pkg/version"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv1 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v1"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
-	"github.com/terraform-providers/terraform-provider-xyz/xyz"
 )
 
 // all of the token components used below.
 const (
 	// packages:
-	mainPkg = "xyz"
+	mainPkg = "eventstorecloud"
 	// modules:
 	mainMod = "index" // the y module
 )
@@ -91,49 +91,31 @@ var managedByPulumi = &tfbridge.DefaultInfo{Value: "Managed by Pulumi"}
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv1.NewProvider(xyz.Provider().(*schema.Provider))
+	p := shimv1.NewProvider(eventstorecloud.Provider().(*schema.Provider))
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:           p,
-		Name:        "xyz",
-		Description: "A Pulumi package for creating and managing xyz cloud resources.",
-		Keywords:    []string{"pulumi", "xyz"},
-		License:     "Apache-2.0",
-		Homepage:    "https://pulumi.io",
-		Repository:  "https://github.com/pulumi/pulumi-xyz",
-		Config:      map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
-			// "region": {
-			// 	Type: makeType("region", "Region"),
-			// 	Default: &tfbridge.DefaultInfo{
-			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
-			// 	},
-			// },
-		},
+		P:                    p,
+		Name:                 "eventstorecloud",
+		Description:          "A Pulumi package for creating and managing eventstorecloud cloud resources.",
+		Keywords:             []string{"pulumi", "eventstorecloud"},
+		License:              "Apache-2.0",
+		Homepage:             "https://eventstore.com",
+		Repository:           "https://github.com/alexeyzimarev/pulumi-eventstorecloud",
+		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: makeResource(mainMod, "IamRole")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: makeResource(mainMod, "Certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: makeType(mainPkg, "Tags")},
-			// 	},
-			// },
+		Resources: map[string]*tfbridge.ResourceInfo{
+			"eventstorecloud_project":          {Tok: makeResource(mainMod, "Project")},
+			"eventstorecloud_network":          {Tok: makeResource(mainMod, "Network")},
+			"eventstorecloud_peering":          {Tok: makeResource(mainMod, "Peering")},
+			"eventstorecloud_managed_cluster":  {Tok: makeResource(mainMod, "ManagedCluster")},
+			"eventstorecloud_scheduled_backup": {Tok: makeResource(mainMod, "ScheduledBackup")},
+			"eventstorecloud_integration":      {Tok: makeResource(mainMod, "Integration")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
+			"eventstorecloud_project": {Tok: makeDataSource(mainMod, "getProject")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},
@@ -141,13 +123,8 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 				"@types/mime": "^2.0.0",
 			},
-			// See the documentation for tfbridge.OverlayInfo for how to lay out this
-			// section, or refer to the AWS provider. Delete this section if there are
-			// no overlay files.
-			//Overlay: &tfbridge.OverlayInfo{},
 		},
 		Python: &tfbridge.PythonInfo{
-			// List any Python dependencies and their version ranges
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
@@ -164,9 +141,10 @@ func Provider() tfbridge.ProviderInfo {
 		CSharp: &tfbridge.CSharpInfo{
 			PackageReferences: map[string]string{
 				"Pulumi":                       "3.*",
-				"System.Collections.Immutable": "1.6.0",
+				"System.Collections.Immutable": "5.0.0",
 			},
 		},
+		PluginDownloadURL: fmt.Sprintf("https://github.com/alexeyzimarev/pulumi-eventstorecloud/releases/download/%s", version.Version),
 	}
 
 	prov.SetAutonaming(255, "-")

@@ -1,0 +1,771 @@
+{
+    "name": "eventstorecloud",
+    "description": "A Pulumi package for creating and managing eventstorecloud cloud resources.",
+    "keywords": [
+        "pulumi",
+        "eventstorecloud"
+    ],
+    "homepage": "https://eventstore.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/terraform-providers/terraform-provider-eventstorecloud).",
+    "repository": "https://github.com/alexeyzimarev/pulumi-eventstorecloud",
+    "pluginDownloadURL": "https://github.com/alexeyzimarev/pulumi-eventstorecloud/releases/download/0.0.1-alpha.1623235147+2e15515f.dirty",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "config": {
+        "variables": {
+            "organizationId": {
+                "type": "string"
+            },
+            "token": {
+                "type": "string"
+            },
+            "tokenStore": {
+                "type": "string"
+            },
+            "url": {
+                "type": "string"
+            }
+        },
+        "defaults": [
+            "organizationId",
+            "token",
+            "tokenStore",
+            "url"
+        ]
+    },
+    "types": {
+        "eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata": {
+            "properties": {
+                "awsPeeringLinkId": {
+                    "type": "string"
+                },
+                "gcpNetworkId": {
+                    "type": "string"
+                },
+                "gcpNetworkName": {
+                    "type": "string"
+                },
+                "gcpProjectId": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "awsPeeringLinkId",
+                        "gcpNetworkId",
+                        "gcpNetworkName",
+                        "gcpProjectId"
+                    ]
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the eventstorecloud package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "organizationId": {
+                "type": "string"
+            },
+            "token": {
+                "type": "string"
+            },
+            "tokenStore": {
+                "type": "string"
+            },
+            "url": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "organizationId",
+            "token",
+            "tokenStore",
+            "url"
+        ],
+        "inputProperties": {
+            "organizationId": {
+                "type": "string"
+            },
+            "token": {
+                "type": "string"
+            },
+            "tokenStore": {
+                "type": "string"
+            },
+            "url": {
+                "type": "string"
+            }
+        },
+        "requiredInputs": [
+            "organizationId",
+            "token",
+            "tokenStore",
+            "url"
+        ]
+    },
+    "resources": {
+        "eventstorecloud:index/integration:Integration": {
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Data for the integration\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the integration\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project to which the integration applies\n"
+                }
+            },
+            "required": [
+                "data",
+                "description",
+                "projectId"
+            ],
+            "inputProperties": {
+                "data": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "pulumi.json#/Any"
+                    },
+                    "description": "Data for the integration\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the integration\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project to which the integration applies\n"
+                }
+            },
+            "requiredInputs": [
+                "data",
+                "description",
+                "projectId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Integration resources.\n",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "description": "Data for the integration\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human readable description of the integration\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "ID of the project to which the integration applies\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "eventstorecloud:index/managedCluster:ManagedCluster": {
+            "properties": {
+                "diskSize": {
+                    "type": "integer",
+                    "description": "Size of the data disks, in gigabytes\n"
+                },
+                "diskType": {
+                    "type": "string",
+                    "description": "Storage class of the data disks\n"
+                },
+                "dnsName": {
+                    "type": "string",
+                    "description": "DNS address of the cluster\n"
+                },
+                "instanceType": {
+                    "type": "string",
+                    "description": "Instance Type of the managed cluster\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the managed cluster\n"
+                },
+                "networkId": {
+                    "type": "string",
+                    "description": "ID of the network in which the managed cluster exists\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project in which the managed cluster exists\n"
+                },
+                "projectionLevel": {
+                    "type": "string",
+                    "description": "Determines whether to run no projections, system projections only, or system and user projections\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region in which the cluster was created. Determined by the region of the Network\n"
+                },
+                "resourceProvider": {
+                    "type": "string",
+                    "description": "Provider in which the cluster was created. Determined by the provider of the Network.\n"
+                },
+                "serverVersion": {
+                    "type": "string",
+                    "description": "Server version to provision\n"
+                },
+                "topology": {
+                    "type": "string",
+                    "description": "Topology of the managed cluster\n"
+                }
+            },
+            "required": [
+                "diskSize",
+                "diskType",
+                "dnsName",
+                "instanceType",
+                "name",
+                "networkId",
+                "projectId",
+                "region",
+                "resourceProvider",
+                "serverVersion",
+                "topology"
+            ],
+            "inputProperties": {
+                "diskSize": {
+                    "type": "integer",
+                    "description": "Size of the data disks, in gigabytes\n"
+                },
+                "diskType": {
+                    "type": "string",
+                    "description": "Storage class of the data disks\n"
+                },
+                "instanceType": {
+                    "type": "string",
+                    "description": "Instance Type of the managed cluster\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the managed cluster\n"
+                },
+                "networkId": {
+                    "type": "string",
+                    "description": "ID of the network in which the managed cluster exists\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project in which the managed cluster exists\n"
+                },
+                "projectionLevel": {
+                    "type": "string",
+                    "description": "Determines whether to run no projections, system projections only, or system and user projections\n"
+                },
+                "serverVersion": {
+                    "type": "string",
+                    "description": "Server version to provision\n"
+                },
+                "topology": {
+                    "type": "string",
+                    "description": "Topology of the managed cluster\n"
+                }
+            },
+            "requiredInputs": [
+                "diskSize",
+                "diskType",
+                "instanceType",
+                "networkId",
+                "projectId",
+                "serverVersion",
+                "topology"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ManagedCluster resources.\n",
+                "properties": {
+                    "diskSize": {
+                        "type": "integer",
+                        "description": "Size of the data disks, in gigabytes\n"
+                    },
+                    "diskType": {
+                        "type": "string",
+                        "description": "Storage class of the data disks\n"
+                    },
+                    "dnsName": {
+                        "type": "string",
+                        "description": "DNS address of the cluster\n"
+                    },
+                    "instanceType": {
+                        "type": "string",
+                        "description": "Instance Type of the managed cluster\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the managed cluster\n"
+                    },
+                    "networkId": {
+                        "type": "string",
+                        "description": "ID of the network in which the managed cluster exists\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "ID of the project in which the managed cluster exists\n"
+                    },
+                    "projectionLevel": {
+                        "type": "string",
+                        "description": "Determines whether to run no projections, system projections only, or system and user projections\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Region in which the cluster was created. Determined by the region of the Network\n"
+                    },
+                    "resourceProvider": {
+                        "type": "string",
+                        "description": "Provider in which the cluster was created. Determined by the provider of the Network.\n"
+                    },
+                    "serverVersion": {
+                        "type": "string",
+                        "description": "Server version to provision\n"
+                    },
+                    "topology": {
+                        "type": "string",
+                        "description": "Topology of the managed cluster\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "eventstorecloud:index/network:Network": {
+            "properties": {
+                "cidrBlock": {
+                    "type": "string",
+                    "description": "Address space of the network in CIDR block notation\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Human-friendly name for the network\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Project ID\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Provider region in which to provision the network\n"
+                },
+                "resourceProvider": {
+                    "type": "string",
+                    "description": "Cloud Provider in which to provision the network.\n"
+                }
+            },
+            "required": [
+                "cidrBlock",
+                "name",
+                "projectId",
+                "region",
+                "resourceProvider"
+            ],
+            "inputProperties": {
+                "cidrBlock": {
+                    "type": "string",
+                    "description": "Address space of the network in CIDR block notation\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Human-friendly name for the network\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Project ID\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Provider region in which to provision the network\n"
+                },
+                "resourceProvider": {
+                    "type": "string",
+                    "description": "Cloud Provider in which to provision the network.\n"
+                }
+            },
+            "requiredInputs": [
+                "cidrBlock",
+                "projectId",
+                "region",
+                "resourceProvider"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Network resources.\n",
+                "properties": {
+                    "cidrBlock": {
+                        "type": "string",
+                        "description": "Address space of the network in CIDR block notation\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Human-friendly name for the network\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "Project ID\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Provider region in which to provision the network\n"
+                    },
+                    "resourceProvider": {
+                        "type": "string",
+                        "description": "Cloud Provider in which to provision the network.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "eventstorecloud:index/peering:Peering": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Human-friendly name for the network\n"
+                },
+                "networkId": {
+                    "type": "string",
+                    "description": "Network ID\n"
+                },
+                "peerAccountId": {
+                    "type": "string",
+                    "description": "Account identifier in which to the peer network exists\n"
+                },
+                "peerNetworkId": {
+                    "type": "string",
+                    "description": "Network identifier of the peer network exists\n"
+                },
+                "peerNetworkRegion": {
+                    "type": "string",
+                    "description": "Provider region in which to the peer network exists\n"
+                },
+                "peerResourceProvider": {
+                    "type": "string",
+                    "description": "Cloud Provider in which the target network exists\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Project ID\n"
+                },
+                "providerMetadata": {
+                    "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata",
+                    "description": "Metadata about the remote end of the peering connection\n"
+                },
+                "routes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Routes to create from the Event Store network to the peer network\n"
+                }
+            },
+            "required": [
+                "name",
+                "networkId",
+                "peerAccountId",
+                "peerNetworkId",
+                "peerNetworkRegion",
+                "peerResourceProvider",
+                "projectId",
+                "providerMetadata",
+                "routes"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Human-friendly name for the network\n"
+                },
+                "networkId": {
+                    "type": "string",
+                    "description": "Network ID\n"
+                },
+                "peerAccountId": {
+                    "type": "string",
+                    "description": "Account identifier in which to the peer network exists\n"
+                },
+                "peerNetworkId": {
+                    "type": "string",
+                    "description": "Network identifier of the peer network exists\n"
+                },
+                "peerNetworkRegion": {
+                    "type": "string",
+                    "description": "Provider region in which to the peer network exists\n"
+                },
+                "peerResourceProvider": {
+                    "type": "string",
+                    "description": "Cloud Provider in which the target network exists\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Project ID\n"
+                },
+                "routes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Routes to create from the Event Store network to the peer network\n"
+                }
+            },
+            "requiredInputs": [
+                "networkId",
+                "peerAccountId",
+                "peerNetworkId",
+                "peerNetworkRegion",
+                "peerResourceProvider",
+                "projectId",
+                "routes"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Peering resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Human-friendly name for the network\n"
+                    },
+                    "networkId": {
+                        "type": "string",
+                        "description": "Network ID\n"
+                    },
+                    "peerAccountId": {
+                        "type": "string",
+                        "description": "Account identifier in which to the peer network exists\n"
+                    },
+                    "peerNetworkId": {
+                        "type": "string",
+                        "description": "Network identifier of the peer network exists\n"
+                    },
+                    "peerNetworkRegion": {
+                        "type": "string",
+                        "description": "Provider region in which to the peer network exists\n"
+                    },
+                    "peerResourceProvider": {
+                        "type": "string",
+                        "description": "Cloud Provider in which the target network exists\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "Project ID\n"
+                    },
+                    "providerMetadata": {
+                        "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata",
+                        "description": "Metadata about the remote end of the peering connection\n"
+                    },
+                    "routes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Routes to create from the Event Store network to the peer network\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "eventstorecloud:index/project:Project": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Human-friendly name for the project\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Human-friendly name for the project\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Project resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Human-friendly name for the project\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "eventstorecloud:index/scheduledBackup:ScheduledBackup": {
+            "properties": {
+                "backupDescription": {
+                    "type": "string",
+                    "description": "backup_description\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the job\n"
+                },
+                "maxBackupCount": {
+                    "type": "integer",
+                    "description": "The maximum number of backups to keep for this job\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project in which the backup exists\n"
+                },
+                "schedule": {
+                    "type": "string",
+                    "description": "Schedule for the backup, defined using restricted subset of cron\n"
+                },
+                "sourceClusterId": {
+                    "type": "string",
+                    "description": "the ID of the cluster to back up\n"
+                }
+            },
+            "required": [
+                "backupDescription",
+                "description",
+                "maxBackupCount",
+                "projectId",
+                "schedule",
+                "sourceClusterId"
+            ],
+            "inputProperties": {
+                "backupDescription": {
+                    "type": "string",
+                    "description": "backup_description\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the job\n"
+                },
+                "maxBackupCount": {
+                    "type": "integer",
+                    "description": "The maximum number of backups to keep for this job\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project in which the backup exists\n"
+                },
+                "schedule": {
+                    "type": "string",
+                    "description": "Schedule for the backup, defined using restricted subset of cron\n"
+                },
+                "sourceClusterId": {
+                    "type": "string",
+                    "description": "the ID of the cluster to back up\n"
+                }
+            },
+            "requiredInputs": [
+                "backupDescription",
+                "description",
+                "maxBackupCount",
+                "projectId",
+                "schedule",
+                "sourceClusterId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ScheduledBackup resources.\n",
+                "properties": {
+                    "backupDescription": {
+                        "type": "string",
+                        "description": "backup_description\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human readable description of the job\n"
+                    },
+                    "maxBackupCount": {
+                        "type": "integer",
+                        "description": "The maximum number of backups to keep for this job\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "ID of the project in which the backup exists\n"
+                    },
+                    "schedule": {
+                        "type": "string",
+                        "description": "Schedule for the backup, defined using restricted subset of cron\n"
+                    },
+                    "sourceClusterId": {
+                        "type": "string",
+                        "description": "the ID of the cluster to back up\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "eventstorecloud:index/getProject:getProject": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getProject.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getProject.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "id"
+                ]
+            }
+        }
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*",
+                "System.Collections.Immutable": "5.0.0"
+            }
+        },
+        "go": {
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing eventstorecloud cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-eventstorecloud)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-eventstorecloud` repo](https://github.com/terraform-providers/terraform-provider-eventstorecloud/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-eventstorecloud)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-eventstorecloud` repo](https://github.com/terraform-providers/terraform-provider-eventstorecloud/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    }
+}

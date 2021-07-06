@@ -9,5 +9,6 @@ sdk/nodejs/node_modules
 
 .idea/
 *.iml
+nuget/
 
 yarn.lock
