@@ -5,6 +5,7 @@ before:
   hooks:
   - make tfgen
   - make build_sdks
+  - make install_sdks
 builds:
 - binary: pulumi-resource-eventstorecloud
   dir: provider
