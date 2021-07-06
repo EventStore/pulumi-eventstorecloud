@@ -19,7 +19,7 @@ builds:
   - windows
   - linux
   ldflags:
-  - -X github.com/alexeyzimarev/pulumi-eventstorecloud/provider/pkg/version.Version={{.Tag}}
+  - -X github.com/EventStore/pulumi-eventstorecloud/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-eventstorecloud/
 changelog:
   skip: true

@@ -1,3 +1,3 @@
-module github.com/alexeyzimarev/pulumi-eventstorecloud/examples
+module github.com/EventStore/pulumi-eventstorecloud/examples
 
 go 1.16

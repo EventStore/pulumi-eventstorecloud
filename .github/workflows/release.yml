@@ -30,3 +30,6 @@ jobs:
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push NuGet package
+        run: |
+          dotnet nuget push nuget/**/*.nupkg --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}

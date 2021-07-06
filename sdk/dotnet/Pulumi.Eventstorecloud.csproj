@@ -4,10 +4,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Pulumi Corp.</Authors>
     <Company>Pulumi Corp.</Company>
-    <Description>A Pulumi package for creating and managing eventstorecloud cloud resources.</Description>
+    <Description>A Pulumi package for creating and managing Event Store Cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://eventstore.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/alexeyzimarev/pulumi-eventstorecloud</RepositoryUrl>
+    <RepositoryUrl>https://github.com/EventStore/pulumi-eventstorecloud</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
 
     <TargetFramework>netcoreapp3.1</TargetFramework>

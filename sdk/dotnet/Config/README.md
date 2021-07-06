@@ -1,1 +1,1 @@
-A Pulumi package for creating and managing eventstorecloud cloud resources.
+A Pulumi package for creating and managing Event Store Cloud resources.

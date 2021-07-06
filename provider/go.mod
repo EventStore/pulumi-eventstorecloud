@@ -1,4 +1,4 @@
-module github.com/alexeyzimarev/pulumi-eventstorecloud/provider
+module github.com/EventStore/pulumi-eventstorecloud/provider
 
 go 1.16
 

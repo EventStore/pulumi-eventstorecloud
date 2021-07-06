@@ -20,7 +20,7 @@ import (
 	"unicode"
 
 	eventstorecloud "github.com/EventStore/terraform-provider-eventstorecloud/esc"
-	"github.com/alexeyzimarev/pulumi-eventstorecloud/provider/pkg/version"
+	"github.com/EventStore/pulumi-eventstorecloud/provider/pkg/version"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
@@ -97,11 +97,11 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:                    p,
 		Name:                 "eventstorecloud",
-		Description:          "A Pulumi package for creating and managing eventstorecloud cloud resources.",
+		Description:          "A Pulumi package for creating and managing Event Store Cloud resources.",
 		Keywords:             []string{"pulumi", "eventstorecloud"},
 		License:              "Apache-2.0",
 		Homepage:             "https://eventstore.com",
-		Repository:           "https://github.com/alexeyzimarev/pulumi-eventstorecloud",
+		Repository:           "https://github.com/EventStore/pulumi-eventstorecloud",
 		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
 		Resources: map[string]*tfbridge.ResourceInfo{
@@ -144,7 +144,7 @@ func Provider() tfbridge.ProviderInfo {
 				"System.Collections.Immutable": "5.0.0",
 			},
 		},
-		PluginDownloadURL: fmt.Sprintf("https://github.com/alexeyzimarev/pulumi-eventstorecloud/releases/download/%s", version.Version),
+		PluginDownloadURL: fmt.Sprintf("https://github.com/EventStore/pulumi-eventstorecloud/releases/download/%s", version.Version),
 	}
 
 	prov.SetAutonaming(255, "-")

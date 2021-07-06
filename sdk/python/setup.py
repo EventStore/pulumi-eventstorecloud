@@ -12,7 +12,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', '${PLUGIN_VERSION}', '--server', 'https://github.com/alexeyzimarev/pulumi-eventstorecloud/releases/download/0.1.0'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', '${PLUGIN_VERSION}', '--server', 'https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.1+dirty'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print("""
@@ -36,7 +36,7 @@ def readme():
 
 setup(name='pulumi_eventstorecloud',
       version='${VERSION}',
-      description="A Pulumi package for creating and managing eventstorecloud cloud resources.",
+      description="A Pulumi package for creating and managing Event Store Cloud resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={
@@ -45,7 +45,7 @@ setup(name='pulumi_eventstorecloud',
       keywords='pulumi eventstorecloud',
       url='https://eventstore.com',
       project_urls={
-          'Repository': 'https://github.com/alexeyzimarev/pulumi-eventstorecloud'
+          'Repository': 'https://github.com/EventStore/pulumi-eventstorecloud'
       },
       license='Apache-2.0',
       packages=find_packages(),
