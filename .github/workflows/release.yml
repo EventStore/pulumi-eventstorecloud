@@ -28,11 +28,10 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist --debug
+          args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push NuGet package
         run: |
-          ls *
           dotnet nuget add source --username alexeyzimarev --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/EventStore/index.json"
           dotnet nuget push nuget/**/*.nupkg --source "github" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}

@@ -19,8 +19,8 @@ import (
 	"path/filepath"
 	"unicode"
 
-	eventstorecloud "github.com/EventStore/terraform-provider-eventstorecloud/esc"
 	"github.com/EventStore/pulumi-eventstorecloud/provider/pkg/version"
+	eventstorecloud "github.com/EventStore/terraform-provider-eventstorecloud/esc"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
