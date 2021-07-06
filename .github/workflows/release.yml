@@ -1,6 +1,8 @@
 name: Build and publish
 on:
   push:
+    branches:
+      - "main"
     tags:
       - '*'
 jobs:
@@ -8,29 +10,29 @@ jobs:
     name: build and publish
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Unshallow to restore tags
+      - name: Unshallow to restore tags
         run: git fetch --prune --unshallow
-      -
-        name: Set up Go
+      - name: Set up Go
         uses: actions/setup-go@v1
         with:
           go-version: 1.16.x
-      -
-        name: Install pulumictl
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x' 
+      - name: Install pulumictl
         run: curl -L https://github.com/pulumi/pulumictl/releases/download/v0.0.25/pulumictl-v0.0.25-linux-amd64.tar.gz | sudo tar zxv -C /usr/bin -f- pulumictl
-      -
-        name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v1
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist
+          args: release --rm-dist --debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push NuGet package
         run: |
+          ls *
           dotnet nuget add source --username alexeyzimarev --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/EventStore/index.json"
           dotnet nuget push nuget/**/*.nupkg --source "github" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}
