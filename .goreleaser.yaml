@@ -1,0 +1,32 @@
+archives:
+- id: archive
+  name_template: '{{ .Binary }}-v{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
+before:
+  hooks:
+  - make tfgen
+  - make build_sdks
+builds:
+- binary: pulumi-resource-eventstorecloud
+  dir: provider
+  env:
+  - CGO_ENABLED=0
+  - GO111MODULE=on
+  goarch:
+  - amd64
+  - arm64
+  goos:
+  - darwin
+  - windows
+  - linux
+  ldflags:
+  - -X github.com/alexeyzimarev/pulumi-eventstorecloud/provider/pkg/version.Version={{.Tag}}
+  main: ./cmd/pulumi-resource-eventstorecloud/
+changelog:
+  skip: true
+release:
+  disable: false
+  extra_files:
+    - glob: sdk/python/bin/dist/pulumi_eventstorecloud-*.tar.gz
+    - glob: nuget/*.nupkg
+snapshot:
+  name_template: '{{ .Tag }}-SNAPSHOT'
