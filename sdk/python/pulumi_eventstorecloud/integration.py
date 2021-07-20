@@ -129,7 +129,8 @@ class Integration(pulumi.CustomResource):
                  project_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a Integration resource with the given unique name, props, and options.
+        Manages integration resources, for example Slack or OpsGenie.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Mapping[str, Any]] data: Data for the integration
@@ -143,7 +144,8 @@ class Integration(pulumi.CustomResource):
                  args: IntegrationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Integration resource with the given unique name, props, and options.
+        Manages integration resources, for example Slack or OpsGenie.
+
         :param str resource_name: The name of the resource.
         :param IntegrationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

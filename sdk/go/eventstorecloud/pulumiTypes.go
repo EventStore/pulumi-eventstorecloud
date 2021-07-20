@@ -47,45 +47,29 @@ func (i PeeringProviderMetadataArgs) ToPeeringProviderMetadataOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(PeeringProviderMetadataOutput)
 }
 
-func (i PeeringProviderMetadataArgs) ToPeeringProviderMetadataPtrOutput() PeeringProviderMetadataPtrOutput {
-	return i.ToPeeringProviderMetadataPtrOutputWithContext(context.Background())
-}
-
-func (i PeeringProviderMetadataArgs) ToPeeringProviderMetadataPtrOutputWithContext(ctx context.Context) PeeringProviderMetadataPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PeeringProviderMetadataOutput).ToPeeringProviderMetadataPtrOutputWithContext(ctx)
-}
-
-// PeeringProviderMetadataPtrInput is an input type that accepts PeeringProviderMetadataArgs, PeeringProviderMetadataPtr and PeeringProviderMetadataPtrOutput values.
-// You can construct a concrete instance of `PeeringProviderMetadataPtrInput` via:
+// PeeringProviderMetadataArrayInput is an input type that accepts PeeringProviderMetadataArray and PeeringProviderMetadataArrayOutput values.
+// You can construct a concrete instance of `PeeringProviderMetadataArrayInput` via:
 //
-//          PeeringProviderMetadataArgs{...}
-//
-//  or:
-//
-//          nil
-type PeeringProviderMetadataPtrInput interface {
+//          PeeringProviderMetadataArray{ PeeringProviderMetadataArgs{...} }
+type PeeringProviderMetadataArrayInput interface {
 	pulumi.Input
 
-	ToPeeringProviderMetadataPtrOutput() PeeringProviderMetadataPtrOutput
-	ToPeeringProviderMetadataPtrOutputWithContext(context.Context) PeeringProviderMetadataPtrOutput
+	ToPeeringProviderMetadataArrayOutput() PeeringProviderMetadataArrayOutput
+	ToPeeringProviderMetadataArrayOutputWithContext(context.Context) PeeringProviderMetadataArrayOutput
 }
 
-type peeringProviderMetadataPtrType PeeringProviderMetadataArgs
+type PeeringProviderMetadataArray []PeeringProviderMetadataInput
 
-func PeeringProviderMetadataPtr(v *PeeringProviderMetadataArgs) PeeringProviderMetadataPtrInput {
-	return (*peeringProviderMetadataPtrType)(v)
+func (PeeringProviderMetadataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PeeringProviderMetadata)(nil)).Elem()
 }
 
-func (*peeringProviderMetadataPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**PeeringProviderMetadata)(nil)).Elem()
+func (i PeeringProviderMetadataArray) ToPeeringProviderMetadataArrayOutput() PeeringProviderMetadataArrayOutput {
+	return i.ToPeeringProviderMetadataArrayOutputWithContext(context.Background())
 }
 
-func (i *peeringProviderMetadataPtrType) ToPeeringProviderMetadataPtrOutput() PeeringProviderMetadataPtrOutput {
-	return i.ToPeeringProviderMetadataPtrOutputWithContext(context.Background())
-}
-
-func (i *peeringProviderMetadataPtrType) ToPeeringProviderMetadataPtrOutputWithContext(ctx context.Context) PeeringProviderMetadataPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(PeeringProviderMetadataPtrOutput)
+func (i PeeringProviderMetadataArray) ToPeeringProviderMetadataArrayOutputWithContext(ctx context.Context) PeeringProviderMetadataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PeeringProviderMetadataArrayOutput)
 }
 
 type PeeringProviderMetadataOutput struct{ *pulumi.OutputState }
@@ -102,15 +86,6 @@ func (o PeeringProviderMetadataOutput) ToPeeringProviderMetadataOutputWithContex
 	return o
 }
 
-func (o PeeringProviderMetadataOutput) ToPeeringProviderMetadataPtrOutput() PeeringProviderMetadataPtrOutput {
-	return o.ToPeeringProviderMetadataPtrOutputWithContext(context.Background())
-}
-
-func (o PeeringProviderMetadataOutput) ToPeeringProviderMetadataPtrOutputWithContext(ctx context.Context) PeeringProviderMetadataPtrOutput {
-	return o.ApplyT(func(v PeeringProviderMetadata) *PeeringProviderMetadata {
-		return &v
-	}).(PeeringProviderMetadataPtrOutput)
-}
 func (o PeeringProviderMetadataOutput) AwsPeeringLinkId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PeeringProviderMetadata) *string { return v.AwsPeeringLinkId }).(pulumi.StringPtrOutput)
 }
@@ -127,61 +102,27 @@ func (o PeeringProviderMetadataOutput) GcpProjectId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PeeringProviderMetadata) *string { return v.GcpProjectId }).(pulumi.StringPtrOutput)
 }
 
-type PeeringProviderMetadataPtrOutput struct{ *pulumi.OutputState }
+type PeeringProviderMetadataArrayOutput struct{ *pulumi.OutputState }
 
-func (PeeringProviderMetadataPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**PeeringProviderMetadata)(nil)).Elem()
+func (PeeringProviderMetadataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PeeringProviderMetadata)(nil)).Elem()
 }
 
-func (o PeeringProviderMetadataPtrOutput) ToPeeringProviderMetadataPtrOutput() PeeringProviderMetadataPtrOutput {
+func (o PeeringProviderMetadataArrayOutput) ToPeeringProviderMetadataArrayOutput() PeeringProviderMetadataArrayOutput {
 	return o
 }
 
-func (o PeeringProviderMetadataPtrOutput) ToPeeringProviderMetadataPtrOutputWithContext(ctx context.Context) PeeringProviderMetadataPtrOutput {
+func (o PeeringProviderMetadataArrayOutput) ToPeeringProviderMetadataArrayOutputWithContext(ctx context.Context) PeeringProviderMetadataArrayOutput {
 	return o
 }
 
-func (o PeeringProviderMetadataPtrOutput) Elem() PeeringProviderMetadataOutput {
-	return o.ApplyT(func(v *PeeringProviderMetadata) PeeringProviderMetadata { return *v }).(PeeringProviderMetadataOutput)
-}
-
-func (o PeeringProviderMetadataPtrOutput) AwsPeeringLinkId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PeeringProviderMetadata) *string {
-		if v == nil {
-			return nil
-		}
-		return v.AwsPeeringLinkId
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o PeeringProviderMetadataPtrOutput) GcpNetworkId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PeeringProviderMetadata) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GcpNetworkId
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o PeeringProviderMetadataPtrOutput) GcpNetworkName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PeeringProviderMetadata) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GcpNetworkName
-	}).(pulumi.StringPtrOutput)
-}
-
-func (o PeeringProviderMetadataPtrOutput) GcpProjectId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *PeeringProviderMetadata) *string {
-		if v == nil {
-			return nil
-		}
-		return v.GcpProjectId
-	}).(pulumi.StringPtrOutput)
+func (o PeeringProviderMetadataArrayOutput) Index(i pulumi.IntInput) PeeringProviderMetadataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PeeringProviderMetadata {
+		return vs[0].([]PeeringProviderMetadata)[vs[1].(int)]
+	}).(PeeringProviderMetadataOutput)
 }
 
 func init() {
 	pulumi.RegisterOutputType(PeeringProviderMetadataOutput{})
-	pulumi.RegisterOutputType(PeeringProviderMetadataPtrOutput{})
+	pulumi.RegisterOutputType(PeeringProviderMetadataArrayOutput{})
 }

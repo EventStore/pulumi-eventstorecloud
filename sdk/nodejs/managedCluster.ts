@@ -4,6 +4,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages EventStoreDB instances and clusters in Event Store Cloud
+ */
 export class ManagedCluster extends pulumi.CustomResource {
     /**
      * Get an existing ManagedCluster resource's state with the given name, ID, and optional extra
@@ -37,7 +40,7 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     public readonly diskSize!: pulumi.Output<number>;
     /**
-     * Storage class of the data disks
+     * Storage class of the data disks (find the list of valid values below)
      */
     public readonly diskType!: pulumi.Output<string>;
     /**
@@ -45,7 +48,7 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly dnsName!: pulumi.Output<string>;
     /**
-     * Instance Type of the managed cluster
+     * Instance type of the managed cluster (find the list of valid values below)
      */
     public readonly instanceType!: pulumi.Output<string>;
     /**
@@ -61,7 +64,7 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<string>;
     /**
-     * Determines whether to run no projections, system projections only, or system and user projections
+     * Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
      */
     public readonly projectionLevel!: pulumi.Output<string | undefined>;
     /**
@@ -73,11 +76,11 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly resourceProvider!: pulumi.Output<string>;
     /**
-     * Server version to provision
+     * Server version to provision (find the list of valid values below)
      */
     public readonly serverVersion!: pulumi.Output<string>;
     /**
-     * Topology of the managed cluster
+     * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
     public readonly topology!: pulumi.Output<string>;
 
@@ -158,7 +161,7 @@ export interface ManagedClusterState {
      */
     diskSize?: pulumi.Input<number>;
     /**
-     * Storage class of the data disks
+     * Storage class of the data disks (find the list of valid values below)
      */
     diskType?: pulumi.Input<string>;
     /**
@@ -166,7 +169,7 @@ export interface ManagedClusterState {
      */
     dnsName?: pulumi.Input<string>;
     /**
-     * Instance Type of the managed cluster
+     * Instance type of the managed cluster (find the list of valid values below)
      */
     instanceType?: pulumi.Input<string>;
     /**
@@ -182,7 +185,7 @@ export interface ManagedClusterState {
      */
     projectId?: pulumi.Input<string>;
     /**
-     * Determines whether to run no projections, system projections only, or system and user projections
+     * Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
      */
     projectionLevel?: pulumi.Input<string>;
     /**
@@ -194,11 +197,11 @@ export interface ManagedClusterState {
      */
     resourceProvider?: pulumi.Input<string>;
     /**
-     * Server version to provision
+     * Server version to provision (find the list of valid values below)
      */
     serverVersion?: pulumi.Input<string>;
     /**
-     * Topology of the managed cluster
+     * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
     topology?: pulumi.Input<string>;
 }
@@ -212,11 +215,11 @@ export interface ManagedClusterArgs {
      */
     diskSize: pulumi.Input<number>;
     /**
-     * Storage class of the data disks
+     * Storage class of the data disks (find the list of valid values below)
      */
     diskType: pulumi.Input<string>;
     /**
-     * Instance Type of the managed cluster
+     * Instance type of the managed cluster (find the list of valid values below)
      */
     instanceType: pulumi.Input<string>;
     /**
@@ -232,15 +235,15 @@ export interface ManagedClusterArgs {
      */
     projectId: pulumi.Input<string>;
     /**
-     * Determines whether to run no projections, system projections only, or system and user projections
+     * Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
      */
     projectionLevel?: pulumi.Input<string>;
     /**
-     * Server version to provision
+     * Server version to provision (find the list of valid values below)
      */
     serverVersion: pulumi.Input<string>;
     /**
-     * Topology of the managed cluster
+     * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
     topology: pulumi.Input<string>;
 }

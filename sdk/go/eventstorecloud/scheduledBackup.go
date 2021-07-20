@@ -11,6 +11,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Creates a new scheduled backup.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := eventstorecloud.NewScheduledBackup(ctx, "daily", &eventstorecloud.ScheduledBackupArgs{
+// 			ProjectId:         pulumi.Any(eventstorecloud_project.Example.Id),
+// 			Schedule:          pulumi.String("0 12 * * */1"),
+// 			Description:       pulumi.String("Creates a backup once a day at 12:00"),
+// 			SourceClusterId:   pulumi.Any(eventstorecloud_managed_cluster.Example.Id),
+// 			BackupDescription: pulumi.String("{cluster} Daily Backup {datetime:RFC3339}"),
+// 			MaxBackupCount:    pulumi.Int(3),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type ScheduledBackup struct {
 	pulumi.CustomResourceState
 

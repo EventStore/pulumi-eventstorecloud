@@ -11,16 +11,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages EventStoreDB instances and clusters in Event Store Cloud
 type ManagedCluster struct {
 	pulumi.CustomResourceState
 
 	// Size of the data disks, in gigabytes
 	DiskSize pulumi.IntOutput `pulumi:"diskSize"`
-	// Storage class of the data disks
+	// Storage class of the data disks (find the list of valid values below)
 	DiskType pulumi.StringOutput `pulumi:"diskType"`
 	// DNS address of the cluster
 	DnsName pulumi.StringOutput `pulumi:"dnsName"`
-	// Instance Type of the managed cluster
+	// Instance type of the managed cluster (find the list of valid values below)
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
 	// Name of the managed cluster
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -28,15 +29,15 @@ type ManagedCluster struct {
 	NetworkId pulumi.StringOutput `pulumi:"networkId"`
 	// ID of the project in which the managed cluster exists
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
-	// Determines whether to run no projections, system projections only, or system and user projections
+	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel pulumi.StringPtrOutput `pulumi:"projectionLevel"`
 	// Region in which the cluster was created. Determined by the region of the Network
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Provider in which the cluster was created. Determined by the provider of the Network.
 	ResourceProvider pulumi.StringOutput `pulumi:"resourceProvider"`
-	// Server version to provision
+	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringOutput `pulumi:"serverVersion"`
-	// Topology of the managed cluster
+	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology pulumi.StringOutput `pulumi:"topology"`
 }
 
@@ -92,11 +93,11 @@ func GetManagedCluster(ctx *pulumi.Context,
 type managedClusterState struct {
 	// Size of the data disks, in gigabytes
 	DiskSize *int `pulumi:"diskSize"`
-	// Storage class of the data disks
+	// Storage class of the data disks (find the list of valid values below)
 	DiskType *string `pulumi:"diskType"`
 	// DNS address of the cluster
 	DnsName *string `pulumi:"dnsName"`
-	// Instance Type of the managed cluster
+	// Instance type of the managed cluster (find the list of valid values below)
 	InstanceType *string `pulumi:"instanceType"`
 	// Name of the managed cluster
 	Name *string `pulumi:"name"`
@@ -104,26 +105,26 @@ type managedClusterState struct {
 	NetworkId *string `pulumi:"networkId"`
 	// ID of the project in which the managed cluster exists
 	ProjectId *string `pulumi:"projectId"`
-	// Determines whether to run no projections, system projections only, or system and user projections
+	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel *string `pulumi:"projectionLevel"`
 	// Region in which the cluster was created. Determined by the region of the Network
 	Region *string `pulumi:"region"`
 	// Provider in which the cluster was created. Determined by the provider of the Network.
 	ResourceProvider *string `pulumi:"resourceProvider"`
-	// Server version to provision
+	// Server version to provision (find the list of valid values below)
 	ServerVersion *string `pulumi:"serverVersion"`
-	// Topology of the managed cluster
+	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology *string `pulumi:"topology"`
 }
 
 type ManagedClusterState struct {
 	// Size of the data disks, in gigabytes
 	DiskSize pulumi.IntPtrInput
-	// Storage class of the data disks
+	// Storage class of the data disks (find the list of valid values below)
 	DiskType pulumi.StringPtrInput
 	// DNS address of the cluster
 	DnsName pulumi.StringPtrInput
-	// Instance Type of the managed cluster
+	// Instance type of the managed cluster (find the list of valid values below)
 	InstanceType pulumi.StringPtrInput
 	// Name of the managed cluster
 	Name pulumi.StringPtrInput
@@ -131,15 +132,15 @@ type ManagedClusterState struct {
 	NetworkId pulumi.StringPtrInput
 	// ID of the project in which the managed cluster exists
 	ProjectId pulumi.StringPtrInput
-	// Determines whether to run no projections, system projections only, or system and user projections
+	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel pulumi.StringPtrInput
 	// Region in which the cluster was created. Determined by the region of the Network
 	Region pulumi.StringPtrInput
 	// Provider in which the cluster was created. Determined by the provider of the Network.
 	ResourceProvider pulumi.StringPtrInput
-	// Server version to provision
+	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringPtrInput
-	// Topology of the managed cluster
+	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology pulumi.StringPtrInput
 }
 
@@ -150,9 +151,9 @@ func (ManagedClusterState) ElementType() reflect.Type {
 type managedClusterArgs struct {
 	// Size of the data disks, in gigabytes
 	DiskSize int `pulumi:"diskSize"`
-	// Storage class of the data disks
+	// Storage class of the data disks (find the list of valid values below)
 	DiskType string `pulumi:"diskType"`
-	// Instance Type of the managed cluster
+	// Instance type of the managed cluster (find the list of valid values below)
 	InstanceType string `pulumi:"instanceType"`
 	// Name of the managed cluster
 	Name *string `pulumi:"name"`
@@ -160,11 +161,11 @@ type managedClusterArgs struct {
 	NetworkId string `pulumi:"networkId"`
 	// ID of the project in which the managed cluster exists
 	ProjectId string `pulumi:"projectId"`
-	// Determines whether to run no projections, system projections only, or system and user projections
+	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel *string `pulumi:"projectionLevel"`
-	// Server version to provision
+	// Server version to provision (find the list of valid values below)
 	ServerVersion string `pulumi:"serverVersion"`
-	// Topology of the managed cluster
+	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology string `pulumi:"topology"`
 }
 
@@ -172,9 +173,9 @@ type managedClusterArgs struct {
 type ManagedClusterArgs struct {
 	// Size of the data disks, in gigabytes
 	DiskSize pulumi.IntInput
-	// Storage class of the data disks
+	// Storage class of the data disks (find the list of valid values below)
 	DiskType pulumi.StringInput
-	// Instance Type of the managed cluster
+	// Instance type of the managed cluster (find the list of valid values below)
 	InstanceType pulumi.StringInput
 	// Name of the managed cluster
 	Name pulumi.StringPtrInput
@@ -182,11 +183,11 @@ type ManagedClusterArgs struct {
 	NetworkId pulumi.StringInput
 	// ID of the project in which the managed cluster exists
 	ProjectId pulumi.StringInput
-	// Determines whether to run no projections, system projections only, or system and user projections
+	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel pulumi.StringPtrInput
-	// Server version to provision
+	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringInput
-	// Topology of the managed cluster
+	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology pulumi.StringInput
 }
 

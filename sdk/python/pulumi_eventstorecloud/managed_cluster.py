@@ -25,14 +25,14 @@ class ManagedClusterArgs:
         """
         The set of arguments for constructing a ManagedCluster resource.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
-        :param pulumi.Input[str] disk_type: Storage class of the data disks
-        :param pulumi.Input[str] instance_type: Instance Type of the managed cluster
+        :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
+        :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
-        :param pulumi.Input[str] server_version: Server version to provision
-        :param pulumi.Input[str] topology: Topology of the managed cluster
+        :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
+        :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         :param pulumi.Input[str] name: Name of the managed cluster
-        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections
+        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         """
         pulumi.set(__self__, "disk_size", disk_size)
         pulumi.set(__self__, "disk_type", disk_type)
@@ -62,7 +62,7 @@ class ManagedClusterArgs:
     @pulumi.getter(name="diskType")
     def disk_type(self) -> pulumi.Input[str]:
         """
-        Storage class of the data disks
+        Storage class of the data disks (find the list of valid values below)
         """
         return pulumi.get(self, "disk_type")
 
@@ -74,7 +74,7 @@ class ManagedClusterArgs:
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> pulumi.Input[str]:
         """
-        Instance Type of the managed cluster
+        Instance type of the managed cluster (find the list of valid values below)
         """
         return pulumi.get(self, "instance_type")
 
@@ -110,7 +110,7 @@ class ManagedClusterArgs:
     @pulumi.getter(name="serverVersion")
     def server_version(self) -> pulumi.Input[str]:
         """
-        Server version to provision
+        Server version to provision (find the list of valid values below)
         """
         return pulumi.get(self, "server_version")
 
@@ -122,7 +122,7 @@ class ManagedClusterArgs:
     @pulumi.getter
     def topology(self) -> pulumi.Input[str]:
         """
-        Topology of the managed cluster
+        Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         return pulumi.get(self, "topology")
 
@@ -146,7 +146,7 @@ class ManagedClusterArgs:
     @pulumi.getter(name="projectionLevel")
     def projection_level(self) -> Optional[pulumi.Input[str]]:
         """
-        Determines whether to run no projections, system projections only, or system and user projections
+        Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         """
         return pulumi.get(self, "projection_level")
 
@@ -173,17 +173,17 @@ class _ManagedClusterState:
         """
         Input properties used for looking up and filtering ManagedCluster resources.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
-        :param pulumi.Input[str] disk_type: Storage class of the data disks
+        :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
         :param pulumi.Input[str] dns_name: DNS address of the cluster
-        :param pulumi.Input[str] instance_type: Instance Type of the managed cluster
+        :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
         :param pulumi.Input[str] name: Name of the managed cluster
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
-        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections
+        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         :param pulumi.Input[str] region: Region in which the cluster was created. Determined by the region of the Network
         :param pulumi.Input[str] resource_provider: Provider in which the cluster was created. Determined by the provider of the Network.
-        :param pulumi.Input[str] server_version: Server version to provision
-        :param pulumi.Input[str] topology: Topology of the managed cluster
+        :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
+        :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         if disk_size is not None:
             pulumi.set(__self__, "disk_size", disk_size)
@@ -226,7 +226,7 @@ class _ManagedClusterState:
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Storage class of the data disks
+        Storage class of the data disks (find the list of valid values below)
         """
         return pulumi.get(self, "disk_type")
 
@@ -250,7 +250,7 @@ class _ManagedClusterState:
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance Type of the managed cluster
+        Instance type of the managed cluster (find the list of valid values below)
         """
         return pulumi.get(self, "instance_type")
 
@@ -298,7 +298,7 @@ class _ManagedClusterState:
     @pulumi.getter(name="projectionLevel")
     def projection_level(self) -> Optional[pulumi.Input[str]]:
         """
-        Determines whether to run no projections, system projections only, or system and user projections
+        Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         """
         return pulumi.get(self, "projection_level")
 
@@ -334,7 +334,7 @@ class _ManagedClusterState:
     @pulumi.getter(name="serverVersion")
     def server_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Server version to provision
+        Server version to provision (find the list of valid values below)
         """
         return pulumi.get(self, "server_version")
 
@@ -346,7 +346,7 @@ class _ManagedClusterState:
     @pulumi.getter
     def topology(self) -> Optional[pulumi.Input[str]]:
         """
-        Topology of the managed cluster
+        Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         return pulumi.get(self, "topology")
 
@@ -371,18 +371,19 @@ class ManagedCluster(pulumi.CustomResource):
                  topology: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a ManagedCluster resource with the given unique name, props, and options.
+        Manages EventStoreDB instances and clusters in Event Store Cloud
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
-        :param pulumi.Input[str] disk_type: Storage class of the data disks
-        :param pulumi.Input[str] instance_type: Instance Type of the managed cluster
+        :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
+        :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
         :param pulumi.Input[str] name: Name of the managed cluster
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
-        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections
-        :param pulumi.Input[str] server_version: Server version to provision
-        :param pulumi.Input[str] topology: Topology of the managed cluster
+        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
+        :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
+        :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         ...
     @overload
@@ -391,7 +392,8 @@ class ManagedCluster(pulumi.CustomResource):
                  args: ManagedClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a ManagedCluster resource with the given unique name, props, and options.
+        Manages EventStoreDB instances and clusters in Event Store Cloud
+
         :param str resource_name: The name of the resource.
         :param ManagedClusterArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -484,17 +486,17 @@ class ManagedCluster(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
-        :param pulumi.Input[str] disk_type: Storage class of the data disks
+        :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
         :param pulumi.Input[str] dns_name: DNS address of the cluster
-        :param pulumi.Input[str] instance_type: Instance Type of the managed cluster
+        :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
         :param pulumi.Input[str] name: Name of the managed cluster
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
-        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections
+        :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         :param pulumi.Input[str] region: Region in which the cluster was created. Determined by the region of the Network
         :param pulumi.Input[str] resource_provider: Provider in which the cluster was created. Determined by the provider of the Network.
-        :param pulumi.Input[str] server_version: Server version to provision
-        :param pulumi.Input[str] topology: Topology of the managed cluster
+        :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
+        :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -526,7 +528,7 @@ class ManagedCluster(pulumi.CustomResource):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> pulumi.Output[str]:
         """
-        Storage class of the data disks
+        Storage class of the data disks (find the list of valid values below)
         """
         return pulumi.get(self, "disk_type")
 
@@ -542,7 +544,7 @@ class ManagedCluster(pulumi.CustomResource):
     @pulumi.getter(name="instanceType")
     def instance_type(self) -> pulumi.Output[str]:
         """
-        Instance Type of the managed cluster
+        Instance type of the managed cluster (find the list of valid values below)
         """
         return pulumi.get(self, "instance_type")
 
@@ -574,7 +576,7 @@ class ManagedCluster(pulumi.CustomResource):
     @pulumi.getter(name="projectionLevel")
     def projection_level(self) -> pulumi.Output[Optional[str]]:
         """
-        Determines whether to run no projections, system projections only, or system and user projections
+        Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         """
         return pulumi.get(self, "projection_level")
 
@@ -598,7 +600,7 @@ class ManagedCluster(pulumi.CustomResource):
     @pulumi.getter(name="serverVersion")
     def server_version(self) -> pulumi.Output[str]:
         """
-        Server version to provision
+        Server version to provision (find the list of valid values below)
         """
         return pulumi.get(self, "server_version")
 
@@ -606,7 +608,7 @@ class ManagedCluster(pulumi.CustomResource):
     @pulumi.getter
     def topology(self) -> pulumi.Output[str]:
         """
-        Topology of the managed cluster
+        Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         return pulumi.get(self, "topology")
 

@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Eventstorecloud
 {
+    /// <summary>
+    /// Manages EventStoreDB instances and clusters in Event Store Cloud
+    /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/managedCluster:ManagedCluster")]
     public partial class ManagedCluster : Pulumi.CustomResource
     {
@@ -19,7 +22,7 @@ namespace Pulumi.Eventstorecloud
         public Output<int> DiskSize { get; private set; } = null!;
 
         /// <summary>
-        /// Storage class of the data disks
+        /// Storage class of the data disks (find the list of valid values below)
         /// </summary>
         [Output("diskType")]
         public Output<string> DiskType { get; private set; } = null!;
@@ -31,7 +34,7 @@ namespace Pulumi.Eventstorecloud
         public Output<string> DnsName { get; private set; } = null!;
 
         /// <summary>
-        /// Instance Type of the managed cluster
+        /// Instance type of the managed cluster (find the list of valid values below)
         /// </summary>
         [Output("instanceType")]
         public Output<string> InstanceType { get; private set; } = null!;
@@ -55,7 +58,7 @@ namespace Pulumi.Eventstorecloud
         public Output<string> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Determines whether to run no projections, system projections only, or system and user projections
+        /// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         /// </summary>
         [Output("projectionLevel")]
         public Output<string?> ProjectionLevel { get; private set; } = null!;
@@ -73,13 +76,13 @@ namespace Pulumi.Eventstorecloud
         public Output<string> ResourceProvider { get; private set; } = null!;
 
         /// <summary>
-        /// Server version to provision
+        /// Server version to provision (find the list of valid values below)
         /// </summary>
         [Output("serverVersion")]
         public Output<string> ServerVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Topology of the managed cluster
+        /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         /// </summary>
         [Output("topology")]
         public Output<string> Topology { get; private set; } = null!;
@@ -137,13 +140,13 @@ namespace Pulumi.Eventstorecloud
         public Input<int> DiskSize { get; set; } = null!;
 
         /// <summary>
-        /// Storage class of the data disks
+        /// Storage class of the data disks (find the list of valid values below)
         /// </summary>
         [Input("diskType", required: true)]
         public Input<string> DiskType { get; set; } = null!;
 
         /// <summary>
-        /// Instance Type of the managed cluster
+        /// Instance type of the managed cluster (find the list of valid values below)
         /// </summary>
         [Input("instanceType", required: true)]
         public Input<string> InstanceType { get; set; } = null!;
@@ -167,19 +170,19 @@ namespace Pulumi.Eventstorecloud
         public Input<string> ProjectId { get; set; } = null!;
 
         /// <summary>
-        /// Determines whether to run no projections, system projections only, or system and user projections
+        /// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         /// </summary>
         [Input("projectionLevel")]
         public Input<string>? ProjectionLevel { get; set; }
 
         /// <summary>
-        /// Server version to provision
+        /// Server version to provision (find the list of valid values below)
         /// </summary>
         [Input("serverVersion", required: true)]
         public Input<string> ServerVersion { get; set; } = null!;
 
         /// <summary>
-        /// Topology of the managed cluster
+        /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         /// </summary>
         [Input("topology", required: true)]
         public Input<string> Topology { get; set; } = null!;
@@ -198,7 +201,7 @@ namespace Pulumi.Eventstorecloud
         public Input<int>? DiskSize { get; set; }
 
         /// <summary>
-        /// Storage class of the data disks
+        /// Storage class of the data disks (find the list of valid values below)
         /// </summary>
         [Input("diskType")]
         public Input<string>? DiskType { get; set; }
@@ -210,7 +213,7 @@ namespace Pulumi.Eventstorecloud
         public Input<string>? DnsName { get; set; }
 
         /// <summary>
-        /// Instance Type of the managed cluster
+        /// Instance type of the managed cluster (find the list of valid values below)
         /// </summary>
         [Input("instanceType")]
         public Input<string>? InstanceType { get; set; }
@@ -234,7 +237,7 @@ namespace Pulumi.Eventstorecloud
         public Input<string>? ProjectId { get; set; }
 
         /// <summary>
-        /// Determines whether to run no projections, system projections only, or system and user projections
+        /// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         /// </summary>
         [Input("projectionLevel")]
         public Input<string>? ProjectionLevel { get; set; }
@@ -252,13 +255,13 @@ namespace Pulumi.Eventstorecloud
         public Input<string>? ResourceProvider { get; set; }
 
         /// <summary>
-        /// Server version to provision
+        /// Server version to provision (find the list of valid values below)
         /// </summary>
         [Input("serverVersion")]
         public Input<string>? ServerVersion { get; set; }
 
         /// <summary>
-        /// Topology of the managed cluster
+        /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         /// </summary>
         [Input("topology")]
         public Input<string>? Topology { get; set; }

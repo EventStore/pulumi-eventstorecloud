@@ -54,7 +54,7 @@ class AwaitableGetProjectResult(GetProjectResult):
 def get_project(name: Optional[str] = None,
                 opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetProjectResult:
     """
-    Use this data source to access information about an existing resource.
+    Retrieves data for an existing `Project` resource
     """
     __args__ = dict()
     __args__['name'] = name

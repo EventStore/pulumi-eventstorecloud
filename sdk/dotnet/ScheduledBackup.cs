@@ -9,6 +9,33 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Eventstorecloud
 {
+    /// <summary>
+    /// Creates a new scheduled backup.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var daily = new Eventstorecloud.ScheduledBackup("daily", new Eventstorecloud.ScheduledBackupArgs
+    ///         {
+    ///             ProjectId = eventstorecloud_project.Example.Id,
+    ///             Schedule = "0 12 * * */1",
+    ///             Description = "Creates a backup once a day at 12:00",
+    ///             SourceClusterId = eventstorecloud_managed_cluster.Example.Id,
+    ///             BackupDescription = "{cluster} Daily Backup {datetime:RFC3339}",
+    ///             MaxBackupCount = 3,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/scheduledBackup:ScheduledBackup")]
     public partial class ScheduledBackup : Pulumi.CustomResource
     {

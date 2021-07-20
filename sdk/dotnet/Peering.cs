@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Eventstorecloud
 {
+    /// <summary>
+    /// Manages peering connections between Event Store Cloud VPCs and customer own VPCs
+    /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/peering:Peering")]
     public partial class Peering : Pulumi.CustomResource
     {
@@ -57,8 +60,8 @@ namespace Pulumi.Eventstorecloud
         /// <summary>
         /// Metadata about the remote end of the peering connection
         /// </summary>
-        [Output("providerMetadata")]
-        public Output<Outputs.PeeringProviderMetadata> ProviderMetadata { get; private set; } = null!;
+        [Output("providerMetadatas")]
+        public Output<ImmutableArray<Outputs.PeeringProviderMetadata>> ProviderMetadatas { get; private set; } = null!;
 
         /// <summary>
         /// Routes to create from the Event Store network to the peer network
@@ -215,11 +218,17 @@ namespace Pulumi.Eventstorecloud
         [Input("projectId")]
         public Input<string>? ProjectId { get; set; }
 
+        [Input("providerMetadatas")]
+        private InputList<Inputs.PeeringProviderMetadataGetArgs>? _providerMetadatas;
+
         /// <summary>
         /// Metadata about the remote end of the peering connection
         /// </summary>
-        [Input("providerMetadata")]
-        public Input<Inputs.PeeringProviderMetadataGetArgs>? ProviderMetadata { get; set; }
+        public InputList<Inputs.PeeringProviderMetadataGetArgs> ProviderMetadatas
+        {
+            get => _providerMetadatas ?? (_providerMetadatas = new InputList<Inputs.PeeringProviderMetadataGetArgs>());
+            set => _providerMetadatas = value;
+        }
 
         [Input("routes")]
         private InputList<string>? _routes;

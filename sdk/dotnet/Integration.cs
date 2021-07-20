@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Eventstorecloud
 {
+    /// <summary>
+    /// Manages integration resources, for example Slack or OpsGenie.
+    /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/integration:Integration")]
     public partial class Integration : Pulumi.CustomResource
     {

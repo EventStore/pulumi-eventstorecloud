@@ -11,6 +11,9 @@ namespace Pulumi.Eventstorecloud
 {
     public static class GetProject
     {
+        /// <summary>
+        /// Retrieves data for an existing `Project` resource
+        /// </summary>
         public static Task<GetProjectResult> InvokeAsync(GetProjectArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithVersion());
     }

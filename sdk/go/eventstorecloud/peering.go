@@ -11,6 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages peering connections between Event Store Cloud VPCs and customer own VPCs
 type Peering struct {
 	pulumi.CustomResourceState
 
@@ -29,7 +30,7 @@ type Peering struct {
 	// Project ID
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// Metadata about the remote end of the peering connection
-	ProviderMetadata PeeringProviderMetadataOutput `pulumi:"providerMetadata"`
+	ProviderMetadatas PeeringProviderMetadataArrayOutput `pulumi:"providerMetadatas"`
 	// Routes to create from the Event Store network to the peer network
 	Routes pulumi.StringArrayOutput `pulumi:"routes"`
 }
@@ -99,7 +100,7 @@ type peeringState struct {
 	// Project ID
 	ProjectId *string `pulumi:"projectId"`
 	// Metadata about the remote end of the peering connection
-	ProviderMetadata *PeeringProviderMetadata `pulumi:"providerMetadata"`
+	ProviderMetadatas []PeeringProviderMetadata `pulumi:"providerMetadatas"`
 	// Routes to create from the Event Store network to the peer network
 	Routes []string `pulumi:"routes"`
 }
@@ -120,7 +121,7 @@ type PeeringState struct {
 	// Project ID
 	ProjectId pulumi.StringPtrInput
 	// Metadata about the remote end of the peering connection
-	ProviderMetadata PeeringProviderMetadataPtrInput
+	ProviderMetadatas PeeringProviderMetadataArrayInput
 	// Routes to create from the Event Store network to the peer network
 	Routes pulumi.StringArrayInput
 }

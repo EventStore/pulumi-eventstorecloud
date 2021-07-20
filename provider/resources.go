@@ -20,11 +20,10 @@ import (
 	"unicode"
 
 	"github.com/EventStore/pulumi-eventstorecloud/provider/pkg/version"
-	eventstorecloud "github.com/EventStore/terraform-provider-eventstorecloud/esc"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/EventStore/terraform-provider-eventstorecloud/esc"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
-	shimv1 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v1"
+	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 )
@@ -91,7 +90,7 @@ var managedByPulumi = &tfbridge.DefaultInfo{Value: "Managed by Pulumi"}
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv1.NewProvider(eventstorecloud.Provider().(*schema.Provider))
+	p := shimv2.NewProvider(esc.New("")())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -102,6 +101,7 @@ func Provider() tfbridge.ProviderInfo {
 		License:              "Apache-2.0",
 		Homepage:             "https://eventstore.com",
 		Repository:           "https://github.com/EventStore/pulumi-eventstorecloud",
+		GitHubOrg:            "EventStore",
 		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
 		Resources: map[string]*tfbridge.ResourceInfo{

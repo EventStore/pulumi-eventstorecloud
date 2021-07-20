@@ -7,9 +7,9 @@
     ],
     "homepage": "https://eventstore.com",
     "license": "Apache-2.0",
-    "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/terraform-providers/terraform-provider-eventstorecloud).",
+    "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud).",
     "repository": "https://github.com/EventStore/pulumi-eventstorecloud",
-    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.1+dirty",
+    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.0+dirty",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
@@ -39,16 +39,36 @@
         "eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata": {
             "properties": {
                 "awsPeeringLinkId": {
-                    "type": "string"
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
                 },
                 "gcpNetworkId": {
-                    "type": "string"
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
                 },
                 "gcpNetworkName": {
-                    "type": "string"
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
                 },
                 "gcpProjectId": {
-                    "type": "string"
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
                 }
             },
             "type": "object",
@@ -109,6 +129,7 @@
     },
     "resources": {
         "eventstorecloud:index/integration:Integration": {
+            "description": "Manages integration resources, for example Slack or OpsGenie.\n",
             "properties": {
                 "data": {
                     "type": "object",
@@ -176,6 +197,7 @@
             }
         },
         "eventstorecloud:index/managedCluster:ManagedCluster": {
+            "description": "Manages EventStoreDB instances and clusters in Event Store Cloud\n",
             "properties": {
                 "diskSize": {
                     "type": "integer",
@@ -183,7 +205,7 @@
                 },
                 "diskType": {
                     "type": "string",
-                    "description": "Storage class of the data disks\n"
+                    "description": "Storage class of the data disks (find the list of valid values below)\n"
                 },
                 "dnsName": {
                     "type": "string",
@@ -191,7 +213,7 @@
                 },
                 "instanceType": {
                     "type": "string",
-                    "description": "Instance Type of the managed cluster\n"
+                    "description": "Instance type of the managed cluster (find the list of valid values below)\n"
                 },
                 "name": {
                     "type": "string",
@@ -207,7 +229,7 @@
                 },
                 "projectionLevel": {
                     "type": "string",
-                    "description": "Determines whether to run no projections, system projections only, or system and user projections\n"
+                    "description": "Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.\n"
                 },
                 "region": {
                     "type": "string",
@@ -219,11 +241,11 @@
                 },
                 "serverVersion": {
                     "type": "string",
-                    "description": "Server version to provision\n"
+                    "description": "Server version to provision (find the list of valid values below)\n"
                 },
                 "topology": {
                     "type": "string",
-                    "description": "Topology of the managed cluster\n"
+                    "description": "Topology of the managed cluster (`single-node` or `three-node-multi-zone`)\n"
                 }
             },
             "required": [
@@ -246,11 +268,11 @@
                 },
                 "diskType": {
                     "type": "string",
-                    "description": "Storage class of the data disks\n"
+                    "description": "Storage class of the data disks (find the list of valid values below)\n"
                 },
                 "instanceType": {
                     "type": "string",
-                    "description": "Instance Type of the managed cluster\n"
+                    "description": "Instance type of the managed cluster (find the list of valid values below)\n"
                 },
                 "name": {
                     "type": "string",
@@ -266,15 +288,15 @@
                 },
                 "projectionLevel": {
                     "type": "string",
-                    "description": "Determines whether to run no projections, system projections only, or system and user projections\n"
+                    "description": "Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.\n"
                 },
                 "serverVersion": {
                     "type": "string",
-                    "description": "Server version to provision\n"
+                    "description": "Server version to provision (find the list of valid values below)\n"
                 },
                 "topology": {
                     "type": "string",
-                    "description": "Topology of the managed cluster\n"
+                    "description": "Topology of the managed cluster (`single-node` or `three-node-multi-zone`)\n"
                 }
             },
             "requiredInputs": [
@@ -295,7 +317,7 @@
                     },
                     "diskType": {
                         "type": "string",
-                        "description": "Storage class of the data disks\n"
+                        "description": "Storage class of the data disks (find the list of valid values below)\n"
                     },
                     "dnsName": {
                         "type": "string",
@@ -303,7 +325,7 @@
                     },
                     "instanceType": {
                         "type": "string",
-                        "description": "Instance Type of the managed cluster\n"
+                        "description": "Instance type of the managed cluster (find the list of valid values below)\n"
                     },
                     "name": {
                         "type": "string",
@@ -319,7 +341,7 @@
                     },
                     "projectionLevel": {
                         "type": "string",
-                        "description": "Determines whether to run no projections, system projections only, or system and user projections\n"
+                        "description": "Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.\n"
                     },
                     "region": {
                         "type": "string",
@@ -331,17 +353,18 @@
                     },
                     "serverVersion": {
                         "type": "string",
-                        "description": "Server version to provision\n"
+                        "description": "Server version to provision (find the list of valid values below)\n"
                     },
                     "topology": {
                         "type": "string",
-                        "description": "Topology of the managed cluster\n"
+                        "description": "Topology of the managed cluster (`single-node` or `three-node-multi-zone`)\n"
                     }
                 },
                 "type": "object"
             }
         },
         "eventstorecloud:index/network:Network": {
+            "description": "Manages VPC (network) resources in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst exampleProject = new eventstorecloud.Project(\"exampleProject\", {});\nconst exampleNetwork = new eventstorecloud.Network(\"exampleNetwork\", {\n    projectId: exampleProject.id,\n    resourceProvider: \"aws\",\n    region: \"us-west-2\",\n    cidrBlock: \"172.21.0.0/16\",\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nexample_project = eventstorecloud.Project(\"exampleProject\")\nexample_network = eventstorecloud.Network(\"exampleNetwork\",\n    project_id=example_project.id,\n    resource_provider=\"aws\",\n    region=\"us-west-2\",\n    cidr_block=\"172.21.0.0/16\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var exampleProject = new Eventstorecloud.Project(\"exampleProject\", new Eventstorecloud.ProjectArgs\n        {\n        });\n        var exampleNetwork = new Eventstorecloud.Network(\"exampleNetwork\", new Eventstorecloud.NetworkArgs\n        {\n            ProjectId = exampleProject.Id,\n            ResourceProvider = \"aws\",\n            Region = \"us-west-2\",\n            CidrBlock = \"172.21.0.0/16\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleProject, err := eventstorecloud.NewProject(ctx, \"exampleProject\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewNetwork(ctx, \"exampleNetwork\", \u0026eventstorecloud.NetworkArgs{\n\t\t\tProjectId:        exampleProject.ID(),\n\t\t\tResourceProvider: pulumi.String(\"aws\"),\n\t\t\tRegion:           pulumi.String(\"us-west-2\"),\n\t\t\tCidrBlock:        pulumi.String(\"172.21.0.0/16\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "cidrBlock": {
                     "type": "string",
@@ -427,6 +450,7 @@
             }
         },
         "eventstorecloud:index/peering:Peering": {
+            "description": "Manages peering connections between Event Store Cloud VPCs and customer own VPCs\n",
             "properties": {
                 "name": {
                     "type": "string",
@@ -456,8 +480,11 @@
                     "type": "string",
                     "description": "Project ID\n"
                 },
-                "providerMetadata": {
-                    "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata",
+                "providerMetadatas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata"
+                    },
                     "description": "Metadata about the remote end of the peering connection\n"
                 },
                 "routes": {
@@ -476,7 +503,7 @@
                 "peerNetworkRegion",
                 "peerResourceProvider",
                 "projectId",
-                "providerMetadata",
+                "providerMetadatas",
                 "routes"
             ],
             "inputProperties": {
@@ -556,8 +583,11 @@
                         "type": "string",
                         "description": "Project ID\n"
                     },
-                    "providerMetadata": {
-                        "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata",
+                    "providerMetadatas": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata"
+                        },
                         "description": "Metadata about the remote end of the peering connection\n"
                     },
                     "routes": {
@@ -572,6 +602,7 @@
             }
         },
         "eventstorecloud:index/project:Project": {
+            "description": "Manages projects within an organization in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst chickenWindow = new eventstorecloud.Project(\"chicken_window\", {});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nchicken_window = eventstorecloud.Project(\"chickenWindow\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var chickenWindow = new Eventstorecloud.Project(\"chickenWindow\", new Eventstorecloud.ProjectArgs\n        {\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewProject(ctx, \"chickenWindow\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "name": {
                     "type": "string",
@@ -599,6 +630,7 @@
             }
         },
         "eventstorecloud:index/scheduledBackup:ScheduledBackup": {
+            "description": "Creates a new scheduled backup.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst daily = new eventstorecloud.ScheduledBackup(\"daily\", {\n    projectId: eventstorecloud_project.example.id,\n    schedule: \"0 12 * * */1\",\n    description: \"Creates a backup once a day at 12:00\",\n    sourceClusterId: eventstorecloud_managed_cluster.example.id,\n    backupDescription: \"{cluster} Daily Backup {datetime:RFC3339}\",\n    maxBackupCount: 3,\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\ndaily = eventstorecloud.ScheduledBackup(\"daily\",\n    project_id=eventstorecloud_project[\"example\"][\"id\"],\n    schedule=\"0 12 * * */1\",\n    description=\"Creates a backup once a day at 12:00\",\n    source_cluster_id=eventstorecloud_managed_cluster[\"example\"][\"id\"],\n    backup_description=\"{cluster} Daily Backup {datetime:RFC3339}\",\n    max_backup_count=3)\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var daily = new Eventstorecloud.ScheduledBackup(\"daily\", new Eventstorecloud.ScheduledBackupArgs\n        {\n            ProjectId = eventstorecloud_project.Example.Id,\n            Schedule = \"0 12 * * */1\",\n            Description = \"Creates a backup once a day at 12:00\",\n            SourceClusterId = eventstorecloud_managed_cluster.Example.Id,\n            BackupDescription = \"{cluster} Daily Backup {datetime:RFC3339}\",\n            MaxBackupCount = 3,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewScheduledBackup(ctx, \"daily\", \u0026eventstorecloud.ScheduledBackupArgs{\n\t\t\tProjectId:         pulumi.Any(eventstorecloud_project.Example.Id),\n\t\t\tSchedule:          pulumi.String(\"0 12 * * */1\"),\n\t\t\tDescription:       pulumi.String(\"Creates a backup once a day at 12:00\"),\n\t\t\tSourceClusterId:   pulumi.Any(eventstorecloud_managed_cluster.Example.Id),\n\t\t\tBackupDescription: pulumi.String(\"{cluster} Daily Backup {datetime:RFC3339}\"),\n\t\t\tMaxBackupCount:    pulumi.Int(3),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "backupDescription": {
                     "type": "string",
@@ -701,6 +733,7 @@
     },
     "functions": {
         "eventstorecloud:index/getProject:getProject": {
+            "description": "Retrieves data for an existing `Project` resource\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getProject.\n",
                 "properties": {
@@ -757,12 +790,12 @@
             "disableUnionOutputTypes": true,
             "packageDescription": "A Pulumi package for creating and managing Event Store Cloud resources.",
             "packageName": "",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-eventstorecloud)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-eventstorecloud` repo](https://github.com/terraform-providers/terraform-provider-eventstorecloud/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`EventStore/terraform-provider-eventstorecloud` repo](https://github.com/EventStore/terraform-provider-eventstorecloud/issues).",
             "typescriptVersion": ""
         },
         "python": {
             "compatibility": "tfbridge20",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-eventstorecloud)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-eventstorecloud` repo](https://github.com/terraform-providers/terraform-provider-eventstorecloud/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`EventStore/terraform-provider-eventstorecloud` repo](https://github.com/EventStore/terraform-provider-eventstorecloud/issues).",
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }

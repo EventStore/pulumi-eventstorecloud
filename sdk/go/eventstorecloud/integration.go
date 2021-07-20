@@ -11,6 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Manages integration resources, for example Slack or OpsGenie.
 type Integration struct {
 	pulumi.CustomResourceState
 

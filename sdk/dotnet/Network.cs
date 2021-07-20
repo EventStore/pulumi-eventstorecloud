@@ -9,6 +9,34 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Eventstorecloud
 {
+    /// <summary>
+    /// Manages VPC (network) resources in Event Store Cloud
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var exampleProject = new Eventstorecloud.Project("exampleProject", new Eventstorecloud.ProjectArgs
+    ///         {
+    ///         });
+    ///         var exampleNetwork = new Eventstorecloud.Network("exampleNetwork", new Eventstorecloud.NetworkArgs
+    ///         {
+    ///             ProjectId = exampleProject.Id,
+    ///             ResourceProvider = "aws",
+    ///             Region = "us-west-2",
+    ///             CidrBlock = "172.21.0.0/16",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/network:Network")]
     public partial class Network : Pulumi.CustomResource
     {
