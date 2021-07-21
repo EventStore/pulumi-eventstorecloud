@@ -20,6 +20,11 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x' 
+      - name: Set up NodeJS
+        uses: actions/setup-node@v2
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@eventstore'
       - name: Install pulumictl
         run: curl -L https://github.com/pulumi/pulumictl/releases/download/v0.0.25/pulumictl-v0.0.25-linux-amd64.tar.gz | sudo tar zxv -C /usr/bin -f- pulumictl
       - name: Run GoReleaser
@@ -33,3 +38,9 @@ jobs:
         run: |
           dotnet nuget add source --username alexeyzimarev --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/EventStore/index.json"
           dotnet nuget push nuget/**/*.nupkg --source "github" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}
+      - name: Run yarn
+        run: (cd ${{ github.workspace }}/sd/nodejs/bin && yarn)
+      - name: Publish NPM package  
+        run: (cd ${{ github.workspace }}/sd/nodejs/bin && yarn publish)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,10 +1,31 @@
 # Pulumi provider for Event Store Cloud
 
+The Event Store Cloud provider allows you to manage resources in [Event Store Cloud](https://eventstore.com/cloud).
+
 ## Installing
 
 This package is available in many languages in the standard packaging formats.
 
+### Get the plugin
+
+For projects that use .NET and Go Pulumi SDK you have to install the provider before trying to update the stack.
+
+Use the following command to add the plugin to your environment:
+
+```
+pulumi plugin install resource eventstorecloud [version] \
+  --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/[version]
+```
+
 ### Node.js (Java/TypeScript)
+
+First, add the GitHub NPM package source, as the package is not yet available on NPM. Normally, you'd need to include the custom registry to the `.npmrc` file:
+
+```
+@eventstore:registry=https://npm.pkg.github.com
+```
+
+Read mode about using GitHub NPM registry in [their documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
 
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
@@ -14,19 +35,21 @@ or `yarn`:
 
     $ yarn add @eventstore/pulumi-eventstorecloud
 
+### .NET
+
+Add the GitHub NuGet package registry first, using `dotnet nuget add source` or by specifying it in the `NuGet.config` file. Use `https://nuget.pkg.github.com/EventStore/index.json` as the package feed URL. Read more in the [GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry).
+
+Then, add the NuGet package `Pulumi.Eventstorecloud` to your Pulumi project, which uses the .NET Pulumi SDK.
+
 ### Python
 
 [WIP]
-
-To use from Python, install using `pip`:
-
-    $ pip install pulumi_xyx
 
 ### Go
 
 To use from Go, use `go get` to grab the latest version of the library
 
-    $ go get github.com/EventStore/pulumi-eventstorecloud/sdk/go/...
+    $ go get github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud
 
 ## Configuration
 
