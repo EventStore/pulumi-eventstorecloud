@@ -58,9 +58,3 @@ The following configuration points are available for the `eventstorecloud` provi
 - `eventstorecloud:organizationId` - the organization ID for an existing organization in Event Store Cloud
 - `eventstorecloud:token` - a valid refresh token for an Event Store Cloud account with admin access to the organization
 
-## Reference
-
-For detailed reference documentation, please visit [the API docs][1].
-
-
-[1]: https://www.pulumi.com/docs/reference/pkg/x/
