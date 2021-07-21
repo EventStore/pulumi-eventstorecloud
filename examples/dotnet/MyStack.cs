@@ -1,23 +1,53 @@
+using esc.Gcp;
 using Pulumi;
 using Pulumi.Eventstorecloud;
+using Pulumi.Gcp.Compute;
+using Network = Pulumi.Eventstorecloud.Network;
+using NetworkArgs = Pulumi.Eventstorecloud.NetworkArgs;
 
 class MyStack : Stack {
     public MyStack() {
-        var project = new Project(
-            "myProject",
-            new ProjectArgs {
-                Name = "Test Alexey"
+        const string gcpRegion  = "europe-west2";
+        const string gcpIpRange = "172.30.0.0/16";
+        const string escIpRange = "172.22.110.0/24";
+
+        var cloudResources = new CloudResources(gcpRegion, gcpIpRange);
+
+        var escProject = new Project("esc-project", new ProjectArgs {Name = "My ES Cloud Project"});
+
+        var escNetwork = new Network(
+            "esc-network",
+            new NetworkArgs {
+                Name             = "Test Network",
+                Region           = gcpRegion,
+                CidrBlock        = escIpRange,
+                ProjectId        = escProject.Id,
+                ResourceProvider = "gcp"
             }
         );
 
-        var network = new Network(
-            "myNetwork",
-            new NetworkArgs {
-                Name             = "Test Network",
-                Region           = "europe-west2",
-                CidrBlock        = "172.22.110.0/24",
-                ProjectId        = project.Id,
-                ResourceProvider = "gcp"
+        var escPeering = new Peering(
+            "esc-peering",
+            new PeeringArgs {
+                Name                 = "Test Peering",
+                ProjectId            = escProject.Id,
+                NetworkId            = escNetwork.Id,
+                PeerAccountId        = cloudResources.Network.Project,
+                PeerNetworkId        = cloudResources.Network.Name,
+                PeerNetworkRegion    = cloudResources.Subnet.Region,
+                PeerResourceProvider = "gcp",
+                Routes               = new[] {gcpIpRange}
+            }
+        );
+
+        var gcpPeering = new NetworkPeering(
+            "gcp-peering",
+            new NetworkPeeringArgs {
+                Name               = "esc-peering",
+                Network            = cloudResources.Network.Id,
+                PeerNetwork        = escPeering.ProviderMetadatas.First().Apply(x => x.GcpNetworkId)!,
+                ExportCustomRoutes = true,
+                ImportCustomRoutes = true
             }
         );
 
@@ -25,8 +55,8 @@ class MyStack : Stack {
             "myCluster",
             new ManagedClusterArgs {
                 Name            = "Test Cluster",
-                ProjectId       = project.Id,
-                NetworkId       = network.Id,
+                ProjectId       = escProject.Id,
+                NetworkId       = escNetwork.Id,
                 Topology        = "single-node",
                 InstanceType    = "F1",
                 DiskSize        = 10,
@@ -35,5 +65,12 @@ class MyStack : Stack {
                 ProjectionLevel = "user"
             }
         );
+
+        ClusterId        = cluster.Id;
+        ConnectionString = cluster.Id.Apply(id => $"esdb+discover://{id}:2113");
     }
+
+    [Output] public Output<string> ClusterId { get; set; }
+
+    [Output] public Output<string> ConnectionString { get; set; }
 }

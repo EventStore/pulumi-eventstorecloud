@@ -13,7 +13,7 @@ For projects that use .NET and Go Pulumi SDK you have to install the provider be
 Use the following command to add the plugin to your environment:
 
 ```
-pulumi plugin install resource eventstorecloud [version] \
+pulumi plugin install resource eventstorecloud v[version] \
   --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/[version]
 ```
 
