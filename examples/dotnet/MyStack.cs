@@ -67,7 +67,7 @@ class MyStack : Stack {
         );
 
         ClusterId        = cluster.Id;
-        ConnectionString = cluster.Id.Apply(id => $"esdb+discover://{id}:2113");
+        ConnectionString = cluster.Id.Apply(id => $"esdb+discover://{id}.mesdb.eventstore.cloud:2113");
     }
 
     [Output] public Output<string> ClusterId { get; set; }
