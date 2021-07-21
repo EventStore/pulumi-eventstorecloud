@@ -123,6 +123,7 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 				"@types/mime": "^2.0.0",
 			},
+			PackageName: "@eventstore/pulumi-eventstorecloud",
 		},
 		Python: &tfbridge.PythonInfo{
 			Requires: map[string]string{

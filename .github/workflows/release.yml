@@ -41,6 +41,7 @@ jobs:
           dotnet nuget push nuget/**/*.nupkg --source "github" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}
       - name: Run yarn
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn)
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
       - name: Publish NPM package  
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version)
         env:

@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/eventstorecloud",
+    "name": "@eventstore/pulumi-eventstorecloud",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing Event Store Cloud resources.",
     "keywords": [
@@ -21,6 +21,6 @@
     },
     "pulumi": {
         "resource": true,
-        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.0+dirty"
+        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/v0.1.2+dirty"
     }
 }
