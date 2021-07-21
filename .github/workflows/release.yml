@@ -43,4 +43,4 @@ jobs:
       - name: Publish NPM package  
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish)
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
