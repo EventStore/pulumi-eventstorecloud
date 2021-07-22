@@ -17,6 +17,13 @@ pulumi plugin install resource eventstorecloud v[version] \
   --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/[version]
 ```
 
+Example:
+
+```
+pulumi plugin install resource eventstorecloud v0.1.2 \
+  --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.2
+```
+
 ### Node.js (Java/TypeScript)
 
 First, add the GitHub NPM package source, as the package is not yet available on NPM. Normally, you'd need to include the custom registry to the `.npmrc` file:
