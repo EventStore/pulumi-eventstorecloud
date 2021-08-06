@@ -13,9 +13,24 @@ For projects that use .NET and Go Pulumi SDK you have to install the provider be
 Use the following command to add the plugin to your environment:
 
 ```
-pulumi plugin install resource eventstorecloud [version] \
+pulumi plugin install resource eventstorecloud v[version] \
   --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/[version]
 ```
+
+Example:
+
+```
+pulumi plugin install resource eventstorecloud v0.1.2 \
+  --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.2
+```
+
+### Configuration
+
+The following configuration points are available for the `eventstorecloud` provider:
+
+- `eventstorecloud:organizationId` - the organization ID for an existing organization in Event Store Cloud
+- `eventstorecloud:token` - a valid refresh token for an Event Store Cloud account with admin access to the organization
+
 
 ### Node.js (Java/TypeScript)
 
@@ -51,16 +66,3 @@ To use from Go, use `go get` to grab the latest version of the library
 
     $ go get github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud
 
-## Configuration
-
-The following configuration points are available for the `eventstorecloud` provider:
-
-- `eventstorecloud:organizationId` - the organization ID for an existing organization in Event Store Cloud
-- `eventstorecloud:token` - a valid refresh token for an Event Store Cloud account with admin access to the organization
-
-## Reference
-
-For detailed reference documentation, please visit [the API docs][1].
-
-
-[1]: https://www.pulumi.com/docs/reference/pkg/x/

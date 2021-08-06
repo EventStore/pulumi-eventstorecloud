@@ -24,6 +24,14 @@ pulumi plugin install resource eventstorecloud v0.1.2 \
   --server https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.2
 ```
 
+### Configuration
+
+The following configuration points are available for the `eventstorecloud` provider:
+
+- `eventstorecloud:organizationId` - the organization ID for an existing organization in Event Store Cloud
+- `eventstorecloud:token` - a valid refresh token for an Event Store Cloud account with admin access to the organization
+
+
 ### Node.js (Java/TypeScript)
 
 First, add the GitHub NPM package source, as the package is not yet available on NPM. Normally, you'd need to include the custom registry to the `.npmrc` file:
@@ -57,11 +65,4 @@ Then, add the NuGet package `Pulumi.Eventstorecloud` to your Pulumi project, whi
 To use from Go, use `go get` to grab the latest version of the library
 
     $ go get github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud
-
-## Configuration
-
-The following configuration points are available for the `eventstorecloud` provider:
-
-- `eventstorecloud:organizationId` - the organization ID for an existing organization in Event Store Cloud
-- `eventstorecloud:token` - a valid refresh token for an Event Store Cloud account with admin access to the organization
 
