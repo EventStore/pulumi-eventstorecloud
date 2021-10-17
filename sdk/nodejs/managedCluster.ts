@@ -6,6 +6,38 @@ import * as utilities from "./utilities";
 
 /**
  * Manages EventStoreDB instances and clusters in Event Store Cloud
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ *
+ * const exampleProject = eventstorecloud.getProject({
+ *     name: "Example Project",
+ * });
+ * const exampleNetwork = new eventstorecloud.Network("exampleNetwork", {
+ *     projectId: eventstorecloud_project.example.id,
+ *     resourceProvider: "aws",
+ *     region: "us-west-2",
+ *     cidrBlock: "172.21.0.0/16",
+ * });
+ * const exampleManagedCluster = new eventstorecloud.ManagedCluster("exampleManagedCluster", {
+ *     projectId: exampleNetwork.projectId,
+ *     networkId: exampleNetwork.id,
+ *     topology: "three-node-multi-zone",
+ *     instanceType: "F1",
+ *     diskSize: 24,
+ *     diskType: "gp2",
+ *     serverVersion: "20.6",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+ * ```
  */
 export class ManagedCluster extends pulumi.CustomResource {
     /**

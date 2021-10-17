@@ -11,6 +11,53 @@ namespace Pulumi.Eventstorecloud
 {
     /// <summary>
     /// Manages peering connections between Event Store Cloud VPCs and customer own VPCs
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         // Example for AWS
+    ///         var exampleProject = new Eventstorecloud.Project("exampleProject", new Eventstorecloud.ProjectArgs
+    ///         {
+    ///         });
+    ///         var exampleNetwork = new Eventstorecloud.Network("exampleNetwork", new Eventstorecloud.NetworkArgs
+    ///         {
+    ///             ProjectId = exampleProject.Id,
+    ///             ResourceProvider = "aws",
+    ///             Region = "us-west-2",
+    ///             CidrBlock = "172.21.0.0/16",
+    ///         });
+    ///         var examplePeering = new Eventstorecloud.Peering("examplePeering", new Eventstorecloud.PeeringArgs
+    ///         {
+    ///             ProjectId = exampleNetwork.ProjectId,
+    ///             NetworkId = exampleNetwork.Id,
+    ///             PeerResourceProvider = exampleNetwork.ResourceProvider,
+    ///             PeerNetworkRegion = exampleNetwork.Region,
+    ///             PeerAccountId = "&lt;Customer AWS Account ID&gt;",
+    ///             PeerNetworkId = "&lt;Customer VPC ID&gt;",
+    ///             Routes = 
+    ///             {
+    ///                 "&lt;Address space of the customer VPC&gt;",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+    /// ```
+    /// 
+    ///  ~&gt; Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
     /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/peering:Peering")]
     public partial class Peering : Pulumi.CustomResource
@@ -60,8 +107,8 @@ namespace Pulumi.Eventstorecloud
         /// <summary>
         /// Metadata about the remote end of the peering connection
         /// </summary>
-        [Output("providerMetadatas")]
-        public Output<ImmutableArray<Outputs.PeeringProviderMetadata>> ProviderMetadatas { get; private set; } = null!;
+        [Output("providerMetadata")]
+        public Output<ImmutableDictionary<string, string>> ProviderMetadata { get; private set; } = null!;
 
         /// <summary>
         /// Routes to create from the Event Store network to the peer network
@@ -218,16 +265,16 @@ namespace Pulumi.Eventstorecloud
         [Input("projectId")]
         public Input<string>? ProjectId { get; set; }
 
-        [Input("providerMetadatas")]
-        private InputList<Inputs.PeeringProviderMetadataGetArgs>? _providerMetadatas;
+        [Input("providerMetadata")]
+        private InputMap<string>? _providerMetadata;
 
         /// <summary>
         /// Metadata about the remote end of the peering connection
         /// </summary>
-        public InputList<Inputs.PeeringProviderMetadataGetArgs> ProviderMetadatas
+        public InputMap<string> ProviderMetadata
         {
-            get => _providerMetadatas ?? (_providerMetadatas = new InputList<Inputs.PeeringProviderMetadataGetArgs>());
-            set => _providerMetadatas = value;
+            get => _providerMetadata ?? (_providerMetadata = new InputMap<string>());
+            set => _providerMetadata = value;
         }
 
         [Input("routes")]

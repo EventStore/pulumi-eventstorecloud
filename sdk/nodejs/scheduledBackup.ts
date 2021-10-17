@@ -22,6 +22,12 @@ import * as utilities from "./utilities";
  *     maxBackupCount: 3,
  * });
  * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
+ * ```
  */
 export class ScheduledBackup extends pulumi.CustomResource {
     /**

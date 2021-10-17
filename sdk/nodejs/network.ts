@@ -21,6 +21,12 @@ import * as utilities from "./utilities";
  *     cidrBlock: "172.21.0.0/16",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import eventstorecloud:index/network:Network example project_id:network_id
+ * ```
  */
 export class Network extends pulumi.CustomResource {
     /**

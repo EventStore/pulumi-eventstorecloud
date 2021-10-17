@@ -7,8 +7,6 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
-from . import outputs
-from ._inputs import *
 
 __all__ = ['PeeringArgs', 'Peering']
 
@@ -151,7 +149,7 @@ class _PeeringState:
                  peer_network_region: Optional[pulumi.Input[str]] = None,
                  peer_resource_provider: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[str]] = None,
-                 provider_metadatas: Optional[pulumi.Input[Sequence[pulumi.Input['PeeringProviderMetadataArgs']]]] = None,
+                 provider_metadata: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  routes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Peering resources.
@@ -162,7 +160,7 @@ class _PeeringState:
         :param pulumi.Input[str] peer_network_region: Provider region in which to the peer network exists
         :param pulumi.Input[str] peer_resource_provider: Cloud Provider in which the target network exists
         :param pulumi.Input[str] project_id: Project ID
-        :param pulumi.Input[Sequence[pulumi.Input['PeeringProviderMetadataArgs']]] provider_metadatas: Metadata about the remote end of the peering connection
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] provider_metadata: Metadata about the remote end of the peering connection
         :param pulumi.Input[Sequence[pulumi.Input[str]]] routes: Routes to create from the Event Store network to the peer network
         """
         if name is not None:
@@ -179,8 +177,8 @@ class _PeeringState:
             pulumi.set(__self__, "peer_resource_provider", peer_resource_provider)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
-        if provider_metadatas is not None:
-            pulumi.set(__self__, "provider_metadatas", provider_metadatas)
+        if provider_metadata is not None:
+            pulumi.set(__self__, "provider_metadata", provider_metadata)
         if routes is not None:
             pulumi.set(__self__, "routes", routes)
 
@@ -269,16 +267,16 @@ class _PeeringState:
         pulumi.set(self, "project_id", value)
 
     @property
-    @pulumi.getter(name="providerMetadatas")
-    def provider_metadatas(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['PeeringProviderMetadataArgs']]]]:
+    @pulumi.getter(name="providerMetadata")
+    def provider_metadata(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         Metadata about the remote end of the peering connection
         """
-        return pulumi.get(self, "provider_metadatas")
+        return pulumi.get(self, "provider_metadata")
 
-    @provider_metadatas.setter
-    def provider_metadatas(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['PeeringProviderMetadataArgs']]]]):
-        pulumi.set(self, "provider_metadatas", value)
+    @provider_metadata.setter
+    def provider_metadata(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "provider_metadata", value)
 
     @property
     @pulumi.getter
@@ -310,6 +308,37 @@ class Peering(pulumi.CustomResource):
         """
         Manages peering connections between Event Store Cloud VPCs and customer own VPCs
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_eventstorecloud as eventstorecloud
+
+        # Example for AWS
+        example_project = eventstorecloud.Project("exampleProject")
+        example_network = eventstorecloud.Network("exampleNetwork",
+            project_id=example_project.id,
+            resource_provider="aws",
+            region="us-west-2",
+            cidr_block="172.21.0.0/16")
+        example_peering = eventstorecloud.Peering("examplePeering",
+            project_id=example_network.project_id,
+            network_id=example_network.id,
+            peer_resource_provider=example_network.resource_provider,
+            peer_network_region=example_network.region,
+            peer_account_id="<Customer AWS Account ID>",
+            peer_network_id="<Customer VPC ID>",
+            routes=["<Address space of the customer VPC>"])
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+        ```
+
+         ~> Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Human-friendly name for the network
@@ -329,6 +358,37 @@ class Peering(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Manages peering connections between Event Store Cloud VPCs and customer own VPCs
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_eventstorecloud as eventstorecloud
+
+        # Example for AWS
+        example_project = eventstorecloud.Project("exampleProject")
+        example_network = eventstorecloud.Network("exampleNetwork",
+            project_id=example_project.id,
+            resource_provider="aws",
+            region="us-west-2",
+            cidr_block="172.21.0.0/16")
+        example_peering = eventstorecloud.Peering("examplePeering",
+            project_id=example_network.project_id,
+            network_id=example_network.id,
+            peer_resource_provider=example_network.resource_provider,
+            peer_network_region=example_network.region,
+            peer_account_id="<Customer AWS Account ID>",
+            peer_network_id="<Customer VPC ID>",
+            routes=["<Address space of the customer VPC>"])
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+        ```
+
+         ~> Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
 
         :param str resource_name: The name of the resource.
         :param PeeringArgs args: The arguments to use to populate this resource's properties.
@@ -387,7 +447,7 @@ class Peering(pulumi.CustomResource):
             if routes is None and not opts.urn:
                 raise TypeError("Missing required property 'routes'")
             __props__.__dict__["routes"] = routes
-            __props__.__dict__["provider_metadatas"] = None
+            __props__.__dict__["provider_metadata"] = None
         super(Peering, __self__).__init__(
             'eventstorecloud:index/peering:Peering',
             resource_name,
@@ -405,7 +465,7 @@ class Peering(pulumi.CustomResource):
             peer_network_region: Optional[pulumi.Input[str]] = None,
             peer_resource_provider: Optional[pulumi.Input[str]] = None,
             project_id: Optional[pulumi.Input[str]] = None,
-            provider_metadatas: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PeeringProviderMetadataArgs']]]]] = None,
+            provider_metadata: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
             routes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Peering':
         """
         Get an existing Peering resource's state with the given name, id, and optional extra
@@ -421,7 +481,7 @@ class Peering(pulumi.CustomResource):
         :param pulumi.Input[str] peer_network_region: Provider region in which to the peer network exists
         :param pulumi.Input[str] peer_resource_provider: Cloud Provider in which the target network exists
         :param pulumi.Input[str] project_id: Project ID
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PeeringProviderMetadataArgs']]]] provider_metadatas: Metadata about the remote end of the peering connection
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] provider_metadata: Metadata about the remote end of the peering connection
         :param pulumi.Input[Sequence[pulumi.Input[str]]] routes: Routes to create from the Event Store network to the peer network
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -435,7 +495,7 @@ class Peering(pulumi.CustomResource):
         __props__.__dict__["peer_network_region"] = peer_network_region
         __props__.__dict__["peer_resource_provider"] = peer_resource_provider
         __props__.__dict__["project_id"] = project_id
-        __props__.__dict__["provider_metadatas"] = provider_metadatas
+        __props__.__dict__["provider_metadata"] = provider_metadata
         __props__.__dict__["routes"] = routes
         return Peering(resource_name, opts=opts, __props__=__props__)
 
@@ -496,12 +556,12 @@ class Peering(pulumi.CustomResource):
         return pulumi.get(self, "project_id")
 
     @property
-    @pulumi.getter(name="providerMetadatas")
-    def provider_metadatas(self) -> pulumi.Output[Sequence['outputs.PeeringProviderMetadata']]:
+    @pulumi.getter(name="providerMetadata")
+    def provider_metadata(self) -> pulumi.Output[Mapping[str, str]]:
         """
         Metadata about the remote end of the peering connection
         """
-        return pulumi.get(self, "provider_metadatas")
+        return pulumi.get(self, "provider_metadata")
 
     @property
     @pulumi.getter

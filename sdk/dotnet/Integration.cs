@@ -11,6 +11,50 @@ namespace Pulumi.Eventstorecloud
 {
     /// <summary>
     /// Manages integration resources, for example Slack or OpsGenie.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var opsgenieIssues = new Eventstorecloud.Integration("opsgenieIssues", new Eventstorecloud.IntegrationArgs
+    ///         {
+    ///             ProjectId = @var.Project_id,
+    ///             Description = "create OpsGenie alerts from issues",
+    ///             Data = 
+    ///             {
+    ///                 { "sink", "opsGenie" },
+    ///                 { "api_key", "&lt;secret OpsGenie key here&gt;" },
+    ///                 { "source", "issues" },
+    ///             },
+    ///         });
+    ///         var slackNotifications = new Eventstorecloud.Integration("slackNotifications", new Eventstorecloud.IntegrationArgs
+    ///         {
+    ///             ProjectId = @var.Project_id,
+    ///             Description = "send Slack a message when a notification happens",
+    ///             Data = 
+    ///             {
+    ///                 { "sink", "slack" },
+    ///                 { "token", "&lt;secret token here&gt;" },
+    ///                 { "channel_id", "#esc-cluster-notifications" },
+    ///                 { "source", "notifications" },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id
+    /// ```
     /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/integration:Integration")]
     public partial class Integration : Pulumi.CustomResource

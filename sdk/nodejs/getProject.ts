@@ -2,7 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -37,4 +36,15 @@ export interface GetProjectResult {
      */
     readonly id: string;
     readonly name: string;
+}
+
+export function getProjectOutput(args: GetProjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectResult> {
+    return pulumi.output(args).apply(a => getProject(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getProject.
+ */
+export interface GetProjectOutputArgs {
+    name: pulumi.Input<string>;
 }

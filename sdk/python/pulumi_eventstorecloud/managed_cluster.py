@@ -373,6 +373,34 @@ class ManagedCluster(pulumi.CustomResource):
         """
         Manages EventStoreDB instances and clusters in Event Store Cloud
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_eventstorecloud as eventstorecloud
+
+        example_project = eventstorecloud.get_project(name="Example Project")
+        example_network = eventstorecloud.Network("exampleNetwork",
+            project_id=eventstorecloud_project["example"]["id"],
+            resource_provider="aws",
+            region="us-west-2",
+            cidr_block="172.21.0.0/16")
+        example_managed_cluster = eventstorecloud.ManagedCluster("exampleManagedCluster",
+            project_id=example_network.project_id,
+            network_id=example_network.id,
+            topology="three-node-multi-zone",
+            instance_type="F1",
+            disk_size=24,
+            disk_type="gp2",
+            server_version="20.6")
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
@@ -393,6 +421,34 @@ class ManagedCluster(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Manages EventStoreDB instances and clusters in Event Store Cloud
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_eventstorecloud as eventstorecloud
+
+        example_project = eventstorecloud.get_project(name="Example Project")
+        example_network = eventstorecloud.Network("exampleNetwork",
+            project_id=eventstorecloud_project["example"]["id"],
+            resource_provider="aws",
+            region="us-west-2",
+            cidr_block="172.21.0.0/16")
+        example_managed_cluster = eventstorecloud.ManagedCluster("exampleManagedCluster",
+            project_id=example_network.project_id,
+            network_id=example_network.id,
+            topology="three-node-multi-zone",
+            instance_type="F1",
+            disk_size=24,
+            disk_type="gp2",
+            server_version="20.6")
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+        ```
 
         :param str resource_name: The name of the resource.
         :param ManagedClusterArgs args: The arguments to use to populate this resource's properties.

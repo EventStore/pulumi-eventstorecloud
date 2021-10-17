@@ -15,6 +15,7 @@
     "files": [
         "config/index.ts",
         "config/vars.ts",
+        "getNetwork.ts",
         "getProject.ts",
         "index.ts",
         "integration.ts",
@@ -24,9 +25,6 @@
         "project.ts",
         "provider.ts",
         "scheduledBackup.ts",
-        "types/index.ts",
-        "types/input.ts",
-        "types/output.ts",
         "utilities.ts"
     ]
 }

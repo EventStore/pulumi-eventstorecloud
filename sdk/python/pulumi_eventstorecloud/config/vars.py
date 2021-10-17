@@ -8,20 +8,25 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
-__all__ = [
-    'organization_id',
-    'token',
-    'token_store',
-    'url',
-]
+import types
 
 __config__ = pulumi.Config('eventstorecloud')
 
-organization_id = __config__.get('organizationId')
 
-token = __config__.get('token')
+class _ExportableConfig(types.ModuleType):
+    @property
+    def organization_id(self) -> Optional[str]:
+        return __config__.get('organizationId')
 
-token_store = __config__.get('tokenStore')
+    @property
+    def token(self) -> Optional[str]:
+        return __config__.get('token')
 
-url = __config__.get('url')
+    @property
+    def token_store(self) -> Optional[str]:
+        return __config__.get('tokenStore')
+
+    @property
+    def url(self) -> Optional[str]:
+        return __config__.get('url')
 

@@ -29,6 +29,12 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import eventstorecloud:index/project:Project chicken_window project_id
+    /// ```
     /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/project:Project")]
     public partial class Project : Pulumi.CustomResource

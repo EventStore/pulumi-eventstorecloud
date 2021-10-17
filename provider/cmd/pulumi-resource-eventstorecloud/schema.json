@@ -9,7 +9,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud).",
     "repository": "https://github.com/EventStore/pulumi-eventstorecloud",
-    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.3-alpha.1626937627+aecf259c.dirty",
+    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.3+dirty",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
@@ -34,55 +34,6 @@
             "tokenStore",
             "url"
         ]
-    },
-    "types": {
-        "eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata": {
-            "properties": {
-                "awsPeeringLinkId": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
-                },
-                "gcpNetworkId": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
-                },
-                "gcpNetworkName": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
-                },
-                "gcpProjectId": {
-                    "type": "string",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
-                }
-            },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "awsPeeringLinkId",
-                        "gcpNetworkId",
-                        "gcpNetworkName",
-                        "gcpProjectId"
-                    ]
-                }
-            }
-        }
     },
     "provider": {
         "description": "The provider type for the eventstorecloud package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
@@ -129,7 +80,7 @@
     },
     "resources": {
         "eventstorecloud:index/integration:Integration": {
-            "description": "Manages integration resources, for example Slack or OpsGenie.\n",
+            "description": "Manages integration resources, for example Slack or OpsGenie.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst opsgenieIssues = new eventstorecloud.Integration(\"opsgenieIssues\", {\n    projectId: _var.project_id,\n    description: \"create OpsGenie alerts from issues\",\n    data: {\n        sink: \"opsGenie\",\n        api_key: \"\u003csecret OpsGenie key here\u003e\",\n        source: \"issues\",\n    },\n});\nconst slackNotifications = new eventstorecloud.Integration(\"slackNotifications\", {\n    projectId: _var.project_id,\n    description: \"send Slack a message when a notification happens\",\n    data: {\n        sink: \"slack\",\n        token: \"\u003csecret token here\u003e\",\n        channel_id: \"#esc-cluster-notifications\",\n        source: \"notifications\",\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nopsgenie_issues = eventstorecloud.Integration(\"opsgenieIssues\",\n    project_id=var[\"project_id\"],\n    description=\"create OpsGenie alerts from issues\",\n    data={\n        \"sink\": \"opsGenie\",\n        \"api_key\": \"\u003csecret OpsGenie key here\u003e\",\n        \"source\": \"issues\",\n    })\nslack_notifications = eventstorecloud.Integration(\"slackNotifications\",\n    project_id=var[\"project_id\"],\n    description=\"send Slack a message when a notification happens\",\n    data={\n        \"sink\": \"slack\",\n        \"token\": \"\u003csecret token here\u003e\",\n        \"channel_id\": \"#esc-cluster-notifications\",\n        \"source\": \"notifications\",\n    })\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var opsgenieIssues = new Eventstorecloud.Integration(\"opsgenieIssues\", new Eventstorecloud.IntegrationArgs\n        {\n            ProjectId = @var.Project_id,\n            Description = \"create OpsGenie alerts from issues\",\n            Data = \n            {\n                { \"sink\", \"opsGenie\" },\n                { \"api_key\", \"\u003csecret OpsGenie key here\u003e\" },\n                { \"source\", \"issues\" },\n            },\n        });\n        var slackNotifications = new Eventstorecloud.Integration(\"slackNotifications\", new Eventstorecloud.IntegrationArgs\n        {\n            ProjectId = @var.Project_id,\n            Description = \"send Slack a message when a notification happens\",\n            Data = \n            {\n                { \"sink\", \"slack\" },\n                { \"token\", \"\u003csecret token here\u003e\" },\n                { \"channel_id\", \"#esc-cluster-notifications\" },\n                { \"source\", \"notifications\" },\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewIntegration(ctx, \"opsgenieIssues\", \u0026eventstorecloud.IntegrationArgs{\n\t\t\tProjectId:   pulumi.Any(_var.Project_id),\n\t\t\tDescription: pulumi.String(\"create OpsGenie alerts from issues\"),\n\t\t\tData: pulumi.AnyMap{\n\t\t\t\t\"sink\":    pulumi.Any(\"opsGenie\"),\n\t\t\t\t\"api_key\": pulumi.Any(\"\u003csecret OpsGenie key here\u003e\"),\n\t\t\t\t\"source\":  pulumi.Any(\"issues\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewIntegration(ctx, \"slackNotifications\", \u0026eventstorecloud.IntegrationArgs{\n\t\t\tProjectId:   pulumi.Any(_var.Project_id),\n\t\t\tDescription: pulumi.String(\"send Slack a message when a notification happens\"),\n\t\t\tData: pulumi.AnyMap{\n\t\t\t\t\"sink\":       pulumi.Any(\"slack\"),\n\t\t\t\t\"token\":      pulumi.Any(\"\u003csecret token here\u003e\"),\n\t\t\t\t\"channel_id\": pulumi.Any(\"#esc-cluster-notifications\"),\n\t\t\t\t\"source\":     pulumi.Any(\"notifications\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id\n```\n\n ",
             "properties": {
                 "data": {
                     "type": "object",
@@ -197,7 +148,7 @@
             }
         },
         "eventstorecloud:index/managedCluster:ManagedCluster": {
-            "description": "Manages EventStoreDB instances and clusters in Event Store Cloud\n",
+            "description": "Manages EventStoreDB instances and clusters in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst exampleProject = eventstorecloud.getProject({\n    name: \"Example Project\",\n});\nconst exampleNetwork = new eventstorecloud.Network(\"exampleNetwork\", {\n    projectId: eventstorecloud_project.example.id,\n    resourceProvider: \"aws\",\n    region: \"us-west-2\",\n    cidrBlock: \"172.21.0.0/16\",\n});\nconst exampleManagedCluster = new eventstorecloud.ManagedCluster(\"exampleManagedCluster\", {\n    projectId: exampleNetwork.projectId,\n    networkId: exampleNetwork.id,\n    topology: \"three-node-multi-zone\",\n    instanceType: \"F1\",\n    diskSize: 24,\n    diskType: \"gp2\",\n    serverVersion: \"20.6\",\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nexample_project = eventstorecloud.get_project(name=\"Example Project\")\nexample_network = eventstorecloud.Network(\"exampleNetwork\",\n    project_id=eventstorecloud_project[\"example\"][\"id\"],\n    resource_provider=\"aws\",\n    region=\"us-west-2\",\n    cidr_block=\"172.21.0.0/16\")\nexample_managed_cluster = eventstorecloud.ManagedCluster(\"exampleManagedCluster\",\n    project_id=example_network.project_id,\n    network_id=example_network.id,\n    topology=\"three-node-multi-zone\",\n    instance_type=\"F1\",\n    disk_size=24,\n    disk_type=\"gp2\",\n    server_version=\"20.6\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var exampleProject = Output.Create(Eventstorecloud.GetProject.InvokeAsync(new Eventstorecloud.GetProjectArgs\n        {\n            Name = \"Example Project\",\n        }));\n        var exampleNetwork = new Eventstorecloud.Network(\"exampleNetwork\", new Eventstorecloud.NetworkArgs\n        {\n            ProjectId = eventstorecloud_project.Example.Id,\n            ResourceProvider = \"aws\",\n            Region = \"us-west-2\",\n            CidrBlock = \"172.21.0.0/16\",\n        });\n        var exampleManagedCluster = new Eventstorecloud.ManagedCluster(\"exampleManagedCluster\", new Eventstorecloud.ManagedClusterArgs\n        {\n            ProjectId = exampleNetwork.ProjectId,\n            NetworkId = exampleNetwork.Id,\n            Topology = \"three-node-multi-zone\",\n            InstanceType = \"F1\",\n            DiskSize = 24,\n            DiskType = \"gp2\",\n            ServerVersion = \"20.6\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.LookupProject(ctx, \u0026GetProjectArgs{\n\t\t\tName: \"Example Project\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleNetwork, err := eventstorecloud.NewNetwork(ctx, \"exampleNetwork\", \u0026eventstorecloud.NetworkArgs{\n\t\t\tProjectId:        pulumi.Any(eventstorecloud_project.Example.Id),\n\t\t\tResourceProvider: pulumi.String(\"aws\"),\n\t\t\tRegion:           pulumi.String(\"us-west-2\"),\n\t\t\tCidrBlock:        pulumi.String(\"172.21.0.0/16\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewManagedCluster(ctx, \"exampleManagedCluster\", \u0026eventstorecloud.ManagedClusterArgs{\n\t\t\tProjectId:     exampleNetwork.ProjectId,\n\t\t\tNetworkId:     exampleNetwork.ID(),\n\t\t\tTopology:      pulumi.String(\"three-node-multi-zone\"),\n\t\t\tInstanceType:  pulumi.String(\"F1\"),\n\t\t\tDiskSize:      pulumi.Int(24),\n\t\t\tDiskType:      pulumi.String(\"gp2\"),\n\t\t\tServerVersion: pulumi.String(\"20.6\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id\n```\n\n ",
             "properties": {
                 "diskSize": {
                     "type": "integer",
@@ -364,7 +315,7 @@
             }
         },
         "eventstorecloud:index/network:Network": {
-            "description": "Manages VPC (network) resources in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst exampleProject = new eventstorecloud.Project(\"exampleProject\", {});\nconst exampleNetwork = new eventstorecloud.Network(\"exampleNetwork\", {\n    projectId: exampleProject.id,\n    resourceProvider: \"aws\",\n    region: \"us-west-2\",\n    cidrBlock: \"172.21.0.0/16\",\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nexample_project = eventstorecloud.Project(\"exampleProject\")\nexample_network = eventstorecloud.Network(\"exampleNetwork\",\n    project_id=example_project.id,\n    resource_provider=\"aws\",\n    region=\"us-west-2\",\n    cidr_block=\"172.21.0.0/16\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var exampleProject = new Eventstorecloud.Project(\"exampleProject\", new Eventstorecloud.ProjectArgs\n        {\n        });\n        var exampleNetwork = new Eventstorecloud.Network(\"exampleNetwork\", new Eventstorecloud.NetworkArgs\n        {\n            ProjectId = exampleProject.Id,\n            ResourceProvider = \"aws\",\n            Region = \"us-west-2\",\n            CidrBlock = \"172.21.0.0/16\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleProject, err := eventstorecloud.NewProject(ctx, \"exampleProject\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewNetwork(ctx, \"exampleNetwork\", \u0026eventstorecloud.NetworkArgs{\n\t\t\tProjectId:        exampleProject.ID(),\n\t\t\tResourceProvider: pulumi.String(\"aws\"),\n\t\t\tRegion:           pulumi.String(\"us-west-2\"),\n\t\t\tCidrBlock:        pulumi.String(\"172.21.0.0/16\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "Manages VPC (network) resources in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst exampleProject = new eventstorecloud.Project(\"exampleProject\", {});\nconst exampleNetwork = new eventstorecloud.Network(\"exampleNetwork\", {\n    projectId: exampleProject.id,\n    resourceProvider: \"aws\",\n    region: \"us-west-2\",\n    cidrBlock: \"172.21.0.0/16\",\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nexample_project = eventstorecloud.Project(\"exampleProject\")\nexample_network = eventstorecloud.Network(\"exampleNetwork\",\n    project_id=example_project.id,\n    resource_provider=\"aws\",\n    region=\"us-west-2\",\n    cidr_block=\"172.21.0.0/16\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var exampleProject = new Eventstorecloud.Project(\"exampleProject\", new Eventstorecloud.ProjectArgs\n        {\n        });\n        var exampleNetwork = new Eventstorecloud.Network(\"exampleNetwork\", new Eventstorecloud.NetworkArgs\n        {\n            ProjectId = exampleProject.Id,\n            ResourceProvider = \"aws\",\n            Region = \"us-west-2\",\n            CidrBlock = \"172.21.0.0/16\",\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleProject, err := eventstorecloud.NewProject(ctx, \"exampleProject\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewNetwork(ctx, \"exampleNetwork\", \u0026eventstorecloud.NetworkArgs{\n\t\t\tProjectId:        exampleProject.ID(),\n\t\t\tResourceProvider: pulumi.String(\"aws\"),\n\t\t\tRegion:           pulumi.String(\"us-west-2\"),\n\t\t\tCidrBlock:        pulumi.String(\"172.21.0.0/16\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/network:Network example project_id:network_id\n```\n\n ",
             "properties": {
                 "cidrBlock": {
                     "type": "string",
@@ -450,7 +401,7 @@
             }
         },
         "eventstorecloud:index/peering:Peering": {
-            "description": "Manages peering connections between Event Store Cloud VPCs and customer own VPCs\n",
+            "description": "Manages peering connections between Event Store Cloud VPCs and customer own VPCs\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\n// Example for AWS\nconst exampleProject = new eventstorecloud.Project(\"exampleProject\", {});\nconst exampleNetwork = new eventstorecloud.Network(\"exampleNetwork\", {\n    projectId: exampleProject.id,\n    resourceProvider: \"aws\",\n    region: \"us-west-2\",\n    cidrBlock: \"172.21.0.0/16\",\n});\nconst examplePeering = new eventstorecloud.Peering(\"examplePeering\", {\n    projectId: exampleNetwork.projectId,\n    networkId: exampleNetwork.id,\n    peerResourceProvider: exampleNetwork.resourceProvider,\n    peerNetworkRegion: exampleNetwork.region,\n    peerAccountId: \"\u003cCustomer AWS Account ID\u003e\",\n    peerNetworkId: \"\u003cCustomer VPC ID\u003e\",\n    routes: [\"\u003cAddress space of the customer VPC\u003e\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\n# Example for AWS\nexample_project = eventstorecloud.Project(\"exampleProject\")\nexample_network = eventstorecloud.Network(\"exampleNetwork\",\n    project_id=example_project.id,\n    resource_provider=\"aws\",\n    region=\"us-west-2\",\n    cidr_block=\"172.21.0.0/16\")\nexample_peering = eventstorecloud.Peering(\"examplePeering\",\n    project_id=example_network.project_id,\n    network_id=example_network.id,\n    peer_resource_provider=example_network.resource_provider,\n    peer_network_region=example_network.region,\n    peer_account_id=\"\u003cCustomer AWS Account ID\u003e\",\n    peer_network_id=\"\u003cCustomer VPC ID\u003e\",\n    routes=[\"\u003cAddress space of the customer VPC\u003e\"])\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        // Example for AWS\n        var exampleProject = new Eventstorecloud.Project(\"exampleProject\", new Eventstorecloud.ProjectArgs\n        {\n        });\n        var exampleNetwork = new Eventstorecloud.Network(\"exampleNetwork\", new Eventstorecloud.NetworkArgs\n        {\n            ProjectId = exampleProject.Id,\n            ResourceProvider = \"aws\",\n            Region = \"us-west-2\",\n            CidrBlock = \"172.21.0.0/16\",\n        });\n        var examplePeering = new Eventstorecloud.Peering(\"examplePeering\", new Eventstorecloud.PeeringArgs\n        {\n            ProjectId = exampleNetwork.ProjectId,\n            NetworkId = exampleNetwork.Id,\n            PeerResourceProvider = exampleNetwork.ResourceProvider,\n            PeerNetworkRegion = exampleNetwork.Region,\n            PeerAccountId = \"\u003cCustomer AWS Account ID\u003e\",\n            PeerNetworkId = \"\u003cCustomer VPC ID\u003e\",\n            Routes = \n            {\n                \"\u003cAddress space of the customer VPC\u003e\",\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleProject, err := eventstorecloud.NewProject(ctx, \"exampleProject\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleNetwork, err := eventstorecloud.NewNetwork(ctx, \"exampleNetwork\", \u0026eventstorecloud.NetworkArgs{\n\t\t\tProjectId:        exampleProject.ID(),\n\t\t\tResourceProvider: pulumi.String(\"aws\"),\n\t\t\tRegion:           pulumi.String(\"us-west-2\"),\n\t\t\tCidrBlock:        pulumi.String(\"172.21.0.0/16\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewPeering(ctx, \"examplePeering\", \u0026eventstorecloud.PeeringArgs{\n\t\t\tProjectId:            exampleNetwork.ProjectId,\n\t\t\tNetworkId:            exampleNetwork.ID(),\n\t\t\tPeerResourceProvider: exampleNetwork.ResourceProvider,\n\t\t\tPeerNetworkRegion:    exampleNetwork.Region,\n\t\t\tPeerAccountId:        pulumi.String(\"\u003cCustomer AWS Account ID\u003e\"),\n\t\t\tPeerNetworkId:        pulumi.String(\"\u003cCustomer VPC ID\u003e\"),\n\t\t\tRoutes: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"\u003cAddress space of the customer VPC\u003e\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id\n```\n\n ~\u003e Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more. ",
             "properties": {
                 "name": {
                     "type": "string",
@@ -480,10 +431,10 @@
                     "type": "string",
                     "description": "Project ID\n"
                 },
-                "providerMetadatas": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata"
+                "providerMetadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     },
                     "description": "Metadata about the remote end of the peering connection\n"
                 },
@@ -503,7 +454,7 @@
                 "peerNetworkRegion",
                 "peerResourceProvider",
                 "projectId",
-                "providerMetadatas",
+                "providerMetadata",
                 "routes"
             ],
             "inputProperties": {
@@ -583,10 +534,10 @@
                         "type": "string",
                         "description": "Project ID\n"
                     },
-                    "providerMetadatas": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/eventstorecloud:index/PeeringProviderMetadata:PeeringProviderMetadata"
+                    "providerMetadata": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
                         },
                         "description": "Metadata about the remote end of the peering connection\n"
                     },
@@ -602,7 +553,7 @@
             }
         },
         "eventstorecloud:index/project:Project": {
-            "description": "Manages projects within an organization in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst chickenWindow = new eventstorecloud.Project(\"chicken_window\", {});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nchicken_window = eventstorecloud.Project(\"chickenWindow\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var chickenWindow = new Eventstorecloud.Project(\"chickenWindow\", new Eventstorecloud.ProjectArgs\n        {\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewProject(ctx, \"chickenWindow\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "Manages projects within an organization in Event Store Cloud\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst chickenWindow = new eventstorecloud.Project(\"chicken_window\", {});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nchicken_window = eventstorecloud.Project(\"chickenWindow\")\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var chickenWindow = new Eventstorecloud.Project(\"chickenWindow\", new Eventstorecloud.ProjectArgs\n        {\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewProject(ctx, \"chickenWindow\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/project:Project chicken_window project_id\n```\n\n ",
             "properties": {
                 "name": {
                     "type": "string",
@@ -630,7 +581,7 @@
             }
         },
         "eventstorecloud:index/scheduledBackup:ScheduledBackup": {
-            "description": "Creates a new scheduled backup.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst daily = new eventstorecloud.ScheduledBackup(\"daily\", {\n    projectId: eventstorecloud_project.example.id,\n    schedule: \"0 12 * * */1\",\n    description: \"Creates a backup once a day at 12:00\",\n    sourceClusterId: eventstorecloud_managed_cluster.example.id,\n    backupDescription: \"{cluster} Daily Backup {datetime:RFC3339}\",\n    maxBackupCount: 3,\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\ndaily = eventstorecloud.ScheduledBackup(\"daily\",\n    project_id=eventstorecloud_project[\"example\"][\"id\"],\n    schedule=\"0 12 * * */1\",\n    description=\"Creates a backup once a day at 12:00\",\n    source_cluster_id=eventstorecloud_managed_cluster[\"example\"][\"id\"],\n    backup_description=\"{cluster} Daily Backup {datetime:RFC3339}\",\n    max_backup_count=3)\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var daily = new Eventstorecloud.ScheduledBackup(\"daily\", new Eventstorecloud.ScheduledBackupArgs\n        {\n            ProjectId = eventstorecloud_project.Example.Id,\n            Schedule = \"0 12 * * */1\",\n            Description = \"Creates a backup once a day at 12:00\",\n            SourceClusterId = eventstorecloud_managed_cluster.Example.Id,\n            BackupDescription = \"{cluster} Daily Backup {datetime:RFC3339}\",\n            MaxBackupCount = 3,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewScheduledBackup(ctx, \"daily\", \u0026eventstorecloud.ScheduledBackupArgs{\n\t\t\tProjectId:         pulumi.Any(eventstorecloud_project.Example.Id),\n\t\t\tSchedule:          pulumi.String(\"0 12 * * */1\"),\n\t\t\tDescription:       pulumi.String(\"Creates a backup once a day at 12:00\"),\n\t\t\tSourceClusterId:   pulumi.Any(eventstorecloud_managed_cluster.Example.Id),\n\t\t\tBackupDescription: pulumi.String(\"{cluster} Daily Backup {datetime:RFC3339}\"),\n\t\t\tMaxBackupCount:    pulumi.Int(3),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "Creates a new scheduled backup.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as eventstorecloud from \"@pulumi/eventstorecloud\";\n\nconst daily = new eventstorecloud.ScheduledBackup(\"daily\", {\n    projectId: eventstorecloud_project.example.id,\n    schedule: \"0 12 * * */1\",\n    description: \"Creates a backup once a day at 12:00\",\n    sourceClusterId: eventstorecloud_managed_cluster.example.id,\n    backupDescription: \"{cluster} Daily Backup {datetime:RFC3339}\",\n    maxBackupCount: 3,\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\ndaily = eventstorecloud.ScheduledBackup(\"daily\",\n    project_id=eventstorecloud_project[\"example\"][\"id\"],\n    schedule=\"0 12 * * */1\",\n    description=\"Creates a backup once a day at 12:00\",\n    source_cluster_id=eventstorecloud_managed_cluster[\"example\"][\"id\"],\n    backup_description=\"{cluster} Daily Backup {datetime:RFC3339}\",\n    max_backup_count=3)\n```\n```csharp\nusing Pulumi;\nusing Eventstorecloud = Pulumi.Eventstorecloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var daily = new Eventstorecloud.ScheduledBackup(\"daily\", new Eventstorecloud.ScheduledBackupArgs\n        {\n            ProjectId = eventstorecloud_project.Example.Id,\n            Schedule = \"0 12 * * */1\",\n            Description = \"Creates a backup once a day at 12:00\",\n            SourceClusterId = eventstorecloud_managed_cluster.Example.Id,\n            BackupDescription = \"{cluster} Daily Backup {datetime:RFC3339}\",\n            MaxBackupCount = 3,\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewScheduledBackup(ctx, \"daily\", \u0026eventstorecloud.ScheduledBackupArgs{\n\t\t\tProjectId:         pulumi.Any(eventstorecloud_project.Example.Id),\n\t\t\tSchedule:          pulumi.String(\"0 12 * * */1\"),\n\t\t\tDescription:       pulumi.String(\"Creates a backup once a day at 12:00\"),\n\t\t\tSourceClusterId:   pulumi.Any(eventstorecloud_managed_cluster.Example.Id),\n\t\t\tBackupDescription: pulumi.String(\"{cluster} Daily Backup {datetime:RFC3339}\"),\n\t\t\tMaxBackupCount:    pulumi.Int(3),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id\n```\n\n ",
             "properties": {
                 "backupDescription": {
                     "type": "string",
@@ -732,6 +683,57 @@
         }
     },
     "functions": {
+        "eventstorecloud:index/getNetwork:getNetwork": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getNetwork.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "projectId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "projectId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getNetwork.\n",
+                "properties": {
+                    "cidrBlock": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "projectId": {
+                        "type": "string"
+                    },
+                    "region": {
+                        "type": "string"
+                    },
+                    "resourceProvider": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "cidrBlock",
+                    "name",
+                    "projectId",
+                    "region",
+                    "resourceProvider",
+                    "id"
+                ]
+            }
+        },
         "eventstorecloud:index/getProject:getProject": {
             "description": "Retrieves data for an existing `Project` resource\n",
             "inputs": {

@@ -15,6 +15,12 @@ import * as utilities from "./utilities";
  *
  * const chickenWindow = new eventstorecloud.Project("chicken_window", {});
  * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import eventstorecloud:index/project:Project chicken_window project_id
+ * ```
  */
 export class Project extends pulumi.CustomResource {
     /**

@@ -12,6 +12,7 @@ __all__ = [
     'GetProjectResult',
     'AwaitableGetProjectResult',
     'get_project',
+    'get_project_output',
 ]
 
 @pulumi.output_type
@@ -67,3 +68,12 @@ def get_project(name: Optional[str] = None,
     return AwaitableGetProjectResult(
         id=__ret__.id,
         name=__ret__.name)
+
+
+@_utilities.lift_output_func(get_project)
+def get_project_output(name: Optional[pulumi.Input[str]] = None,
+                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetProjectResult]:
+    """
+    Retrieves data for an existing `Project` resource
+    """
+    ...

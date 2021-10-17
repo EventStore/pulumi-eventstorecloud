@@ -114,6 +114,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"eventstorecloud_project": {Tok: makeDataSource(mainMod, "getProject")},
+			"eventstorecloud_network": {Tok: makeDataSource(mainMod, "getNetwork")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
