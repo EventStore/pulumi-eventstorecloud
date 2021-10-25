@@ -12,6 +12,54 @@ import (
 )
 
 // Manages integration resources, for example Slack or OpsGenie.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := eventstorecloud.NewIntegration(ctx, "opsgenieIssues", &eventstorecloud.IntegrationArgs{
+// 			ProjectId:   pulumi.Any(_var.Project_id),
+// 			Description: pulumi.String("create OpsGenie alerts from issues"),
+// 			Data: pulumi.AnyMap{
+// 				"sink":    pulumi.Any("opsGenie"),
+// 				"api_key": pulumi.Any("<secret OpsGenie key here>"),
+// 				"source":  pulumi.Any("issues"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = eventstorecloud.NewIntegration(ctx, "slackNotifications", &eventstorecloud.IntegrationArgs{
+// 			ProjectId:   pulumi.Any(_var.Project_id),
+// 			Description: pulumi.String("send Slack a message when a notification happens"),
+// 			Data: pulumi.AnyMap{
+// 				"sink":       pulumi.Any("slack"),
+// 				"token":      pulumi.Any("<secret token here>"),
+// 				"channel_id": pulumi.Any("#esc-cluster-notifications"),
+// 				"source":     pulumi.Any("notifications"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ```sh
+//  $ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id
+// ```
 type Integration struct {
 	pulumi.CustomResourceState
 
@@ -167,7 +215,7 @@ type IntegrationArrayInput interface {
 type IntegrationArray []IntegrationInput
 
 func (IntegrationArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Integration)(nil))
+	return reflect.TypeOf((*[]*Integration)(nil)).Elem()
 }
 
 func (i IntegrationArray) ToIntegrationArrayOutput() IntegrationArrayOutput {
@@ -192,7 +240,7 @@ type IntegrationMapInput interface {
 type IntegrationMap map[string]IntegrationInput
 
 func (IntegrationMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Integration)(nil))
+	return reflect.TypeOf((*map[string]*Integration)(nil)).Elem()
 }
 
 func (i IntegrationMap) ToIntegrationMapOutput() IntegrationMapOutput {
@@ -203,9 +251,7 @@ func (i IntegrationMap) ToIntegrationMapOutputWithContext(ctx context.Context) I
 	return pulumi.ToOutputWithContext(ctx, i).(IntegrationMapOutput)
 }
 
-type IntegrationOutput struct {
-	*pulumi.OutputState
-}
+type IntegrationOutput struct{ *pulumi.OutputState }
 
 func (IntegrationOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Integration)(nil))
@@ -224,14 +270,12 @@ func (o IntegrationOutput) ToIntegrationPtrOutput() IntegrationPtrOutput {
 }
 
 func (o IntegrationOutput) ToIntegrationPtrOutputWithContext(ctx context.Context) IntegrationPtrOutput {
-	return o.ApplyT(func(v Integration) *Integration {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Integration) *Integration {
 		return &v
 	}).(IntegrationPtrOutput)
 }
 
-type IntegrationPtrOutput struct {
-	*pulumi.OutputState
-}
+type IntegrationPtrOutput struct{ *pulumi.OutputState }
 
 func (IntegrationPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Integration)(nil))
@@ -243,6 +287,16 @@ func (o IntegrationPtrOutput) ToIntegrationPtrOutput() IntegrationPtrOutput {
 
 func (o IntegrationPtrOutput) ToIntegrationPtrOutputWithContext(ctx context.Context) IntegrationPtrOutput {
 	return o
+}
+
+func (o IntegrationPtrOutput) Elem() IntegrationOutput {
+	return o.ApplyT(func(v *Integration) Integration {
+		if v != nil {
+			return *v
+		}
+		var ret Integration
+		return ret
+	}).(IntegrationOutput)
 }
 
 type IntegrationArrayOutput struct{ *pulumi.OutputState }

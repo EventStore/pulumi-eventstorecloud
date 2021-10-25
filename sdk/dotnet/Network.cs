@@ -36,6 +36,12 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import eventstorecloud:index/network:Network example project_id:network_id
+    /// ```
     /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/network:Network")]
     public partial class Network : Pulumi.CustomResource

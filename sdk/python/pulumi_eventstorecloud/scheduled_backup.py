@@ -242,6 +242,12 @@ class ScheduledBackup(pulumi.CustomResource):
             max_backup_count=3)
         ```
 
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] backup_description: backup_description
@@ -273,6 +279,12 @@ class ScheduledBackup(pulumi.CustomResource):
             source_cluster_id=eventstorecloud_managed_cluster["example"]["id"],
             backup_description="{cluster} Daily Backup {datetime:RFC3339}",
             max_backup_count=3)
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
         ```
 
         :param str resource_name: The name of the resource.

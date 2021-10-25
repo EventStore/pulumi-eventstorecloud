@@ -5,6 +5,7 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .get_network import *
 from .get_project import *
 from .integration import *
 from .managed_cluster import *
@@ -13,12 +14,11 @@ from .peering import *
 from .project import *
 from .provider import *
 from .scheduled_backup import *
-from ._inputs import *
-from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
-    import pulumi_eventstorecloud.config as config
+    import pulumi_eventstorecloud.config as __config
+    config = __config
 else:
     config = _utilities.lazy_import('pulumi_eventstorecloud.config')
 

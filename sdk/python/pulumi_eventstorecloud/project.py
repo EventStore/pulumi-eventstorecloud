@@ -77,6 +77,12 @@ class Project(pulumi.CustomResource):
         chicken_window = eventstorecloud.Project("chickenWindow")
         ```
 
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/project:Project chicken_window project_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Human-friendly name for the project
@@ -97,6 +103,12 @@ class Project(pulumi.CustomResource):
         import pulumi_eventstorecloud as eventstorecloud
 
         chicken_window = eventstorecloud.Project("chickenWindow")
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/project:Project chicken_window project_id
         ```
 
         :param str resource_name: The name of the resource.

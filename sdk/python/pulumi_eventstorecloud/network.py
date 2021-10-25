@@ -210,6 +210,12 @@ class Network(pulumi.CustomResource):
             cidr_block="172.21.0.0/16")
         ```
 
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/network:Network example project_id:network_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cidr_block: Address space of the network in CIDR block notation
@@ -239,6 +245,12 @@ class Network(pulumi.CustomResource):
             resource_provider="aws",
             region="us-west-2",
             cidr_block="172.21.0.0/16")
+        ```
+
+        ## Import
+
+        ```sh
+         $ pulumi import eventstorecloud:index/network:Network example project_id:network_id
         ```
 
         :param str resource_name: The name of the resource.

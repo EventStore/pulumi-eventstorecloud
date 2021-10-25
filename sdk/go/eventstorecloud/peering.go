@@ -12,6 +12,58 @@ import (
 )
 
 // Manages peering connections between Event Store Cloud VPCs and customer own VPCs
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		exampleProject, err := eventstorecloud.NewProject(ctx, "exampleProject", nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNetwork, err := eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
+// 			ProjectId:        exampleProject.ID(),
+// 			ResourceProvider: pulumi.String("aws"),
+// 			Region:           pulumi.String("us-west-2"),
+// 			CidrBlock:        pulumi.String("172.21.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = eventstorecloud.NewPeering(ctx, "examplePeering", &eventstorecloud.PeeringArgs{
+// 			ProjectId:            exampleNetwork.ProjectId,
+// 			NetworkId:            exampleNetwork.ID(),
+// 			PeerResourceProvider: exampleNetwork.ResourceProvider,
+// 			PeerNetworkRegion:    exampleNetwork.Region,
+// 			PeerAccountId:        pulumi.String("<Customer AWS Account ID>"),
+// 			PeerNetworkId:        pulumi.String("<Customer VPC ID>"),
+// 			Routes: pulumi.StringArray{
+// 				pulumi.String("<Address space of the customer VPC>"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ```sh
+//  $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+// ```
+//
+//  ~> Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
 type Peering struct {
 	pulumi.CustomResourceState
 
@@ -30,7 +82,7 @@ type Peering struct {
 	// Project ID
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// Metadata about the remote end of the peering connection
-	ProviderMetadatas PeeringProviderMetadataArrayOutput `pulumi:"providerMetadatas"`
+	ProviderMetadata pulumi.StringMapOutput `pulumi:"providerMetadata"`
 	// Routes to create from the Event Store network to the peer network
 	Routes pulumi.StringArrayOutput `pulumi:"routes"`
 }
@@ -100,7 +152,7 @@ type peeringState struct {
 	// Project ID
 	ProjectId *string `pulumi:"projectId"`
 	// Metadata about the remote end of the peering connection
-	ProviderMetadatas []PeeringProviderMetadata `pulumi:"providerMetadatas"`
+	ProviderMetadata map[string]string `pulumi:"providerMetadata"`
 	// Routes to create from the Event Store network to the peer network
 	Routes []string `pulumi:"routes"`
 }
@@ -121,7 +173,7 @@ type PeeringState struct {
 	// Project ID
 	ProjectId pulumi.StringPtrInput
 	// Metadata about the remote end of the peering connection
-	ProviderMetadatas PeeringProviderMetadataArrayInput
+	ProviderMetadata pulumi.StringMapInput
 	// Routes to create from the Event Store network to the peer network
 	Routes pulumi.StringArrayInput
 }
@@ -235,7 +287,7 @@ type PeeringArrayInput interface {
 type PeeringArray []PeeringInput
 
 func (PeeringArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Peering)(nil))
+	return reflect.TypeOf((*[]*Peering)(nil)).Elem()
 }
 
 func (i PeeringArray) ToPeeringArrayOutput() PeeringArrayOutput {
@@ -260,7 +312,7 @@ type PeeringMapInput interface {
 type PeeringMap map[string]PeeringInput
 
 func (PeeringMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Peering)(nil))
+	return reflect.TypeOf((*map[string]*Peering)(nil)).Elem()
 }
 
 func (i PeeringMap) ToPeeringMapOutput() PeeringMapOutput {
@@ -271,9 +323,7 @@ func (i PeeringMap) ToPeeringMapOutputWithContext(ctx context.Context) PeeringMa
 	return pulumi.ToOutputWithContext(ctx, i).(PeeringMapOutput)
 }
 
-type PeeringOutput struct {
-	*pulumi.OutputState
-}
+type PeeringOutput struct{ *pulumi.OutputState }
 
 func (PeeringOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Peering)(nil))
@@ -292,14 +342,12 @@ func (o PeeringOutput) ToPeeringPtrOutput() PeeringPtrOutput {
 }
 
 func (o PeeringOutput) ToPeeringPtrOutputWithContext(ctx context.Context) PeeringPtrOutput {
-	return o.ApplyT(func(v Peering) *Peering {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Peering) *Peering {
 		return &v
 	}).(PeeringPtrOutput)
 }
 
-type PeeringPtrOutput struct {
-	*pulumi.OutputState
-}
+type PeeringPtrOutput struct{ *pulumi.OutputState }
 
 func (PeeringPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Peering)(nil))
@@ -311,6 +359,16 @@ func (o PeeringPtrOutput) ToPeeringPtrOutput() PeeringPtrOutput {
 
 func (o PeeringPtrOutput) ToPeeringPtrOutputWithContext(ctx context.Context) PeeringPtrOutput {
 	return o
+}
+
+func (o PeeringPtrOutput) Elem() PeeringOutput {
+	return o.ApplyT(func(v *Peering) Peering {
+		if v != nil {
+			return *v
+		}
+		var ret Peering
+		return ret
+	}).(PeeringOutput)
 }
 
 type PeeringArrayOutput struct{ *pulumi.OutputState }

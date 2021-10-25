@@ -40,6 +40,12 @@ import (
 // 	})
 // }
 // ```
+//
+// ## Import
+//
+// ```sh
+//  $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
+// ```
 type ScheduledBackup struct {
 	pulumi.CustomResourceState
 
@@ -234,7 +240,7 @@ type ScheduledBackupArrayInput interface {
 type ScheduledBackupArray []ScheduledBackupInput
 
 func (ScheduledBackupArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ScheduledBackup)(nil))
+	return reflect.TypeOf((*[]*ScheduledBackup)(nil)).Elem()
 }
 
 func (i ScheduledBackupArray) ToScheduledBackupArrayOutput() ScheduledBackupArrayOutput {
@@ -259,7 +265,7 @@ type ScheduledBackupMapInput interface {
 type ScheduledBackupMap map[string]ScheduledBackupInput
 
 func (ScheduledBackupMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ScheduledBackup)(nil))
+	return reflect.TypeOf((*map[string]*ScheduledBackup)(nil)).Elem()
 }
 
 func (i ScheduledBackupMap) ToScheduledBackupMapOutput() ScheduledBackupMapOutput {
@@ -270,9 +276,7 @@ func (i ScheduledBackupMap) ToScheduledBackupMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ScheduledBackupMapOutput)
 }
 
-type ScheduledBackupOutput struct {
-	*pulumi.OutputState
-}
+type ScheduledBackupOutput struct{ *pulumi.OutputState }
 
 func (ScheduledBackupOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ScheduledBackup)(nil))
@@ -291,14 +295,12 @@ func (o ScheduledBackupOutput) ToScheduledBackupPtrOutput() ScheduledBackupPtrOu
 }
 
 func (o ScheduledBackupOutput) ToScheduledBackupPtrOutputWithContext(ctx context.Context) ScheduledBackupPtrOutput {
-	return o.ApplyT(func(v ScheduledBackup) *ScheduledBackup {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ScheduledBackup) *ScheduledBackup {
 		return &v
 	}).(ScheduledBackupPtrOutput)
 }
 
-type ScheduledBackupPtrOutput struct {
-	*pulumi.OutputState
-}
+type ScheduledBackupPtrOutput struct{ *pulumi.OutputState }
 
 func (ScheduledBackupPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ScheduledBackup)(nil))
@@ -310,6 +312,16 @@ func (o ScheduledBackupPtrOutput) ToScheduledBackupPtrOutput() ScheduledBackupPt
 
 func (o ScheduledBackupPtrOutput) ToScheduledBackupPtrOutputWithContext(ctx context.Context) ScheduledBackupPtrOutput {
 	return o
+}
+
+func (o ScheduledBackupPtrOutput) Elem() ScheduledBackupOutput {
+	return o.ApplyT(func(v *ScheduledBackup) ScheduledBackup {
+		if v != nil {
+			return *v
+		}
+		var ret ScheduledBackup
+		return ret
+	}).(ScheduledBackupOutput)
 }
 
 type ScheduledBackupArrayOutput struct{ *pulumi.OutputState }

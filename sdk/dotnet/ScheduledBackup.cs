@@ -35,6 +35,12 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// }
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
+    /// ```
     /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/scheduledBackup:ScheduledBackup")]
     public partial class ScheduledBackup : Pulumi.CustomResource

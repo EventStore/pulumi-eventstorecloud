@@ -5,6 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./getNetwork";
 export * from "./getProject";
 export * from "./integration";
 export * from "./managedCluster";
@@ -16,11 +17,9 @@ export * from "./scheduledBackup";
 
 // Export sub-modules:
 import * as config from "./config";
-import * as types from "./types";
 
 export {
     config,
-    types,
 };
 
 // Import resources to register:

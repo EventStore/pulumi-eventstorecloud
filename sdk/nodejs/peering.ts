@@ -2,11 +2,43 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
  * Manages peering connections between Event Store Cloud VPCs and customer own VPCs
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ *
+ * // Example for AWS
+ * const exampleProject = new eventstorecloud.Project("exampleProject", {});
+ * const exampleNetwork = new eventstorecloud.Network("exampleNetwork", {
+ *     projectId: exampleProject.id,
+ *     resourceProvider: "aws",
+ *     region: "us-west-2",
+ *     cidrBlock: "172.21.0.0/16",
+ * });
+ * const examplePeering = new eventstorecloud.Peering("examplePeering", {
+ *     projectId: exampleNetwork.projectId,
+ *     networkId: exampleNetwork.id,
+ *     peerResourceProvider: exampleNetwork.resourceProvider,
+ *     peerNetworkRegion: exampleNetwork.region,
+ *     peerAccountId: "<Customer AWS Account ID>",
+ *     peerNetworkId: "<Customer VPC ID>",
+ *     routes: ["<Address space of the customer VPC>"],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * ```sh
+ *  $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+ * ```
+ *
+ *  ~> Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
  */
 export class Peering extends pulumi.CustomResource {
     /**
@@ -67,7 +99,7 @@ export class Peering extends pulumi.CustomResource {
     /**
      * Metadata about the remote end of the peering connection
      */
-    public /*out*/ readonly providerMetadatas!: pulumi.Output<outputs.PeeringProviderMetadata[]>;
+    public /*out*/ readonly providerMetadata!: pulumi.Output<{[key: string]: string}>;
     /**
      * Routes to create from the Event Store network to the peer network
      */
@@ -93,7 +125,7 @@ export class Peering extends pulumi.CustomResource {
             inputs["peerNetworkRegion"] = state ? state.peerNetworkRegion : undefined;
             inputs["peerResourceProvider"] = state ? state.peerResourceProvider : undefined;
             inputs["projectId"] = state ? state.projectId : undefined;
-            inputs["providerMetadatas"] = state ? state.providerMetadatas : undefined;
+            inputs["providerMetadata"] = state ? state.providerMetadata : undefined;
             inputs["routes"] = state ? state.routes : undefined;
         } else {
             const args = argsOrState as PeeringArgs | undefined;
@@ -126,7 +158,7 @@ export class Peering extends pulumi.CustomResource {
             inputs["peerResourceProvider"] = args ? args.peerResourceProvider : undefined;
             inputs["projectId"] = args ? args.projectId : undefined;
             inputs["routes"] = args ? args.routes : undefined;
-            inputs["providerMetadatas"] = undefined /*out*/;
+            inputs["providerMetadata"] = undefined /*out*/;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -170,7 +202,7 @@ export interface PeeringState {
     /**
      * Metadata about the remote end of the peering connection
      */
-    providerMetadatas?: pulumi.Input<pulumi.Input<inputs.PeeringProviderMetadata>[]>;
+    providerMetadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Routes to create from the Event Store network to the peer network
      */

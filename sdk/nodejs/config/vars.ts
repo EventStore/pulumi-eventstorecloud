@@ -4,9 +4,38 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-let __config = new pulumi.Config("eventstorecloud");
+declare var exports: any;
+const __config = new pulumi.Config("eventstorecloud");
 
-export let organizationId: string | undefined = __config.get("organizationId");
-export let token: string | undefined = __config.get("token");
-export let tokenStore: string | undefined = __config.get("tokenStore");
-export let url: string | undefined = __config.get("url");
+export declare const organizationId: string | undefined;
+Object.defineProperty(exports, "organizationId", {
+    get() {
+        return __config.get("organizationId");
+    },
+    enumerable: true,
+});
+
+export declare const token: string | undefined;
+Object.defineProperty(exports, "token", {
+    get() {
+        return __config.get("token");
+    },
+    enumerable: true,
+});
+
+export declare const tokenStore: string | undefined;
+Object.defineProperty(exports, "tokenStore", {
+    get() {
+        return __config.get("tokenStore");
+    },
+    enumerable: true,
+});
+
+export declare const url: string | undefined;
+Object.defineProperty(exports, "url", {
+    get() {
+        return __config.get("url");
+    },
+    enumerable: true,
+});
+

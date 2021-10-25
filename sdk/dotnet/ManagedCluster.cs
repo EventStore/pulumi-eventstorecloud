@@ -11,6 +11,48 @@ namespace Pulumi.Eventstorecloud
 {
     /// <summary>
     /// Manages EventStoreDB instances and clusters in Event Store Cloud
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var exampleProject = Output.Create(Eventstorecloud.GetProject.InvokeAsync(new Eventstorecloud.GetProjectArgs
+    ///         {
+    ///             Name = "Example Project",
+    ///         }));
+    ///         var exampleNetwork = new Eventstorecloud.Network("exampleNetwork", new Eventstorecloud.NetworkArgs
+    ///         {
+    ///             ProjectId = eventstorecloud_project.Example.Id,
+    ///             ResourceProvider = "aws",
+    ///             Region = "us-west-2",
+    ///             CidrBlock = "172.21.0.0/16",
+    ///         });
+    ///         var exampleManagedCluster = new Eventstorecloud.ManagedCluster("exampleManagedCluster", new Eventstorecloud.ManagedClusterArgs
+    ///         {
+    ///             ProjectId = exampleNetwork.ProjectId,
+    ///             NetworkId = exampleNetwork.Id,
+    ///             Topology = "three-node-multi-zone",
+    ///             InstanceType = "F1",
+    ///             DiskSize = 24,
+    ///             DiskType = "gp2",
+    ///             ServerVersion = "20.6",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// ```sh
+    ///  $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+    /// ```
     /// </summary>
     [EventstorecloudResourceType("eventstorecloud:index/managedCluster:ManagedCluster")]
     public partial class ManagedCluster : Pulumi.CustomResource

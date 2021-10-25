@@ -12,6 +12,56 @@ import (
 )
 
 // Manages EventStoreDB instances and clusters in Event Store Cloud
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := eventstorecloud.LookupProject(ctx, &GetProjectArgs{
+// 			Name: "Example Project",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		exampleNetwork, err := eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
+// 			ProjectId:        pulumi.Any(eventstorecloud_project.Example.Id),
+// 			ResourceProvider: pulumi.String("aws"),
+// 			Region:           pulumi.String("us-west-2"),
+// 			CidrBlock:        pulumi.String("172.21.0.0/16"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = eventstorecloud.NewManagedCluster(ctx, "exampleManagedCluster", &eventstorecloud.ManagedClusterArgs{
+// 			ProjectId:     exampleNetwork.ProjectId,
+// 			NetworkId:     exampleNetwork.ID(),
+// 			Topology:      pulumi.String("three-node-multi-zone"),
+// 			InstanceType:  pulumi.String("F1"),
+// 			DiskSize:      pulumi.Int(24),
+// 			DiskType:      pulumi.String("gp2"),
+// 			ServerVersion: pulumi.String("20.6"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
+//
+// ## Import
+//
+// ```sh
+//  $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+// ```
 type ManagedCluster struct {
 	pulumi.CustomResourceState
 
@@ -257,7 +307,7 @@ type ManagedClusterArrayInput interface {
 type ManagedClusterArray []ManagedClusterInput
 
 func (ManagedClusterArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ManagedCluster)(nil))
+	return reflect.TypeOf((*[]*ManagedCluster)(nil)).Elem()
 }
 
 func (i ManagedClusterArray) ToManagedClusterArrayOutput() ManagedClusterArrayOutput {
@@ -282,7 +332,7 @@ type ManagedClusterMapInput interface {
 type ManagedClusterMap map[string]ManagedClusterInput
 
 func (ManagedClusterMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ManagedCluster)(nil))
+	return reflect.TypeOf((*map[string]*ManagedCluster)(nil)).Elem()
 }
 
 func (i ManagedClusterMap) ToManagedClusterMapOutput() ManagedClusterMapOutput {
@@ -293,9 +343,7 @@ func (i ManagedClusterMap) ToManagedClusterMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ManagedClusterMapOutput)
 }
 
-type ManagedClusterOutput struct {
-	*pulumi.OutputState
-}
+type ManagedClusterOutput struct{ *pulumi.OutputState }
 
 func (ManagedClusterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ManagedCluster)(nil))
@@ -314,14 +362,12 @@ func (o ManagedClusterOutput) ToManagedClusterPtrOutput() ManagedClusterPtrOutpu
 }
 
 func (o ManagedClusterOutput) ToManagedClusterPtrOutputWithContext(ctx context.Context) ManagedClusterPtrOutput {
-	return o.ApplyT(func(v ManagedCluster) *ManagedCluster {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ManagedCluster) *ManagedCluster {
 		return &v
 	}).(ManagedClusterPtrOutput)
 }
 
-type ManagedClusterPtrOutput struct {
-	*pulumi.OutputState
-}
+type ManagedClusterPtrOutput struct{ *pulumi.OutputState }
 
 func (ManagedClusterPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ManagedCluster)(nil))
@@ -333,6 +379,16 @@ func (o ManagedClusterPtrOutput) ToManagedClusterPtrOutput() ManagedClusterPtrOu
 
 func (o ManagedClusterPtrOutput) ToManagedClusterPtrOutputWithContext(ctx context.Context) ManagedClusterPtrOutput {
 	return o
+}
+
+func (o ManagedClusterPtrOutput) Elem() ManagedClusterOutput {
+	return o.ApplyT(func(v *ManagedCluster) ManagedCluster {
+		if v != nil {
+			return *v
+		}
+		var ret ManagedCluster
+		return ret
+	}).(ManagedClusterOutput)
 }
 
 type ManagedClusterArrayOutput struct{ *pulumi.OutputState }
