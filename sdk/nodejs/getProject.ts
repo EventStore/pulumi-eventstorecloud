@@ -6,6 +6,18 @@ import * as utilities from "./utilities";
 
 /**
  * Retrieves data for an existing `Project` resource
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ *
+ * const example = eventstorecloud.getProject({
+ *     name: "Example Project",
+ * });
+ * export const projectId = example.then(example => example.id);
+ * ```
  */
 export function getProject(args: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
     if (!opts) {

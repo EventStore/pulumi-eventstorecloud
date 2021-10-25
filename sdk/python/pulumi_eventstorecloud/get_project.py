@@ -56,6 +56,16 @@ def get_project(name: Optional[str] = None,
                 opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetProjectResult:
     """
     Retrieves data for an existing `Project` resource
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_eventstorecloud as eventstorecloud
+
+    example = eventstorecloud.get_project(name="Example Project")
+    pulumi.export("projectId", example.id)
+    ```
     """
     __args__ = dict()
     __args__['name'] = name
@@ -75,5 +85,15 @@ def get_project_output(name: Optional[pulumi.Input[str]] = None,
                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetProjectResult]:
     """
     Retrieves data for an existing `Project` resource
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_eventstorecloud as eventstorecloud
+
+    example = eventstorecloud.get_project(name="Example Project")
+    pulumi.export("projectId", example.id)
+    ```
     """
     ...

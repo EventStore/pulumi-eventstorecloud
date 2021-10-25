@@ -13,6 +13,32 @@ namespace Pulumi.Eventstorecloud
     {
         /// <summary>
         /// Retrieves data for an existing `Project` resource
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Eventstorecloud = Pulumi.Eventstorecloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Eventstorecloud.GetProject.InvokeAsync(new Eventstorecloud.GetProjectArgs
+        ///         {
+        ///             Name = "Example Project",
+        ///         }));
+        ///         this.ProjectId = example.Apply(example =&gt; example.Id);
+        ///     }
+        /// 
+        ///     [Output("projectId")]
+        ///     public Output&lt;string&gt; ProjectId { get; set; }
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
         /// </summary>
         public static Task<GetProjectResult> InvokeAsync(GetProjectArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithVersion());

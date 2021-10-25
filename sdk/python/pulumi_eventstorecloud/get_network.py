@@ -43,6 +43,9 @@ class GetNetworkResult:
     @property
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> str:
+        """
+        Address space of the network in CIDR block notation
+        """
         return pulumi.get(self, "cidr_block")
 
     @property
@@ -66,11 +69,17 @@ class GetNetworkResult:
     @property
     @pulumi.getter
     def region(self) -> str:
+        """
+        Provider region in which to provision the network
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter(name="resourceProvider")
     def resource_provider(self) -> str:
+        """
+        Cloud Provider in which to provision the network.
+        """
         return pulumi.get(self, "resource_provider")
 
 
@@ -92,7 +101,18 @@ def get_network(name: Optional[str] = None,
                 project_id: Optional[str] = None,
                 opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetNetworkResult:
     """
-    Use this data source to access information about an existing resource.
+    Retrieves data for an existing `Network` resource
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_eventstorecloud as eventstorecloud
+
+    example = eventstorecloud.get_network(name="Example Network",
+        project_id=var["project_id"])
+    pulumi.export("networkCidr", example.cidr_block)
+    ```
     """
     __args__ = dict()
     __args__['name'] = name
@@ -117,6 +137,17 @@ def get_network_output(name: Optional[pulumi.Input[str]] = None,
                        project_id: Optional[pulumi.Input[str]] = None,
                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetNetworkResult]:
     """
-    Use this data source to access information about an existing resource.
+    Retrieves data for an existing `Network` resource
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_eventstorecloud as eventstorecloud
+
+    example = eventstorecloud.get_network(name="Example Network",
+        project_id=var["project_id"])
+    pulumi.export("networkCidr", example.cidr_block)
+    ```
     """
     ...

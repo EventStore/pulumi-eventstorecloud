@@ -107,6 +107,8 @@ github.com/EventStore/terraform-provider-eventstorecloud v1.5.6 h1:WHB+zl8dkz8HG
 github.com/EventStore/terraform-provider-eventstorecloud v1.5.6/go.mod h1:PIx6u61TatTMXwvNhDqoNL5rDhRbJMyz0Erg22W9b88=
 github.com/EventStore/terraform-provider-eventstorecloud v1.5.8 h1:Tgyv12kmsDiuGAF/wiVUW0AVLXTp/DCisQaq1tzvIms=
 github.com/EventStore/terraform-provider-eventstorecloud v1.5.8/go.mod h1:4BJvRyKhwKym+y+PlHJ0QOdt/kGvhl/3YxRHh2tsJ20=
+github.com/EventStore/terraform-provider-eventstorecloud v1.5.9 h1:P+g7tWKtNHNnz5E5naQz3loLIZvTlbQ7YljGAcWX7NM=
+github.com/EventStore/terraform-provider-eventstorecloud v1.5.9/go.mod h1:4BJvRyKhwKym+y+PlHJ0QOdt/kGvhl/3YxRHh2tsJ20=
 github.com/GoogleCloudPlatform/cloudsql-proxy v1.19.1/go.mod h1:+yYmuKqcBVkgRePGpUhTA9OEg0XsnFE96eZ6nJ2yCQM=
 github.com/GoogleCloudPlatform/cloudsql-proxy v1.22.0/go.mod h1:mAm5O/zik2RFmcpigNjg6nMotDL8ZXJaxKzgGVcSMFA=
 github.com/Masterminds/goutils v1.1.0 h1:zukEsf/1JZwCMgHiK3GZftabmxiCw4apj3a28RPBiVg=

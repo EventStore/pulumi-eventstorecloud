@@ -11,6 +11,30 @@ import (
 )
 
 // Retrieves data for an existing `Project` resource
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		example, err := eventstorecloud.LookupProject(ctx, &GetProjectArgs{
+// 			Name: "Example Project",
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		ctx.Export("projectId", example.Id)
+// 		return nil
+// 	})
+// }
+// ```
 func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.InvokeOption) (*LookupProjectResult, error) {
 	var rv LookupProjectResult
 	err := ctx.Invoke("eventstorecloud:index/getProject:getProject", args, &rv, opts...)

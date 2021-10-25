@@ -11,6 +11,36 @@ namespace Pulumi.Eventstorecloud
 {
     public static class GetNetwork
     {
+        /// <summary>
+        /// Retrieves data for an existing `Network` resource
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Eventstorecloud = Pulumi.Eventstorecloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(Eventstorecloud.GetNetwork.InvokeAsync(new Eventstorecloud.GetNetworkArgs
+        ///         {
+        ///             Name = "Example Network",
+        ///             ProjectId = @var.Project_id,
+        ///         }));
+        ///         this.NetworkCidr = example.Apply(example =&gt; example.CidrBlock);
+        ///     }
+        /// 
+        ///     [Output("networkCidr")]
+        ///     public Output&lt;string&gt; NetworkCidr { get; set; }
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
         public static Task<GetNetworkResult> InvokeAsync(GetNetworkArgs args, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkArgs(), options.WithVersion());
     }
@@ -33,6 +63,9 @@ namespace Pulumi.Eventstorecloud
     [OutputType]
     public sealed class GetNetworkResult
     {
+        /// <summary>
+        /// Address space of the network in CIDR block notation
+        /// </summary>
         public readonly string CidrBlock;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
@@ -40,7 +73,13 @@ namespace Pulumi.Eventstorecloud
         public readonly string Id;
         public readonly string Name;
         public readonly string ProjectId;
+        /// <summary>
+        /// Provider region in which to provision the network
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// Cloud Provider in which to provision the network.
+        /// </summary>
         public readonly string ResourceProvider;
 
         [OutputConstructor]
