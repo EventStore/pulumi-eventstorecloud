@@ -45,7 +45,7 @@ class MyStack : Stack {
             new NetworkPeeringArgs {
                 Name               = "esc-peering",
                 Network            = cloudResources.Network.Id,
-                PeerNetwork        = escPeering.ProviderMetadatas.First().Apply(x => x.GcpNetworkId)!,
+                PeerNetwork        = escPeering.ProviderMetadata.Apply(x => x["gcp_network_id"]),
                 ExportCustomRoutes = true,
                 ImportCustomRoutes = true
             }

@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Pulumi" Version="3.*" />
-    <PackageReference Include="Pulumi.Eventstorecloud" Version="0.2.0" />
-    <PackageReference Include="Pulumi.Gcp" Version="5.25.0" />
+    <PackageReference Include="Pulumi.Eventstorecloud" Version="0.2.1" />
+    <PackageReference Include="Pulumi.Gcp" Version="6.10.0" />
   </ItemGroup>
 
 </Project>
