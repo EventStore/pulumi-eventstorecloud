@@ -12,3 +12,4 @@ sdk/nodejs/node_modules
 nuget/
 
 yarn.lock
+**/.DS_Store
