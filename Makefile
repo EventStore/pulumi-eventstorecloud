@@ -1,9 +1,9 @@
-PROJECT_NAME := eventstorecloud Package
+PROJECT_NAME := Event Store Cloud Package
 
 PACK             := eventstorecloud
 ORG              := EventStore
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
-NODE_MODULE_NAME := @pulumi/pulumi-${PACK}
+NODE_MODULE_NAME := @eventstore/pulumi-${PACK}
 TF_NAME          := ${PACK}
 PROVIDER_PATH    := provider
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version

@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// Manages projects within an organization in Event Store Cloud
@@ -16,13 +16,13 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var chickenWindow = new Eventstorecloud.Project("chickenWindow", new Eventstorecloud.ProjectArgs
+    ///         var chickenWindow = new EventStoreCloud.Project("chickenWindow", new EventStoreCloud.ProjectArgs
     ///         {
     ///         });
     ///     }
@@ -36,7 +36,7 @@ namespace Pulumi.Eventstorecloud
     ///  $ pulumi import eventstorecloud:index/project:Project chicken_window project_id
     /// ```
     /// </summary>
-    [EventstorecloudResourceType("eventstorecloud:index/project:Project")]
+    [EventStoreCloudResourceType("eventstorecloud:index/project:Project")]
     public partial class Project : Pulumi.CustomResource
     {
         /// <summary>

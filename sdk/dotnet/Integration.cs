@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// Manages integration resources, for example Slack or OpsGenie.
@@ -16,13 +16,13 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var opsgenieIssues = new Eventstorecloud.Integration("opsgenieIssues", new Eventstorecloud.IntegrationArgs
+    ///         var opsgenieIssues = new EventStoreCloud.Integration("opsgenieIssues", new EventStoreCloud.IntegrationArgs
     ///         {
     ///             ProjectId = @var.Project_id,
     ///             Description = "create OpsGenie alerts from issues",
@@ -33,7 +33,7 @@ namespace Pulumi.Eventstorecloud
     ///                 { "source", "issues" },
     ///             },
     ///         });
-    ///         var slackNotifications = new Eventstorecloud.Integration("slackNotifications", new Eventstorecloud.IntegrationArgs
+    ///         var slackNotifications = new EventStoreCloud.Integration("slackNotifications", new EventStoreCloud.IntegrationArgs
     ///         {
     ///             ProjectId = @var.Project_id,
     ///             Description = "send Slack a message when a notification happens",
@@ -56,7 +56,7 @@ namespace Pulumi.Eventstorecloud
     ///  $ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id
     /// ```
     /// </summary>
-    [EventstorecloudResourceType("eventstorecloud:index/integration:Integration")]
+    [EventStoreCloudResourceType("eventstorecloud:index/integration:Integration")]
     public partial class Integration : Pulumi.CustomResource
     {
         /// <summary>

@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// The provider type for the eventstorecloud package. By default, resources use package-wide configuration
@@ -15,7 +15,7 @@ namespace Pulumi.Eventstorecloud
     /// construction to achieve fine-grained programmatic control over provider settings. See the
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
-    [EventstorecloudResourceType("pulumi:providers:eventstorecloud")]
+    [EventStoreCloudResourceType("pulumi:providers:eventstorecloud")]
     public partial class Provider : Pulumi.ProviderResource
     {
         [Output("organizationId")]

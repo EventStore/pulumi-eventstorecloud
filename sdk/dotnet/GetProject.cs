@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     public static class GetProject
     {
@@ -20,13 +20,13 @@ namespace Pulumi.Eventstorecloud
         /// 
         /// ```csharp
         /// using Pulumi;
-        /// using Eventstorecloud = Pulumi.Eventstorecloud;
+        /// using EventStoreCloud = Pulumi.EventStoreCloud;
         /// 
         /// class MyStack : Stack
         /// {
         ///     public MyStack()
         ///     {
-        ///         var example = Output.Create(Eventstorecloud.GetProject.InvokeAsync(new Eventstorecloud.GetProjectArgs
+        ///         var example = Output.Create(EventStoreCloud.GetProject.InvokeAsync(new EventStoreCloud.GetProjectArgs
         ///         {
         ///             Name = "Example Project",
         ///         }));

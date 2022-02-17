@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// Creates a new scheduled backup.
@@ -16,13 +16,13 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var daily = new Eventstorecloud.ScheduledBackup("daily", new Eventstorecloud.ScheduledBackupArgs
+    ///         var daily = new EventStoreCloud.ScheduledBackup("daily", new EventStoreCloud.ScheduledBackupArgs
     ///         {
     ///             ProjectId = eventstorecloud_project.Example.Id,
     ///             Schedule = "0 12 * * */1",
@@ -42,7 +42,7 @@ namespace Pulumi.Eventstorecloud
     ///  $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
     /// ```
     /// </summary>
-    [EventstorecloudResourceType("eventstorecloud:index/scheduledBackup:ScheduledBackup")]
+    [EventStoreCloudResourceType("eventstorecloud:index/scheduledBackup:ScheduledBackup")]
     public partial class ScheduledBackup : Pulumi.CustomResource
     {
         /// <summary>

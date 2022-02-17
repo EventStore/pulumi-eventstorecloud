@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using Pulumi;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     static class Utilities
     {
@@ -66,7 +66,7 @@ namespace Pulumi.Eventstorecloud
         static Utilities()
         {
             var assembly = typeof(Utilities).GetTypeInfo().Assembly;
-            using var stream = assembly.GetManifestResourceStream("Pulumi.Eventstorecloud.version.txt");
+            using var stream = assembly.GetManifestResourceStream("Pulumi.EventStoreCloud.version.txt");
             using var reader = new StreamReader(stream ?? throw new NotSupportedException("Missing embedded version.txt file"));
             version = reader.ReadToEnd().Trim();
             var parts = version.Split("\n");
@@ -78,9 +78,9 @@ namespace Pulumi.Eventstorecloud
         }
     }
 
-    internal sealed class EventstorecloudResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class EventStoreCloudResourceTypeAttribute : Pulumi.ResourceTypeAttribute
     {
-        public EventstorecloudResourceTypeAttribute(string type) : base(type, Utilities.Version)
+        public EventStoreCloudResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {
         }
     }

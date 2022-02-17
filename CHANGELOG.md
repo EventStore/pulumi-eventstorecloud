@@ -10,4 +10,8 @@ CHANGELOG
 
 - Update to TF provider 1.5.9
 
+## 0.3.0
+
+- Renamed the namespace to `EventStoreCloud` (breaking)
+
 ---

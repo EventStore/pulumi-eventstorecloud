@@ -22,6 +22,6 @@
     },
     "pulumi": {
         "resource": true,
-        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.1.4-alpha.1635175882+48c9a1cb.dirty"
+        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.2-alpha.1644227019+2fc4f192.dirty"
     }
 }

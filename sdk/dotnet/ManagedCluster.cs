@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// Manages EventStoreDB instances and clusters in Event Store Cloud
@@ -16,24 +16,24 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var exampleProject = Output.Create(Eventstorecloud.GetProject.InvokeAsync(new Eventstorecloud.GetProjectArgs
+    ///         var exampleProject = Output.Create(EventStoreCloud.GetProject.InvokeAsync(new EventStoreCloud.GetProjectArgs
     ///         {
     ///             Name = "Example Project",
     ///         }));
-    ///         var exampleNetwork = new Eventstorecloud.Network("exampleNetwork", new Eventstorecloud.NetworkArgs
+    ///         var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new EventStoreCloud.NetworkArgs
     ///         {
     ///             ProjectId = eventstorecloud_project.Example.Id,
     ///             ResourceProvider = "aws",
     ///             Region = "us-west-2",
     ///             CidrBlock = "172.21.0.0/16",
     ///         });
-    ///         var exampleManagedCluster = new Eventstorecloud.ManagedCluster("exampleManagedCluster", new Eventstorecloud.ManagedClusterArgs
+    ///         var exampleManagedCluster = new EventStoreCloud.ManagedCluster("exampleManagedCluster", new EventStoreCloud.ManagedClusterArgs
     ///         {
     ///             ProjectId = exampleNetwork.ProjectId,
     ///             NetworkId = exampleNetwork.Id,
@@ -54,7 +54,7 @@ namespace Pulumi.Eventstorecloud
     ///  $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
     /// ```
     /// </summary>
-    [EventstorecloudResourceType("eventstorecloud:index/managedCluster:ManagedCluster")]
+    [EventStoreCloudResourceType("eventstorecloud:index/managedCluster:ManagedCluster")]
     public partial class ManagedCluster : Pulumi.CustomResource
     {
         /// <summary>

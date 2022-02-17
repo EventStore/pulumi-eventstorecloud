@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// Manages VPC (network) resources in Event Store Cloud
@@ -16,16 +16,16 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
-    ///         var exampleProject = new Eventstorecloud.Project("exampleProject", new Eventstorecloud.ProjectArgs
+    ///         var exampleProject = new EventStoreCloud.Project("exampleProject", new EventStoreCloud.ProjectArgs
     ///         {
     ///         });
-    ///         var exampleNetwork = new Eventstorecloud.Network("exampleNetwork", new Eventstorecloud.NetworkArgs
+    ///         var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new EventStoreCloud.NetworkArgs
     ///         {
     ///             ProjectId = exampleProject.Id,
     ///             ResourceProvider = "aws",
@@ -43,7 +43,7 @@ namespace Pulumi.Eventstorecloud
     ///  $ pulumi import eventstorecloud:index/network:Network example project_id:network_id
     /// ```
     /// </summary>
-    [EventstorecloudResourceType("eventstorecloud:index/network:Network")]
+    [EventStoreCloudResourceType("eventstorecloud:index/network:Network")]
     public partial class Network : Pulumi.CustomResource
     {
         /// <summary>

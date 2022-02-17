@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Eventstorecloud
+namespace Pulumi.EventStoreCloud
 {
     /// <summary>
     /// Manages peering connections between Event Store Cloud VPCs and customer own VPCs
@@ -16,24 +16,24 @@ namespace Pulumi.Eventstorecloud
     /// 
     /// ```csharp
     /// using Pulumi;
-    /// using Eventstorecloud = Pulumi.Eventstorecloud;
+    /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
     /// class MyStack : Stack
     /// {
     ///     public MyStack()
     ///     {
     ///         // Example for AWS
-    ///         var exampleProject = new Eventstorecloud.Project("exampleProject", new Eventstorecloud.ProjectArgs
+    ///         var exampleProject = new EventStoreCloud.Project("exampleProject", new EventStoreCloud.ProjectArgs
     ///         {
     ///         });
-    ///         var exampleNetwork = new Eventstorecloud.Network("exampleNetwork", new Eventstorecloud.NetworkArgs
+    ///         var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new EventStoreCloud.NetworkArgs
     ///         {
     ///             ProjectId = exampleProject.Id,
     ///             ResourceProvider = "aws",
     ///             Region = "us-west-2",
     ///             CidrBlock = "172.21.0.0/16",
     ///         });
-    ///         var examplePeering = new Eventstorecloud.Peering("examplePeering", new Eventstorecloud.PeeringArgs
+    ///         var examplePeering = new EventStoreCloud.Peering("examplePeering", new EventStoreCloud.PeeringArgs
     ///         {
     ///             ProjectId = exampleNetwork.ProjectId,
     ///             NetworkId = exampleNetwork.Id,
@@ -59,7 +59,7 @@ namespace Pulumi.Eventstorecloud
     /// 
     ///  ~&gt; Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
     /// </summary>
-    [EventstorecloudResourceType("eventstorecloud:index/peering:Peering")]
+    [EventStoreCloudResourceType("eventstorecloud:index/peering:Peering")]
     public partial class Peering : Pulumi.CustomResource
     {
         /// <summary>
