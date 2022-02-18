@@ -16,4 +16,3 @@ The following configuration points are available for the `eventstorecloud` provi
 ### Install SDK
 
 
-[WIP]

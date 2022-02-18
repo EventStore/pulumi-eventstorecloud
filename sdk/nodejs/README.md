@@ -1,4 +1,29 @@
-> This provider is a derived work of the [Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud)
-> distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,
-> first check the [`pulumi/pulumi-eventstorecloud` repo](https://github.com/pulumi/pulumi-eventstorecloud/issues); however, if that doesn't turn up anything,
-> please consult the source [`EventStore/terraform-provider-eventstorecloud` repo](https://github.com/EventStore/terraform-provider-eventstorecloud/issues).
+# Pulumi provider for Event Store Cloud
+
+The Event Store Cloud provider allows you to manage resources in [Event Store Cloud](https://eventstore.com/cloud).
+
+## Installation
+
+This package is available in many languages in the standard packaging formats.
+
+### Configure the provider
+
+The following configuration points are available for the `eventstorecloud` provider:
+
+- `eventstorecloud:organizationId` - the organization ID for an existing organization in Event Store Cloud
+- `eventstorecloud:token` - a valid refresh token for an Event Store Cloud account with admin access to the organization
+
+### Install SDK
+
+
+Install the NodeJS SDK using either `npm`:
+
+```bash
+$ npm install @eventstore/pulumi-eventstorecloud
+```
+
+or `yarn`:
+
+```bash
+$ yarn add @eventstore/pulumi-eventstorecloud
+```

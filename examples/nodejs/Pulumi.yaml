@@ -1,0 +1,8 @@
+name: esc-typescript
+runtime: nodejs
+description: Event Store Cloud sample with TypeScript
+template:
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: eu-west-1

@@ -16,7 +16,12 @@ The following configuration points are available for the `eventstorecloud` provi
 ### Install SDK
 
 
-Add the NuGet package `Pulumi.EventStoreCloud` to your Pulumi project, which uses the .NET Pulumi SDK.
+Use `go get` to grab the latest version of the library
+
+```bash
+$ go get github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud
+```
+
 ### Get the plugin
 
 For projects that use .NET and Go Pulumi SDK you have to install the provider before trying to update the stack.
