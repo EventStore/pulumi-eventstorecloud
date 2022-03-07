@@ -24,7 +24,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           registry-url: 'https://registry.npmjs.org'
-          scope: '@eventstore'
           always-auth: true
       - name: Install pulumictl
         run: curl -L https://github.com/pulumi/pulumictl/releases/download/v0.0.25/pulumictl-v0.0.25-linux-amd64.tar.gz | sudo tar zxv -C /usr/bin -f- pulumictl
@@ -40,7 +39,6 @@ jobs:
           dotnet nuget push nuget/**/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
       - name: Run yarn
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn)
-      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Publish NPM package
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version)
         env:
