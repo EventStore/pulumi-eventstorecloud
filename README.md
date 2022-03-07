@@ -34,14 +34,6 @@ The following configuration points are available for the `eventstorecloud` provi
 
 ### Node.js (Java/TypeScript)
 
-First, add the GitHub NPM package source, as the package is not yet available on NPM. Normally, you'd need to include the custom registry to the `.npmrc` file:
-
-```
-@eventstore:registry=https://npm.pkg.github.com
-```
-
-Read mode about using GitHub NPM registry in [their documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
-
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
     $ npm install @eventstore/pulumi-eventstorecloud
@@ -52,9 +44,7 @@ or `yarn`:
 
 ### .NET
 
-Add the GitHub NuGet package registry first, using `dotnet nuget add source` or by specifying it in the `NuGet.config` file. Use `https://nuget.pkg.github.com/EventStore/index.json` as the package feed URL. Read more in the [GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry).
-
-Then, add the NuGet package `Pulumi.Eventstorecloud` to your Pulumi project, which uses the .NET Pulumi SDK.
+Add the NuGet package `Pulumi.EventStoreCloud` to your Pulumi project, which uses the .NET Pulumi SDK.
 
 ### Python
 
