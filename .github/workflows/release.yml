@@ -23,6 +23,7 @@ jobs:
       - name: Set up NodeJS
         uses: actions/setup-node@v2
         with:
+          registry-url: 'https://registry.npmjs.org'
           scope: '@eventstore'
           always-auth: true
       - name: Install pulumictl
