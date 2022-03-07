@@ -19,11 +19,10 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.x' 
+          dotnet-version: '3.1.x'
       - name: Set up NodeJS
         uses: actions/setup-node@v2
         with:
-          registry-url: 'https://npm.pkg.github.com'
           scope: '@eventstore'
           always-auth: true
       - name: Install pulumictl
@@ -37,12 +36,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push NuGet package
         run: |
-          dotnet nuget add source --username alexeyzimarev --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/EventStore/index.json"
-          dotnet nuget push nuget/**/*.nupkg --source "github" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push nuget/**/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_API_KEY }}
       - name: Run yarn
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn)
-      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-      - name: Publish NPM package  
+      - name: Publish NPM package
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version)
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
