@@ -40,6 +40,6 @@ jobs:
       - name: Run yarn
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn)
       - name: Publish NPM package
-        run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version)
+        run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --access public --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version)
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
