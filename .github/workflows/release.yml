@@ -37,9 +37,13 @@ jobs:
       - name: Push NuGet package
         run: |
           dotnet nuget push nuget/**/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+      - name: Authenticate with npm
+        working-directory: ./sdk/nodejs/bin
+        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - name: Run yarn
-        run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn)
+        working-directory: ./sdk/nodejs/bin
+        run: yarn
       - name: Publish NPM package
-        run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --access public --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version)
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: ./sdk/nodejs/bin
+        run: yarn publish --access public --new-version ${GITHUB_REF#"refs/tags/"} --no-git-tag-version
+
