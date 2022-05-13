@@ -7,7 +7,7 @@ if (args.indexOf("${VERSION}") !== -1) {
 	process.exit(0);
 }
 
-var res = childProcess.spawnSync("pulumi", ["plugin", "install", "--server", "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4"].concat(args), {
+var res = childProcess.spawnSync("pulumi", ["plugin", "install", "--server", "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4+dirty"].concat(args), {
     stdio: ["ignore", "inherit", "inherit"]
 });
 

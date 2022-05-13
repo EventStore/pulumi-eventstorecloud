@@ -63,8 +63,9 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 	cd sdk/nodejs/ && \
         yarn install && \
         yarn run tsc && \
-        cat ../../readme/README.md ../../readme/nodejs.md > ./README.md && \
+        cat ../../readme/README.md ../../readme/nodejs.md > ./bin/README.md && \
 		cp ../../LICENSE package.json yarn.lock ./bin/ && \
+		mkdir ./bin/scripts && cp ./scripts/install-pulumi-plugin.js ./bin/scripts && \
     	sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
 
 build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
