@@ -37,8 +37,6 @@ jobs:
       - name: Push NuGet package
         run: |
           dotnet nuget push nuget/**/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
-      - name: Run yarn
-        run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn)
       - name: Publish NPM package
         run: (cd ${{ github.workspace }}/sdk/nodejs/bin && yarn publish --access public)
         env:
