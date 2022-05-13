@@ -40,7 +40,9 @@ namespace Pulumi.EventStoreCloud
     ///             Topology = "three-node-multi-zone",
     ///             InstanceType = "F1",
     ///             DiskSize = 24,
-    ///             DiskType = "gp2",
+    ///             DiskType = "gp3",
+    ///             DiskIops = 3000,
+    ///             DiskThroughput = 125,
     ///             ServerVersion = "20.6",
     ///         });
     ///     }
@@ -58,10 +60,22 @@ namespace Pulumi.EventStoreCloud
     public partial class ManagedCluster : Pulumi.CustomResource
     {
         /// <summary>
+        /// Number of IOPS for storage, required if disk_type is `gp3`
+        /// </summary>
+        [Output("diskIops")]
+        public Output<int?> DiskIops { get; private set; } = null!;
+
+        /// <summary>
         /// Size of the data disks, in gigabytes
         /// </summary>
         [Output("diskSize")]
         public Output<int> DiskSize { get; private set; } = null!;
+
+        /// <summary>
+        /// Throughput in MB/s for storage, required if disk_type is `gp3`
+        /// </summary>
+        [Output("diskThroughput")]
+        public Output<int?> DiskThroughput { get; private set; } = null!;
 
         /// <summary>
         /// Storage class of the data disks (find the list of valid values below)
@@ -152,6 +166,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4-alpha.1646832346+66c903e2.dirty",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -176,10 +191,22 @@ namespace Pulumi.EventStoreCloud
     public sealed class ManagedClusterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Number of IOPS for storage, required if disk_type is `gp3`
+        /// </summary>
+        [Input("diskIops")]
+        public Input<int>? DiskIops { get; set; }
+
+        /// <summary>
         /// Size of the data disks, in gigabytes
         /// </summary>
         [Input("diskSize", required: true)]
         public Input<int> DiskSize { get; set; } = null!;
+
+        /// <summary>
+        /// Throughput in MB/s for storage, required if disk_type is `gp3`
+        /// </summary>
+        [Input("diskThroughput")]
+        public Input<int>? DiskThroughput { get; set; }
 
         /// <summary>
         /// Storage class of the data disks (find the list of valid values below)
@@ -237,10 +264,22 @@ namespace Pulumi.EventStoreCloud
     public sealed class ManagedClusterState : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Number of IOPS for storage, required if disk_type is `gp3`
+        /// </summary>
+        [Input("diskIops")]
+        public Input<int>? DiskIops { get; set; }
+
+        /// <summary>
         /// Size of the data disks, in gigabytes
         /// </summary>
         [Input("diskSize")]
         public Input<int>? DiskSize { get; set; }
+
+        /// <summary>
+        /// Throughput in MB/s for storage, required if disk_type is `gp3`
+        /// </summary>
+        [Input("diskThroughput")]
+        public Input<int>? DiskThroughput { get; set; }
 
         /// <summary>
         /// Storage class of the data disks (find the list of valid values below)

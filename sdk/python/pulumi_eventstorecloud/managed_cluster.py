@@ -20,6 +20,8 @@ class ManagedClusterArgs:
                  project_id: pulumi.Input[str],
                  server_version: pulumi.Input[str],
                  topology: pulumi.Input[str],
+                 disk_iops: Optional[pulumi.Input[int]] = None,
+                 disk_throughput: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  projection_level: Optional[pulumi.Input[str]] = None):
         """
@@ -31,6 +33,8 @@ class ManagedClusterArgs:
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
+        :param pulumi.Input[int] disk_iops: Number of IOPS for storage, required if disk_type is `gp3`
+        :param pulumi.Input[int] disk_throughput: Throughput in MB/s for storage, required if disk_type is `gp3`
         :param pulumi.Input[str] name: Name of the managed cluster
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         """
@@ -41,6 +45,10 @@ class ManagedClusterArgs:
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "server_version", server_version)
         pulumi.set(__self__, "topology", topology)
+        if disk_iops is not None:
+            pulumi.set(__self__, "disk_iops", disk_iops)
+        if disk_throughput is not None:
+            pulumi.set(__self__, "disk_throughput", disk_throughput)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if projection_level is not None:
@@ -131,6 +139,30 @@ class ManagedClusterArgs:
         pulumi.set(self, "topology", value)
 
     @property
+    @pulumi.getter(name="diskIops")
+    def disk_iops(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of IOPS for storage, required if disk_type is `gp3`
+        """
+        return pulumi.get(self, "disk_iops")
+
+    @disk_iops.setter
+    def disk_iops(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_iops", value)
+
+    @property
+    @pulumi.getter(name="diskThroughput")
+    def disk_throughput(self) -> Optional[pulumi.Input[int]]:
+        """
+        Throughput in MB/s for storage, required if disk_type is `gp3`
+        """
+        return pulumi.get(self, "disk_throughput")
+
+    @disk_throughput.setter
+    def disk_throughput(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_throughput", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -158,7 +190,9 @@ class ManagedClusterArgs:
 @pulumi.input_type
 class _ManagedClusterState:
     def __init__(__self__, *,
+                 disk_iops: Optional[pulumi.Input[int]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
+                 disk_throughput: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  dns_name: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
@@ -172,7 +206,9 @@ class _ManagedClusterState:
                  topology: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ManagedCluster resources.
+        :param pulumi.Input[int] disk_iops: Number of IOPS for storage, required if disk_type is `gp3`
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
+        :param pulumi.Input[int] disk_throughput: Throughput in MB/s for storage, required if disk_type is `gp3`
         :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
         :param pulumi.Input[str] dns_name: DNS address of the cluster
         :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
@@ -185,8 +221,12 @@ class _ManagedClusterState:
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
+        if disk_iops is not None:
+            pulumi.set(__self__, "disk_iops", disk_iops)
         if disk_size is not None:
             pulumi.set(__self__, "disk_size", disk_size)
+        if disk_throughput is not None:
+            pulumi.set(__self__, "disk_throughput", disk_throughput)
         if disk_type is not None:
             pulumi.set(__self__, "disk_type", disk_type)
         if dns_name is not None:
@@ -211,6 +251,18 @@ class _ManagedClusterState:
             pulumi.set(__self__, "topology", topology)
 
     @property
+    @pulumi.getter(name="diskIops")
+    def disk_iops(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of IOPS for storage, required if disk_type is `gp3`
+        """
+        return pulumi.get(self, "disk_iops")
+
+    @disk_iops.setter
+    def disk_iops(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_iops", value)
+
+    @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
         """
@@ -221,6 +273,18 @@ class _ManagedClusterState:
     @disk_size.setter
     def disk_size(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "disk_size", value)
+
+    @property
+    @pulumi.getter(name="diskThroughput")
+    def disk_throughput(self) -> Optional[pulumi.Input[int]]:
+        """
+        Throughput in MB/s for storage, required if disk_type is `gp3`
+        """
+        return pulumi.get(self, "disk_throughput")
+
+    @disk_throughput.setter
+    def disk_throughput(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_throughput", value)
 
     @property
     @pulumi.getter(name="diskType")
@@ -360,7 +424,9 @@ class ManagedCluster(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 disk_iops: Optional[pulumi.Input[int]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
+                 disk_throughput: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -391,7 +457,9 @@ class ManagedCluster(pulumi.CustomResource):
             topology="three-node-multi-zone",
             instance_type="F1",
             disk_size=24,
-            disk_type="gp2",
+            disk_type="gp3",
+            disk_iops=3000,
+            disk_throughput=125,
             server_version="20.6")
         ```
 
@@ -403,7 +471,9 @@ class ManagedCluster(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] disk_iops: Number of IOPS for storage, required if disk_type is `gp3`
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
+        :param pulumi.Input[int] disk_throughput: Throughput in MB/s for storage, required if disk_type is `gp3`
         :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
         :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
         :param pulumi.Input[str] name: Name of the managed cluster
@@ -440,7 +510,9 @@ class ManagedCluster(pulumi.CustomResource):
             topology="three-node-multi-zone",
             instance_type="F1",
             disk_size=24,
-            disk_type="gp2",
+            disk_type="gp3",
+            disk_iops=3000,
+            disk_throughput=125,
             server_version="20.6")
         ```
 
@@ -465,7 +537,9 @@ class ManagedCluster(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 disk_iops: Optional[pulumi.Input[int]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
+                 disk_throughput: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -481,14 +555,18 @@ class ManagedCluster(pulumi.CustomResource):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
             opts.version = _utilities.get_version()
+        if opts.plugin_download_url is None:
+            opts.plugin_download_url = _utilities.get_plugin_download_url()
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ManagedClusterArgs.__new__(ManagedClusterArgs)
 
+            __props__.__dict__["disk_iops"] = disk_iops
             if disk_size is None and not opts.urn:
                 raise TypeError("Missing required property 'disk_size'")
             __props__.__dict__["disk_size"] = disk_size
+            __props__.__dict__["disk_throughput"] = disk_throughput
             if disk_type is None and not opts.urn:
                 raise TypeError("Missing required property 'disk_type'")
             __props__.__dict__["disk_type"] = disk_type
@@ -522,7 +600,9 @@ class ManagedCluster(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            disk_iops: Optional[pulumi.Input[int]] = None,
             disk_size: Optional[pulumi.Input[int]] = None,
+            disk_throughput: Optional[pulumi.Input[int]] = None,
             disk_type: Optional[pulumi.Input[str]] = None,
             dns_name: Optional[pulumi.Input[str]] = None,
             instance_type: Optional[pulumi.Input[str]] = None,
@@ -541,7 +621,9 @@ class ManagedCluster(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] disk_iops: Number of IOPS for storage, required if disk_type is `gp3`
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
+        :param pulumi.Input[int] disk_throughput: Throughput in MB/s for storage, required if disk_type is `gp3`
         :param pulumi.Input[str] disk_type: Storage class of the data disks (find the list of valid values below)
         :param pulumi.Input[str] dns_name: DNS address of the cluster
         :param pulumi.Input[str] instance_type: Instance type of the managed cluster (find the list of valid values below)
@@ -558,7 +640,9 @@ class ManagedCluster(pulumi.CustomResource):
 
         __props__ = _ManagedClusterState.__new__(_ManagedClusterState)
 
+        __props__.__dict__["disk_iops"] = disk_iops
         __props__.__dict__["disk_size"] = disk_size
+        __props__.__dict__["disk_throughput"] = disk_throughput
         __props__.__dict__["disk_type"] = disk_type
         __props__.__dict__["dns_name"] = dns_name
         __props__.__dict__["instance_type"] = instance_type
@@ -573,12 +657,28 @@ class ManagedCluster(pulumi.CustomResource):
         return ManagedCluster(resource_name, opts=opts, __props__=__props__)
 
     @property
+    @pulumi.getter(name="diskIops")
+    def disk_iops(self) -> pulumi.Output[Optional[int]]:
+        """
+        Number of IOPS for storage, required if disk_type is `gp3`
+        """
+        return pulumi.get(self, "disk_iops")
+
+    @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> pulumi.Output[int]:
         """
         Size of the data disks, in gigabytes
         """
         return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskThroughput")
+    def disk_throughput(self) -> pulumi.Output[Optional[int]]:
+        """
+        Throughput in MB/s for storage, required if disk_type is `gp3`
+        """
+        return pulumi.get(self, "disk_throughput")
 
     @property
     @pulumi.getter(name="diskType")

@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ * import * as pulumi_eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
  * const exampleProject = new eventstorecloud.Project("exampleProject", {});
  * const exampleNetwork = new eventstorecloud.Network("exampleNetwork", {
@@ -86,15 +86,15 @@ export class Network extends pulumi.CustomResource {
      */
     constructor(name: string, args: NetworkArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: NetworkArgs | NetworkState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as NetworkState | undefined;
-            inputs["cidrBlock"] = state ? state.cidrBlock : undefined;
-            inputs["name"] = state ? state.name : undefined;
-            inputs["projectId"] = state ? state.projectId : undefined;
-            inputs["region"] = state ? state.region : undefined;
-            inputs["resourceProvider"] = state ? state.resourceProvider : undefined;
+            resourceInputs["cidrBlock"] = state ? state.cidrBlock : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["region"] = state ? state.region : undefined;
+            resourceInputs["resourceProvider"] = state ? state.resourceProvider : undefined;
         } else {
             const args = argsOrState as NetworkArgs | undefined;
             if ((!args || args.cidrBlock === undefined) && !opts.urn) {
@@ -109,16 +109,14 @@ export class Network extends pulumi.CustomResource {
             if ((!args || args.resourceProvider === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'resourceProvider'");
             }
-            inputs["cidrBlock"] = args ? args.cidrBlock : undefined;
-            inputs["name"] = args ? args.name : undefined;
-            inputs["projectId"] = args ? args.projectId : undefined;
-            inputs["region"] = args ? args.region : undefined;
-            inputs["resourceProvider"] = args ? args.resourceProvider : undefined;
+            resourceInputs["cidrBlock"] = args ? args.cidrBlock : undefined;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["region"] = args ? args.region : undefined;
+            resourceInputs["resourceProvider"] = args ? args.resourceProvider : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Network.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Network.__pulumiType, name, resourceInputs, opts);
     }
 }
 

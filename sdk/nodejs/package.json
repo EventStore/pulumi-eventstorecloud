@@ -10,7 +10,8 @@
     "repository": "https://github.com/EventStore/pulumi-eventstorecloud",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "install": "node scripts/install-pulumi-plugin.js resource eventstorecloud ${VERSION}"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
@@ -22,6 +23,6 @@
     },
     "pulumi": {
         "resource": true,
-        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.2-alpha.1645100942+d6be2b54.dirty"
+        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4-alpha.1646832346+66c903e2.dirty"
     }
 }

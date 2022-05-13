@@ -12,6 +12,7 @@ import * as utilities from "./utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ * import * as pulumi_eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
  * const exampleProject = eventstorecloud.getProject({
  *     name: "Example Project",
@@ -28,7 +29,9 @@ import * as utilities from "./utilities";
  *     topology: "three-node-multi-zone",
  *     instanceType: "F1",
  *     diskSize: 24,
- *     diskType: "gp2",
+ *     diskType: "gp3",
+ *     diskIops: 3000,
+ *     diskThroughput: 125,
  *     serverVersion: "20.6",
  * });
  * ```
@@ -68,9 +71,17 @@ export class ManagedCluster extends pulumi.CustomResource {
     }
 
     /**
+     * Number of IOPS for storage, required if diskType is `gp3`
+     */
+    public readonly diskIops!: pulumi.Output<number | undefined>;
+    /**
      * Size of the data disks, in gigabytes
      */
     public readonly diskSize!: pulumi.Output<number>;
+    /**
+     * Throughput in MB/s for storage, required if diskType is `gp3`
+     */
+    public readonly diskThroughput!: pulumi.Output<number | undefined>;
     /**
      * Storage class of the data disks (find the list of valid values below)
      */
@@ -125,22 +136,24 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     constructor(name: string, args: ManagedClusterArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ManagedClusterArgs | ManagedClusterState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ManagedClusterState | undefined;
-            inputs["diskSize"] = state ? state.diskSize : undefined;
-            inputs["diskType"] = state ? state.diskType : undefined;
-            inputs["dnsName"] = state ? state.dnsName : undefined;
-            inputs["instanceType"] = state ? state.instanceType : undefined;
-            inputs["name"] = state ? state.name : undefined;
-            inputs["networkId"] = state ? state.networkId : undefined;
-            inputs["projectId"] = state ? state.projectId : undefined;
-            inputs["projectionLevel"] = state ? state.projectionLevel : undefined;
-            inputs["region"] = state ? state.region : undefined;
-            inputs["resourceProvider"] = state ? state.resourceProvider : undefined;
-            inputs["serverVersion"] = state ? state.serverVersion : undefined;
-            inputs["topology"] = state ? state.topology : undefined;
+            resourceInputs["diskIops"] = state ? state.diskIops : undefined;
+            resourceInputs["diskSize"] = state ? state.diskSize : undefined;
+            resourceInputs["diskThroughput"] = state ? state.diskThroughput : undefined;
+            resourceInputs["diskType"] = state ? state.diskType : undefined;
+            resourceInputs["dnsName"] = state ? state.dnsName : undefined;
+            resourceInputs["instanceType"] = state ? state.instanceType : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["networkId"] = state ? state.networkId : undefined;
+            resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["projectionLevel"] = state ? state.projectionLevel : undefined;
+            resourceInputs["region"] = state ? state.region : undefined;
+            resourceInputs["resourceProvider"] = state ? state.resourceProvider : undefined;
+            resourceInputs["serverVersion"] = state ? state.serverVersion : undefined;
+            resourceInputs["topology"] = state ? state.topology : undefined;
         } else {
             const args = argsOrState as ManagedClusterArgs | undefined;
             if ((!args || args.diskSize === undefined) && !opts.urn) {
@@ -164,23 +177,23 @@ export class ManagedCluster extends pulumi.CustomResource {
             if ((!args || args.topology === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'topology'");
             }
-            inputs["diskSize"] = args ? args.diskSize : undefined;
-            inputs["diskType"] = args ? args.diskType : undefined;
-            inputs["instanceType"] = args ? args.instanceType : undefined;
-            inputs["name"] = args ? args.name : undefined;
-            inputs["networkId"] = args ? args.networkId : undefined;
-            inputs["projectId"] = args ? args.projectId : undefined;
-            inputs["projectionLevel"] = args ? args.projectionLevel : undefined;
-            inputs["serverVersion"] = args ? args.serverVersion : undefined;
-            inputs["topology"] = args ? args.topology : undefined;
-            inputs["dnsName"] = undefined /*out*/;
-            inputs["region"] = undefined /*out*/;
-            inputs["resourceProvider"] = undefined /*out*/;
+            resourceInputs["diskIops"] = args ? args.diskIops : undefined;
+            resourceInputs["diskSize"] = args ? args.diskSize : undefined;
+            resourceInputs["diskThroughput"] = args ? args.diskThroughput : undefined;
+            resourceInputs["diskType"] = args ? args.diskType : undefined;
+            resourceInputs["instanceType"] = args ? args.instanceType : undefined;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["networkId"] = args ? args.networkId : undefined;
+            resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["projectionLevel"] = args ? args.projectionLevel : undefined;
+            resourceInputs["serverVersion"] = args ? args.serverVersion : undefined;
+            resourceInputs["topology"] = args ? args.topology : undefined;
+            resourceInputs["dnsName"] = undefined /*out*/;
+            resourceInputs["region"] = undefined /*out*/;
+            resourceInputs["resourceProvider"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(ManagedCluster.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(ManagedCluster.__pulumiType, name, resourceInputs, opts);
     }
 }
 
@@ -189,9 +202,17 @@ export class ManagedCluster extends pulumi.CustomResource {
  */
 export interface ManagedClusterState {
     /**
+     * Number of IOPS for storage, required if diskType is `gp3`
+     */
+    diskIops?: pulumi.Input<number>;
+    /**
      * Size of the data disks, in gigabytes
      */
     diskSize?: pulumi.Input<number>;
+    /**
+     * Throughput in MB/s for storage, required if diskType is `gp3`
+     */
+    diskThroughput?: pulumi.Input<number>;
     /**
      * Storage class of the data disks (find the list of valid values below)
      */
@@ -243,9 +264,17 @@ export interface ManagedClusterState {
  */
 export interface ManagedClusterArgs {
     /**
+     * Number of IOPS for storage, required if diskType is `gp3`
+     */
+    diskIops?: pulumi.Input<number>;
+    /**
      * Size of the data disks, in gigabytes
      */
     diskSize: pulumi.Input<number>;
+    /**
+     * Throughput in MB/s for storage, required if diskType is `gp3`
+     */
+    diskThroughput?: pulumi.Input<number>;
     /**
      * Storage class of the data disks (find the list of valid values below)
      */

@@ -15,7 +15,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', PLUGIN_VERSION, '--server', 'https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.2-alpha.1645100942+d6be2b54.dirty'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', PLUGIN_VERSION, '--server', 'https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4-alpha.1646832346+66c903e2.dirty'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print(f"""
@@ -55,6 +55,7 @@ setup(name='pulumi_eventstorecloud',
       package_data={
           'pulumi_eventstorecloud': [
               'py.typed',
+              'pulumi-plugin.json',
           ]
       },
       install_requires=[

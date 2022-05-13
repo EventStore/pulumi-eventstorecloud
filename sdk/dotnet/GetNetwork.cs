@@ -42,7 +42,40 @@ namespace Pulumi.EventStoreCloud
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetNetworkResult> InvokeAsync(GetNetworkArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Retrieves data for an existing `Network` resource
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using EventStoreCloud = Pulumi.EventStoreCloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(EventStoreCloud.GetNetwork.InvokeAsync(new EventStoreCloud.GetNetworkArgs
+        ///         {
+        ///             Name = "Example Network",
+        ///             ProjectId = @var.Project_id,
+        ///         }));
+        ///         this.NetworkCidr = example.Apply(example =&gt; example.CidrBlock);
+        ///     }
+        /// 
+        ///     [Output("networkCidr")]
+        ///     public Output&lt;string&gt; NetworkCidr { get; set; }
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Output<GetNetworkResult> Invoke(GetNetworkInvokeArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.Invoke<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -55,6 +88,19 @@ namespace Pulumi.EventStoreCloud
         public string ProjectId { get; set; } = null!;
 
         public GetNetworkArgs()
+        {
+        }
+    }
+
+    public sealed class GetNetworkInvokeArgs : Pulumi.InvokeArgs
+    {
+        [Input("name", required: true)]
+        public Input<string> Name { get; set; } = null!;
+
+        [Input("projectId", required: true)]
+        public Input<string> ProjectId { get; set; } = null!;
+
+        public GetNetworkInvokeArgs()
         {
         }
     }

@@ -41,7 +41,39 @@ namespace Pulumi.EventStoreCloud
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetProjectResult> InvokeAsync(GetProjectArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithVersion());
+            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Retrieves data for an existing `Project` resource
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using EventStoreCloud = Pulumi.EventStoreCloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var example = Output.Create(EventStoreCloud.GetProject.InvokeAsync(new EventStoreCloud.GetProjectArgs
+        ///         {
+        ///             Name = "Example Project",
+        ///         }));
+        ///         this.ProjectId = example.Apply(example =&gt; example.Id);
+        ///     }
+        /// 
+        ///     [Output("projectId")]
+        ///     public Output&lt;string&gt; ProjectId { get; set; }
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Output<GetProjectResult> Invoke(GetProjectInvokeArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.Invoke<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -51,6 +83,16 @@ namespace Pulumi.EventStoreCloud
         public string Name { get; set; } = null!;
 
         public GetProjectArgs()
+        {
+        }
+    }
+
+    public sealed class GetProjectInvokeArgs : Pulumi.InvokeArgs
+    {
+        [Input("name", required: true)]
+        public Input<string> Name { get; set; } = null!;
+
+        public GetProjectInvokeArgs()
         {
         }
     }

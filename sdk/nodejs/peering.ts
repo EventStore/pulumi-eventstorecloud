@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ * import * as pulumi_eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
  * // Example for AWS
  * const exampleProject = new eventstorecloud.Project("exampleProject", {});
@@ -114,19 +114,19 @@ export class Peering extends pulumi.CustomResource {
      */
     constructor(name: string, args: PeeringArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PeeringArgs | PeeringState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PeeringState | undefined;
-            inputs["name"] = state ? state.name : undefined;
-            inputs["networkId"] = state ? state.networkId : undefined;
-            inputs["peerAccountId"] = state ? state.peerAccountId : undefined;
-            inputs["peerNetworkId"] = state ? state.peerNetworkId : undefined;
-            inputs["peerNetworkRegion"] = state ? state.peerNetworkRegion : undefined;
-            inputs["peerResourceProvider"] = state ? state.peerResourceProvider : undefined;
-            inputs["projectId"] = state ? state.projectId : undefined;
-            inputs["providerMetadata"] = state ? state.providerMetadata : undefined;
-            inputs["routes"] = state ? state.routes : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["networkId"] = state ? state.networkId : undefined;
+            resourceInputs["peerAccountId"] = state ? state.peerAccountId : undefined;
+            resourceInputs["peerNetworkId"] = state ? state.peerNetworkId : undefined;
+            resourceInputs["peerNetworkRegion"] = state ? state.peerNetworkRegion : undefined;
+            resourceInputs["peerResourceProvider"] = state ? state.peerResourceProvider : undefined;
+            resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["providerMetadata"] = state ? state.providerMetadata : undefined;
+            resourceInputs["routes"] = state ? state.routes : undefined;
         } else {
             const args = argsOrState as PeeringArgs | undefined;
             if ((!args || args.networkId === undefined) && !opts.urn) {
@@ -150,20 +150,18 @@ export class Peering extends pulumi.CustomResource {
             if ((!args || args.routes === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'routes'");
             }
-            inputs["name"] = args ? args.name : undefined;
-            inputs["networkId"] = args ? args.networkId : undefined;
-            inputs["peerAccountId"] = args ? args.peerAccountId : undefined;
-            inputs["peerNetworkId"] = args ? args.peerNetworkId : undefined;
-            inputs["peerNetworkRegion"] = args ? args.peerNetworkRegion : undefined;
-            inputs["peerResourceProvider"] = args ? args.peerResourceProvider : undefined;
-            inputs["projectId"] = args ? args.projectId : undefined;
-            inputs["routes"] = args ? args.routes : undefined;
-            inputs["providerMetadata"] = undefined /*out*/;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["networkId"] = args ? args.networkId : undefined;
+            resourceInputs["peerAccountId"] = args ? args.peerAccountId : undefined;
+            resourceInputs["peerNetworkId"] = args ? args.peerNetworkId : undefined;
+            resourceInputs["peerNetworkRegion"] = args ? args.peerNetworkRegion : undefined;
+            resourceInputs["peerResourceProvider"] = args ? args.peerResourceProvider : undefined;
+            resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["routes"] = args ? args.routes : undefined;
+            resourceInputs["providerMetadata"] = undefined /*out*/;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(Peering.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(Peering.__pulumiType, name, resourceInputs, opts);
     }
 }
 

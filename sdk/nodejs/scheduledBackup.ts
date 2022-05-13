@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ * import * as pulumi_eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
  * const daily = new eventstorecloud.ScheduledBackup("daily", {
  *     projectId: eventstorecloud_project.example.id,
@@ -91,16 +91,16 @@ export class ScheduledBackup extends pulumi.CustomResource {
      */
     constructor(name: string, args: ScheduledBackupArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ScheduledBackupArgs | ScheduledBackupState, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ScheduledBackupState | undefined;
-            inputs["backupDescription"] = state ? state.backupDescription : undefined;
-            inputs["description"] = state ? state.description : undefined;
-            inputs["maxBackupCount"] = state ? state.maxBackupCount : undefined;
-            inputs["projectId"] = state ? state.projectId : undefined;
-            inputs["schedule"] = state ? state.schedule : undefined;
-            inputs["sourceClusterId"] = state ? state.sourceClusterId : undefined;
+            resourceInputs["backupDescription"] = state ? state.backupDescription : undefined;
+            resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["maxBackupCount"] = state ? state.maxBackupCount : undefined;
+            resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["schedule"] = state ? state.schedule : undefined;
+            resourceInputs["sourceClusterId"] = state ? state.sourceClusterId : undefined;
         } else {
             const args = argsOrState as ScheduledBackupArgs | undefined;
             if ((!args || args.backupDescription === undefined) && !opts.urn) {
@@ -121,17 +121,15 @@ export class ScheduledBackup extends pulumi.CustomResource {
             if ((!args || args.sourceClusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'sourceClusterId'");
             }
-            inputs["backupDescription"] = args ? args.backupDescription : undefined;
-            inputs["description"] = args ? args.description : undefined;
-            inputs["maxBackupCount"] = args ? args.maxBackupCount : undefined;
-            inputs["projectId"] = args ? args.projectId : undefined;
-            inputs["schedule"] = args ? args.schedule : undefined;
-            inputs["sourceClusterId"] = args ? args.sourceClusterId : undefined;
+            resourceInputs["backupDescription"] = args ? args.backupDescription : undefined;
+            resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["maxBackupCount"] = args ? args.maxBackupCount : undefined;
+            resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["schedule"] = args ? args.schedule : undefined;
+            resourceInputs["sourceClusterId"] = args ? args.sourceClusterId : undefined;
         }
-        if (!opts.version) {
-            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
-        }
-        super(ScheduledBackup.__pulumiType, name, inputs, opts);
+        opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        super(ScheduledBackup.__pulumiType, name, resourceInputs, opts);
     }
 }
 
