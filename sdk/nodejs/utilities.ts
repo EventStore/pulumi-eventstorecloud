@@ -50,5 +50,5 @@ export function getVersion(): string {
 
 /** @internal */
 export function resourceOptsDefaults(): any {
-    return { version: getVersion(), pluginDownloadURL: "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4-alpha.1646832346+66c903e2.dirty" };
+    return { version: getVersion(), pluginDownloadURL: "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4" };
 }

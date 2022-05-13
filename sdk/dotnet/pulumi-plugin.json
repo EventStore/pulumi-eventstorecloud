@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "eventstorecloud",
-  "server": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4-alpha.1646832346+66c903e2.dirty"
+  "server": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.4"
 }
