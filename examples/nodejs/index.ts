@@ -29,7 +29,7 @@ const peering = new esc.Peering("sample-peering", {
     peerResourceProvider: network.resourceProvider,
     peerNetworkRegion: network.region,
     peerAccountId: vpc.vpc.ownerId,
-    peerNetworkId: vpc.id,
+    peerNetworkId: vpc.vpcId,
     routes: [vpc.vpc.cidrBlock]
 });
 
@@ -55,7 +55,7 @@ const cluster = new esc.ManagedCluster("wings", {
     topology: "single-node",
     instanceType: "F1",
     diskSize: 16,
-    diskType: "gp2",
+    diskType: "gp3",
     serverVersion: "21.10"
 });
 
