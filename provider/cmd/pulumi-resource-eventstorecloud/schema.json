@@ -9,12 +9,19 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud).",
     "repository": "https://github.com/EventStore/pulumi-eventstorecloud",
-    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.5",
+    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6",
+    "publisher": "EventStore",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
     "config": {
         "variables": {
+            "clientId": {
+                "type": "string"
+            },
+            "identityProviderUrl": {
+                "type": "string"
+            },
             "organizationId": {
                 "type": "string"
             },
@@ -29,6 +36,8 @@
             }
         },
         "defaults": [
+            "clientId",
+            "identityProviderUrl",
             "organizationId",
             "token",
             "tokenStore",
@@ -38,6 +47,12 @@
     "provider": {
         "description": "The provider type for the eventstorecloud package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
         "properties": {
+            "clientId": {
+                "type": "string"
+            },
+            "identityProviderUrl": {
+                "type": "string"
+            },
             "organizationId": {
                 "type": "string"
             },
@@ -52,12 +67,20 @@
             }
         },
         "required": [
+            "clientId",
+            "identityProviderUrl",
             "organizationId",
             "token",
             "tokenStore",
             "url"
         ],
         "inputProperties": {
+            "clientId": {
+                "type": "string"
+            },
+            "identityProviderUrl": {
+                "type": "string"
+            },
             "organizationId": {
                 "type": "string"
             },
@@ -72,6 +95,8 @@
             }
         },
         "requiredInputs": [
+            "clientId",
+            "identityProviderUrl",
             "organizationId",
             "token",
             "tokenStore",
@@ -79,6 +104,246 @@
         ]
     },
     "resources": {
+        "eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration": {
+            "description": "\n\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration cloudwatch project_id:integration_id\n```\n\n ",
+            "properties": {
+                "accessKeyId": {
+                    "type": "string",
+                    "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                },
+                "clusterIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of cluster IDs to which the integration applies\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the integration\n"
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of the log group\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project to which the integration applies\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The AWS region name of the log group\n"
+                },
+                "secretAccessKey": {
+                    "type": "string",
+                    "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                }
+            },
+            "required": [
+                "clusterIds",
+                "description",
+                "groupName",
+                "projectId",
+                "region"
+            ],
+            "inputProperties": {
+                "accessKeyId": {
+                    "type": "string",
+                    "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                },
+                "clusterIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of cluster IDs to which the integration applies\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the integration\n"
+                },
+                "groupName": {
+                    "type": "string",
+                    "description": "The name of the log group\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project to which the integration applies\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The AWS region name of the log group\n"
+                },
+                "secretAccessKey": {
+                    "type": "string",
+                    "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                }
+            },
+            "requiredInputs": [
+                "clusterIds",
+                "description",
+                "groupName",
+                "projectId",
+                "region"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AWSCloudWatchLogsIntegration resources.\n",
+                "properties": {
+                    "accessKeyId": {
+                        "type": "string",
+                        "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                    },
+                    "clusterIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of cluster IDs to which the integration applies\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human readable description of the integration\n"
+                    },
+                    "groupName": {
+                        "type": "string",
+                        "description": "The name of the log group\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "ID of the project to which the integration applies\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "The AWS region name of the log group\n"
+                    },
+                    "secretAccessKey": {
+                        "type": "string",
+                        "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration": {
+            "description": "\n\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration cloudwatch project_id:integration_id\n```\n\n ",
+            "properties": {
+                "accessKeyId": {
+                    "type": "string",
+                    "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                },
+                "clusterIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of cluster IDs to which the integration applies\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the integration\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "The name of the metric namespace\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project to which the integration applies\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The AWS region name of the log group\n"
+                },
+                "secretAccessKey": {
+                    "type": "string",
+                    "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                }
+            },
+            "required": [
+                "clusterIds",
+                "description",
+                "namespace",
+                "projectId",
+                "region"
+            ],
+            "inputProperties": {
+                "accessKeyId": {
+                    "type": "string",
+                    "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                },
+                "clusterIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of cluster IDs to which the integration applies\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Human readable description of the integration\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "The name of the metric namespace\n"
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "ID of the project to which the integration applies\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The AWS region name of the log group\n"
+                },
+                "secretAccessKey": {
+                    "type": "string",
+                    "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                }
+            },
+            "requiredInputs": [
+                "clusterIds",
+                "description",
+                "namespace",
+                "projectId",
+                "region"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AWSCloudWatchMetricsIntegration resources.\n",
+                "properties": {
+                    "accessKeyId": {
+                        "type": "string",
+                        "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                    },
+                    "clusterIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of cluster IDs to which the integration applies\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Human readable description of the integration\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "The name of the metric namespace\n"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "description": "ID of the project to which the integration applies\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "The AWS region name of the log group\n"
+                    },
+                    "secretAccessKey": {
+                        "type": "string",
+                        "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "eventstorecloud:index/integration:Integration": {
             "description": "Manages integration resources, for example Slack or OpsGenie.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as pulumi_eventstorecloud from \"@eventstore/pulumi-eventstorecloud\";\n\nconst opsgenieIssues = new eventstorecloud.Integration(\"opsgenieIssues\", {\n    projectId: _var.project_id,\n    description: \"create OpsGenie alerts from issues\",\n    data: {\n        sink: \"opsGenie\",\n        api_key: \"\u003csecret OpsGenie key here\u003e\",\n        source: \"issues\",\n    },\n});\nconst slackNotifications = new eventstorecloud.Integration(\"slackNotifications\", {\n    projectId: _var.project_id,\n    description: \"send Slack a message when a notification happens\",\n    data: {\n        sink: \"slack\",\n        token: \"\u003csecret token here\u003e\",\n        channel_id: \"#esc-cluster-notifications\",\n        source: \"notifications\",\n    },\n});\n```\n```python\nimport pulumi\nimport pulumi_eventstorecloud as eventstorecloud\n\nopsgenie_issues = eventstorecloud.Integration(\"opsgenieIssues\",\n    project_id=var[\"project_id\"],\n    description=\"create OpsGenie alerts from issues\",\n    data={\n        \"sink\": \"opsGenie\",\n        \"api_key\": \"\u003csecret OpsGenie key here\u003e\",\n        \"source\": \"issues\",\n    })\nslack_notifications = eventstorecloud.Integration(\"slackNotifications\",\n    project_id=var[\"project_id\"],\n    description=\"send Slack a message when a notification happens\",\n    data={\n        \"sink\": \"slack\",\n        \"token\": \"\u003csecret token here\u003e\",\n        \"channel_id\": \"#esc-cluster-notifications\",\n        \"source\": \"notifications\",\n    })\n```\n```csharp\nusing Pulumi;\nusing EventStoreCloud = Pulumi.EventStoreCloud;\n\nclass MyStack : Stack\n{\n    public MyStack()\n    {\n        var opsgenieIssues = new EventStoreCloud.Integration(\"opsgenieIssues\", new EventStoreCloud.IntegrationArgs\n        {\n            ProjectId = @var.Project_id,\n            Description = \"create OpsGenie alerts from issues\",\n            Data = \n            {\n                { \"sink\", \"opsGenie\" },\n                { \"api_key\", \"\u003csecret OpsGenie key here\u003e\" },\n                { \"source\", \"issues\" },\n            },\n        });\n        var slackNotifications = new EventStoreCloud.Integration(\"slackNotifications\", new EventStoreCloud.IntegrationArgs\n        {\n            ProjectId = @var.Project_id,\n            Description = \"send Slack a message when a notification happens\",\n            Data = \n            {\n                { \"sink\", \"slack\" },\n                { \"token\", \"\u003csecret token here\u003e\" },\n                { \"channel_id\", \"#esc-cluster-notifications\" },\n                { \"source\", \"notifications\" },\n            },\n        });\n    }\n\n}\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := eventstorecloud.NewIntegration(ctx, \"opsgenieIssues\", \u0026eventstorecloud.IntegrationArgs{\n\t\t\tProjectId:   pulumi.Any(_var.Project_id),\n\t\t\tDescription: pulumi.String(\"create OpsGenie alerts from issues\"),\n\t\t\tData: pulumi.AnyMap{\n\t\t\t\t\"sink\":    pulumi.Any(\"opsGenie\"),\n\t\t\t\t\"api_key\": pulumi.Any(\"\u003csecret OpsGenie key here\u003e\"),\n\t\t\t\t\"source\":  pulumi.Any(\"issues\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = eventstorecloud.NewIntegration(ctx, \"slackNotifications\", \u0026eventstorecloud.IntegrationArgs{\n\t\t\tProjectId:   pulumi.Any(_var.Project_id),\n\t\t\tDescription: pulumi.String(\"send Slack a message when a notification happens\"),\n\t\t\tData: pulumi.AnyMap{\n\t\t\t\t\"sink\":       pulumi.Any(\"slack\"),\n\t\t\t\t\"token\":      pulumi.Any(\"\u003csecret token here\u003e\"),\n\t\t\t\t\"channel_id\": pulumi.Any(\"#esc-cluster-notifications\"),\n\t\t\t\t\"source\":     pulumi.Any(\"notifications\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id\n```\n\n ",
             "properties": {
