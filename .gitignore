@@ -13,3 +13,4 @@ nuget/
 
 yarn.lock
 **/.DS_Store
+.vscode/
