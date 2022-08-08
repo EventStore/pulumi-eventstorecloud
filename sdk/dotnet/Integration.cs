@@ -100,7 +100,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.5",
+                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

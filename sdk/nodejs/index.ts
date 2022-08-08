@@ -5,6 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./awscloudWatchLogsIntegration";
+export * from "./awscloudWatchMetricsIntegration";
 export * from "./getNetwork";
 export * from "./getProject";
 export * from "./integration";
@@ -23,6 +25,8 @@ export {
 };
 
 // Import resources to register:
+import { AWSCloudWatchLogsIntegration } from "./awscloudWatchLogsIntegration";
+import { AWSCloudWatchMetricsIntegration } from "./awscloudWatchMetricsIntegration";
 import { Integration } from "./integration";
 import { ManagedCluster } from "./managedCluster";
 import { Network } from "./network";
@@ -34,6 +38,10 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration":
+                return new AWSCloudWatchLogsIntegration(name, <any>undefined, { urn })
+            case "eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration":
+                return new AWSCloudWatchMetricsIntegration(name, <any>undefined, { urn })
             case "eventstorecloud:index/integration:Integration":
                 return new Integration(name, <any>undefined, { urn })
             case "eventstorecloud:index/managedCluster:ManagedCluster":
@@ -51,6 +59,8 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("eventstorecloud", "index/aWSCloudWatchLogsIntegration", _module)
+pulumi.runtime.registerResourceModule("eventstorecloud", "index/aWSCloudWatchMetricsIntegration", _module)
 pulumi.runtime.registerResourceModule("eventstorecloud", "index/integration", _module)
 pulumi.runtime.registerResourceModule("eventstorecloud", "index/managedCluster", _module)
 pulumi.runtime.registerResourceModule("eventstorecloud", "index/network", _module)

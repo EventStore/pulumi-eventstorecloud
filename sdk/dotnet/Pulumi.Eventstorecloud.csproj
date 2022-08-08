@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Pulumi Corp.</Authors>
-    <Company>Pulumi Corp.</Company>
+    <Authors>EventStore</Authors>
+    <Company>EventStore</Company>
     <Description>A Pulumi package for creating and managing Event Store Cloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://eventstore.com</PackageProjectUrl>

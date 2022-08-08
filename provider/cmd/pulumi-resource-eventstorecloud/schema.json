@@ -105,7 +105,6 @@
     },
     "resources": {
         "eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration": {
-            "description": "\n\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration cloudwatch project_id:integration_id\n```\n\n ",
             "properties": {
                 "accessKeyId": {
                     "type": "string",
@@ -116,7 +115,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of cluster IDs to which the integration applies\n"
+                    "description": "Clusters to be used with this integration\n"
                 },
                 "description": {
                     "type": "string",
@@ -124,7 +123,7 @@
                 },
                 "groupName": {
                     "type": "string",
-                    "description": "The name of the log group\n"
+                    "description": "Name of the CloudWatch group\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -132,7 +131,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "The AWS region name of the log group\n"
+                    "description": "AWS region for group\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
@@ -156,7 +155,7 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of cluster IDs to which the integration applies\n"
+                    "description": "Clusters to be used with this integration\n"
                 },
                 "description": {
                     "type": "string",
@@ -164,7 +163,7 @@
                 },
                 "groupName": {
                     "type": "string",
-                    "description": "The name of the log group\n"
+                    "description": "Name of the CloudWatch group\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -172,7 +171,7 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "The AWS region name of the log group\n"
+                    "description": "AWS region for group\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
@@ -198,7 +197,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of cluster IDs to which the integration applies\n"
+                        "description": "Clusters to be used with this integration\n"
                     },
                     "description": {
                         "type": "string",
@@ -206,7 +205,7 @@
                     },
                     "groupName": {
                         "type": "string",
-                        "description": "The name of the log group\n"
+                        "description": "Name of the CloudWatch group\n"
                     },
                     "projectId": {
                         "type": "string",
@@ -214,7 +213,7 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "The AWS region name of the log group\n"
+                        "description": "AWS region for group\n"
                     },
                     "secretAccessKey": {
                         "type": "string",
@@ -225,18 +224,17 @@
             }
         },
         "eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration": {
-            "description": "\n\n\n## Import\n\n\n\n```sh\n $ pulumi import eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration cloudwatch project_id:integration_id\n```\n\n ",
             "properties": {
                 "accessKeyId": {
                     "type": "string",
-                    "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                    "description": "AWS IAM access key\n"
                 },
                 "clusterIds": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of cluster IDs to which the integration applies\n"
+                    "description": "Clusters to be used with this integration\n"
                 },
                 "description": {
                     "type": "string",
@@ -244,7 +242,7 @@
                 },
                 "namespace": {
                     "type": "string",
-                    "description": "The name of the metric namespace\n"
+                    "description": "Name of the CloudWatch namespace\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -252,11 +250,11 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "The AWS region name of the log group\n"
+                    "description": "AWS region for group\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
-                    "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                    "description": "AWS IAM secret access key\n"
                 }
             },
             "required": [
@@ -269,14 +267,14 @@
             "inputProperties": {
                 "accessKeyId": {
                     "type": "string",
-                    "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                    "description": "AWS IAM access key\n"
                 },
                 "clusterIds": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of cluster IDs to which the integration applies\n"
+                    "description": "Clusters to be used with this integration\n"
                 },
                 "description": {
                     "type": "string",
@@ -284,7 +282,7 @@
                 },
                 "namespace": {
                     "type": "string",
-                    "description": "The name of the metric namespace\n"
+                    "description": "Name of the CloudWatch namespace\n"
                 },
                 "projectId": {
                     "type": "string",
@@ -292,11 +290,11 @@
                 },
                 "region": {
                     "type": "string",
-                    "description": "The AWS region name of the log group\n"
+                    "description": "AWS region for group\n"
                 },
                 "secretAccessKey": {
                     "type": "string",
-                    "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                    "description": "AWS IAM secret access key\n"
                 }
             },
             "requiredInputs": [
@@ -311,14 +309,14 @@
                 "properties": {
                     "accessKeyId": {
                         "type": "string",
-                        "description": "The access key ID of IAM credentials which have permissions to create and write to the log group\n"
+                        "description": "AWS IAM access key\n"
                     },
                     "clusterIds": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
-                        "description": "List of cluster IDs to which the integration applies\n"
+                        "description": "Clusters to be used with this integration\n"
                     },
                     "description": {
                         "type": "string",
@@ -326,7 +324,7 @@
                     },
                     "namespace": {
                         "type": "string",
-                        "description": "The name of the metric namespace\n"
+                        "description": "Name of the CloudWatch namespace\n"
                     },
                     "projectId": {
                         "type": "string",
@@ -334,11 +332,11 @@
                     },
                     "region": {
                         "type": "string",
-                        "description": "The AWS region name of the log group\n"
+                        "description": "AWS region for group\n"
                     },
                     "secretAccessKey": {
                         "type": "string",
-                        "description": "The secret access key of IAM credentials which will be used to write to the log groups\n"
+                        "description": "AWS IAM secret access key\n"
                     }
                 },
                 "type": "object"

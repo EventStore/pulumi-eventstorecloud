@@ -15,6 +15,14 @@ __config__ = pulumi.Config('eventstorecloud')
 
 class _ExportableConfig(types.ModuleType):
     @property
+    def client_id(self) -> Optional[str]:
+        return __config__.get('clientId')
+
+    @property
+    def identity_provider_url(self) -> Optional[str]:
+        return __config__.get('identityProviderUrl')
+
+    @property
     def organization_id(self) -> Optional[str]:
         return __config__.get('organizationId')
 

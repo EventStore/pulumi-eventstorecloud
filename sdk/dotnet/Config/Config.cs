@@ -32,6 +32,20 @@ namespace Pulumi.EventStoreCloud
 
         private static readonly Pulumi.Config __config = new Pulumi.Config("eventstorecloud");
 
+        private static readonly __Value<string?> _clientId = new __Value<string?>(() => __config.Get("clientId"));
+        public static string? ClientId
+        {
+            get => _clientId.Get();
+            set => _clientId.Set(value);
+        }
+
+        private static readonly __Value<string?> _identityProviderUrl = new __Value<string?>(() => __config.Get("identityProviderUrl"));
+        public static string? IdentityProviderUrl
+        {
+            get => _identityProviderUrl.Get();
+            set => _identityProviderUrl.Set(value);
+        }
+
         private static readonly __Value<string?> _organizationId = new __Value<string?>(() => __config.Get("organizationId"));
         public static string? OrganizationId
         {

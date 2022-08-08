@@ -8,6 +8,12 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
 
+func GetClientId(ctx *pulumi.Context) string {
+	return config.Get(ctx, "eventstorecloud:clientId")
+}
+func GetIdentityProviderUrl(ctx *pulumi.Context) string {
+	return config.Get(ctx, "eventstorecloud:identityProviderUrl")
+}
 func GetOrganizationId(ctx *pulumi.Context) string {
 	return config.Get(ctx, "eventstorecloud:organizationId")
 }

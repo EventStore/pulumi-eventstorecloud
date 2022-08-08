@@ -20,6 +20,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration":
+		r = &AWSCloudWatchLogsIntegration{}
+	case "eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration":
+		r = &AWSCloudWatchMetricsIntegration{}
 	case "eventstorecloud:index/integration:Integration":
 		r = &Integration{}
 	case "eventstorecloud:index/managedCluster:ManagedCluster":
@@ -60,6 +64,16 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 
 func init() {
 	version, _ := PkgVersion()
+	pulumi.RegisterResourceModule(
+		"eventstorecloud",
+		"index/aWSCloudWatchLogsIntegration",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"eventstorecloud",
+		"index/aWSCloudWatchMetricsIntegration",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"eventstorecloud",
 		"index/integration",

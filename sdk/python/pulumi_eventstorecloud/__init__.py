@@ -5,6 +5,8 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .aws_cloud_watch_logs_integration import *
+from .aws_cloud_watch_metrics_integration import *
 from .get_network import *
 from .get_project import *
 from .integration import *
@@ -25,6 +27,22 @@ else:
 _utilities.register(
     resource_modules="""
 [
+ {
+  "pkg": "eventstorecloud",
+  "mod": "index/aWSCloudWatchLogsIntegration",
+  "fqn": "pulumi_eventstorecloud",
+  "classes": {
+   "eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration": "AWSCloudWatchLogsIntegration"
+  }
+ },
+ {
+  "pkg": "eventstorecloud",
+  "mod": "index/aWSCloudWatchMetricsIntegration",
+  "fqn": "pulumi_eventstorecloud",
+  "classes": {
+   "eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration": "AWSCloudWatchMetricsIntegration"
+  }
+ },
  {
   "pkg": "eventstorecloud",
   "mod": "index/integration",

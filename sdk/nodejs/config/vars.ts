@@ -7,6 +7,22 @@ import * as utilities from "../utilities";
 declare var exports: any;
 const __config = new pulumi.Config("eventstorecloud");
 
+export declare const clientId: string | undefined;
+Object.defineProperty(exports, "clientId", {
+    get() {
+        return __config.get("clientId");
+    },
+    enumerable: true,
+});
+
+export declare const identityProviderUrl: string | undefined;
+Object.defineProperty(exports, "identityProviderUrl", {
+    get() {
+        return __config.get("identityProviderUrl");
+    },
+    enumerable: true,
+});
+
 export declare const organizationId: string | undefined;
 Object.defineProperty(exports, "organizationId", {
     get() {

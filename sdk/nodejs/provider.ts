@@ -25,6 +25,8 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === Provider.__pulumiType;
     }
 
+    public readonly clientId!: pulumi.Output<string>;
+    public readonly identityProviderUrl!: pulumi.Output<string>;
     public readonly organizationId!: pulumi.Output<string>;
     public readonly token!: pulumi.Output<string>;
     public readonly tokenStore!: pulumi.Output<string>;
@@ -41,6 +43,12 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
+            if ((!args || args.clientId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clientId'");
+            }
+            if ((!args || args.identityProviderUrl === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'identityProviderUrl'");
+            }
             if ((!args || args.organizationId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'organizationId'");
             }
@@ -53,6 +61,8 @@ export class Provider extends pulumi.ProviderResource {
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
+            resourceInputs["clientId"] = args ? args.clientId : undefined;
+            resourceInputs["identityProviderUrl"] = args ? args.identityProviderUrl : undefined;
             resourceInputs["organizationId"] = args ? args.organizationId : undefined;
             resourceInputs["token"] = args ? args.token : undefined;
             resourceInputs["tokenStore"] = args ? args.tokenStore : undefined;
@@ -67,6 +77,8 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    clientId: pulumi.Input<string>;
+    identityProviderUrl: pulumi.Input<string>;
     organizationId: pulumi.Input<string>;
     token: pulumi.Input<string>;
     tokenStore: pulumi.Input<string>;

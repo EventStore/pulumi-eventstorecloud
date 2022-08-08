@@ -13,6 +13,8 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
+                 client_id: pulumi.Input[str],
+                 identity_provider_url: pulumi.Input[str],
                  organization_id: pulumi.Input[str],
                  token: pulumi.Input[str],
                  token_store: pulumi.Input[str],
@@ -20,10 +22,30 @@ class ProviderArgs:
         """
         The set of arguments for constructing a Provider resource.
         """
+        pulumi.set(__self__, "client_id", client_id)
+        pulumi.set(__self__, "identity_provider_url", identity_provider_url)
         pulumi.set(__self__, "organization_id", organization_id)
         pulumi.set(__self__, "token", token)
         pulumi.set(__self__, "token_store", token_store)
         pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "client_id")
+
+    @client_id.setter
+    def client_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "client_id", value)
+
+    @property
+    @pulumi.getter(name="identityProviderUrl")
+    def identity_provider_url(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "identity_provider_url")
+
+    @identity_provider_url.setter
+    def identity_provider_url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "identity_provider_url", value)
 
     @property
     @pulumi.getter(name="organizationId")
@@ -67,6 +89,8 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 client_id: Optional[pulumi.Input[str]] = None,
+                 identity_provider_url: Optional[pulumi.Input[str]] = None,
                  organization_id: Optional[pulumi.Input[str]] = None,
                  token: Optional[pulumi.Input[str]] = None,
                  token_store: Optional[pulumi.Input[str]] = None,
@@ -108,6 +132,8 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 client_id: Optional[pulumi.Input[str]] = None,
+                 identity_provider_url: Optional[pulumi.Input[str]] = None,
                  organization_id: Optional[pulumi.Input[str]] = None,
                  token: Optional[pulumi.Input[str]] = None,
                  token_store: Optional[pulumi.Input[str]] = None,
@@ -126,6 +152,12 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            if client_id is None and not opts.urn:
+                raise TypeError("Missing required property 'client_id'")
+            __props__.__dict__["client_id"] = client_id
+            if identity_provider_url is None and not opts.urn:
+                raise TypeError("Missing required property 'identity_provider_url'")
+            __props__.__dict__["identity_provider_url"] = identity_provider_url
             if organization_id is None and not opts.urn:
                 raise TypeError("Missing required property 'organization_id'")
             __props__.__dict__["organization_id"] = organization_id
@@ -143,6 +175,16 @@ class Provider(pulumi.ProviderResource):
             resource_name,
             __props__,
             opts)
+
+    @property
+    @pulumi.getter(name="clientId")
+    def client_id(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "client_id")
+
+    @property
+    @pulumi.getter(name="identityProviderUrl")
+    def identity_provider_url(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "identity_provider_url")
 
     @property
     @pulumi.getter(name="organizationId")

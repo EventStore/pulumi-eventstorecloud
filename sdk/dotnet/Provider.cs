@@ -18,6 +18,12 @@ namespace Pulumi.EventStoreCloud
     [EventStoreCloudResourceType("pulumi:providers:eventstorecloud")]
     public partial class Provider : Pulumi.ProviderResource
     {
+        [Output("clientId")]
+        public Output<string> ClientId { get; private set; } = null!;
+
+        [Output("identityProviderUrl")]
+        public Output<string> IdentityProviderUrl { get; private set; } = null!;
+
         [Output("organizationId")]
         public Output<string> OrganizationId { get; private set; } = null!;
 
@@ -48,7 +54,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.5",
+                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -59,6 +65,12 @@ namespace Pulumi.EventStoreCloud
 
     public sealed class ProviderArgs : Pulumi.ResourceArgs
     {
+        [Input("clientId", required: true)]
+        public Input<string> ClientId { get; set; } = null!;
+
+        [Input("identityProviderUrl", required: true)]
+        public Input<string> IdentityProviderUrl { get; set; } = null!;
+
         [Input("organizationId", required: true)]
         public Input<string> OrganizationId { get; set; } = null!;
 

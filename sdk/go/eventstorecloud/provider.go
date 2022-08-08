@@ -18,10 +18,12 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
-	OrganizationId pulumi.StringOutput `pulumi:"organizationId"`
-	Token          pulumi.StringOutput `pulumi:"token"`
-	TokenStore     pulumi.StringOutput `pulumi:"tokenStore"`
-	Url            pulumi.StringOutput `pulumi:"url"`
+	ClientId            pulumi.StringOutput `pulumi:"clientId"`
+	IdentityProviderUrl pulumi.StringOutput `pulumi:"identityProviderUrl"`
+	OrganizationId      pulumi.StringOutput `pulumi:"organizationId"`
+	Token               pulumi.StringOutput `pulumi:"token"`
+	TokenStore          pulumi.StringOutput `pulumi:"tokenStore"`
+	Url                 pulumi.StringOutput `pulumi:"url"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -31,6 +33,12 @@ func NewProvider(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.ClientId == nil {
+		return nil, errors.New("invalid value for required argument 'ClientId'")
+	}
+	if args.IdentityProviderUrl == nil {
+		return nil, errors.New("invalid value for required argument 'IdentityProviderUrl'")
+	}
 	if args.OrganizationId == nil {
 		return nil, errors.New("invalid value for required argument 'OrganizationId'")
 	}
@@ -53,18 +61,22 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	OrganizationId string `pulumi:"organizationId"`
-	Token          string `pulumi:"token"`
-	TokenStore     string `pulumi:"tokenStore"`
-	Url            string `pulumi:"url"`
+	ClientId            string `pulumi:"clientId"`
+	IdentityProviderUrl string `pulumi:"identityProviderUrl"`
+	OrganizationId      string `pulumi:"organizationId"`
+	Token               string `pulumi:"token"`
+	TokenStore          string `pulumi:"tokenStore"`
+	Url                 string `pulumi:"url"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	OrganizationId pulumi.StringInput
-	Token          pulumi.StringInput
-	TokenStore     pulumi.StringInput
-	Url            pulumi.StringInput
+	ClientId            pulumi.StringInput
+	IdentityProviderUrl pulumi.StringInput
+	OrganizationId      pulumi.StringInput
+	Token               pulumi.StringInput
+	TokenStore          pulumi.StringInput
+	Url                 pulumi.StringInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {

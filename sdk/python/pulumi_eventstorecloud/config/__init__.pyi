@@ -8,6 +8,10 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
+clientId: Optional[str]
+
+identityProviderUrl: Optional[str]
+
 organizationId: Optional[str]
 
 token: Optional[str]
