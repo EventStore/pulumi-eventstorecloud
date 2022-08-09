@@ -9,7 +9,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud).",
     "repository": "https://github.com/EventStore/pulumi-eventstorecloud",
-    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6+dirty",
+    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6",
     "publisher": "EventStore",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
