@@ -104,6 +104,7 @@ func Provider() tfbridge.ProviderInfo {
 	prov := tfbridge.ProviderInfo{
 		P:                    p,
 		Name:                 "eventstorecloud",
+		DisplayName:          "Event Store Cloud",
 		Publisher:            "EventStore",
 		Description:          "A Pulumi package for creating and managing Event Store Cloud resources.",
 		Keywords:             []string{"pulumi", "eventstorecloud"},
