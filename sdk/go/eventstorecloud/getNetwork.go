@@ -18,23 +18,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		example, err := eventstorecloud.LookupNetwork(ctx, &GetNetworkArgs{
-// 			Name:      "Example Network",
-// 			ProjectId: _var.Project_id,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("networkCidr", example.CidrBlock)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := eventstorecloud.LookupNetwork(ctx, &GetNetworkArgs{
+//				Name:      "Example Network",
+//				ProjectId: _var.Project_id,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("networkCidr", example.CidrBlock)
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupNetwork(ctx *pulumi.Context, args *LookupNetworkArgs, opts ...pulumi.InvokeOption) (*LookupNetworkResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)

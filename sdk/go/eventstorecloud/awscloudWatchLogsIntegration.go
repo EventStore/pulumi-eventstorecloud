@@ -173,7 +173,7 @@ func (i *AWSCloudWatchLogsIntegration) ToAWSCloudWatchLogsIntegrationOutputWithC
 // AWSCloudWatchLogsIntegrationArrayInput is an input type that accepts AWSCloudWatchLogsIntegrationArray and AWSCloudWatchLogsIntegrationArrayOutput values.
 // You can construct a concrete instance of `AWSCloudWatchLogsIntegrationArrayInput` via:
 //
-//          AWSCloudWatchLogsIntegrationArray{ AWSCloudWatchLogsIntegrationArgs{...} }
+//	AWSCloudWatchLogsIntegrationArray{ AWSCloudWatchLogsIntegrationArgs{...} }
 type AWSCloudWatchLogsIntegrationArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +198,7 @@ func (i AWSCloudWatchLogsIntegrationArray) ToAWSCloudWatchLogsIntegrationArrayOu
 // AWSCloudWatchLogsIntegrationMapInput is an input type that accepts AWSCloudWatchLogsIntegrationMap and AWSCloudWatchLogsIntegrationMapOutput values.
 // You can construct a concrete instance of `AWSCloudWatchLogsIntegrationMapInput` via:
 //
-//          AWSCloudWatchLogsIntegrationMap{ "key": AWSCloudWatchLogsIntegrationArgs{...} }
+//	AWSCloudWatchLogsIntegrationMap{ "key": AWSCloudWatchLogsIntegrationArgs{...} }
 type AWSCloudWatchLogsIntegrationMapInput interface {
 	pulumi.Input
 

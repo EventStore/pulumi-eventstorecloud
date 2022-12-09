@@ -88,14 +88,14 @@ func isZero(v interface{}) bool {
 
 // pkgResourceDefaultOpts provides package level defaults to pulumi.OptionResource.
 func pkgResourceDefaultOpts(opts []pulumi.ResourceOption) []pulumi.ResourceOption {
-	defaults := []pulumi.ResourceOption{pulumi.PluginDownloadURL("https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6")}
+	defaults := []pulumi.ResourceOption{pulumi.PluginDownloadURL("https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.7-alpha.1670580025+3f729087.dirty")}
 
 	return append(defaults, opts...)
 }
 
 // pkgInvokeDefaultOpts provides package level defaults to pulumi.OptionInvoke.
 func pkgInvokeDefaultOpts(opts []pulumi.InvokeOption) []pulumi.InvokeOption {
-	defaults := []pulumi.InvokeOption{pulumi.PluginDownloadURL("https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.6")}
+	defaults := []pulumi.InvokeOption{pulumi.PluginDownloadURL("https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.7-alpha.1670580025+3f729087.dirty")}
 
 	return append(defaults, opts...)
 }

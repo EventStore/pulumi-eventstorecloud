@@ -19,50 +19,56 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := eventstorecloud.LookupProject(ctx, &GetProjectArgs{
-// 			Name: "Example Project",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNetwork, err := eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
-// 			ProjectId:        pulumi.Any(eventstorecloud_project.Example.Id),
-// 			ResourceProvider: pulumi.String("aws"),
-// 			Region:           pulumi.String("us-west-2"),
-// 			CidrBlock:        pulumi.String("172.21.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = eventstorecloud.NewManagedCluster(ctx, "exampleManagedCluster", &eventstorecloud.ManagedClusterArgs{
-// 			ProjectId:      exampleNetwork.ProjectId,
-// 			NetworkId:      exampleNetwork.ID(),
-// 			Topology:       pulumi.String("three-node-multi-zone"),
-// 			InstanceType:   pulumi.String("F1"),
-// 			DiskSize:       pulumi.Int(24),
-// 			DiskType:       pulumi.String("gp3"),
-// 			DiskIops:       pulumi.Int(3000),
-// 			DiskThroughput: pulumi.Int(125),
-// 			ServerVersion:  pulumi.String("20.6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := eventstorecloud.LookupProject(ctx, &GetProjectArgs{
+//				Name: "Example Project",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			exampleNetwork, err := eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
+//				ProjectId:        pulumi.Any(eventstorecloud_project.Example.Id),
+//				ResourceProvider: pulumi.String("aws"),
+//				Region:           pulumi.String("us-west-2"),
+//				CidrBlock:        pulumi.String("172.21.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = eventstorecloud.NewManagedCluster(ctx, "exampleManagedCluster", &eventstorecloud.ManagedClusterArgs{
+//				ProjectId:      exampleNetwork.ProjectId,
+//				NetworkId:      exampleNetwork.ID(),
+//				Topology:       pulumi.String("three-node-multi-zone"),
+//				InstanceType:   pulumi.String("F1"),
+//				DiskSize:       pulumi.Int(24),
+//				DiskType:       pulumi.String("gp3"),
+//				DiskIops:       pulumi.Int(3000),
+//				DiskThroughput: pulumi.Int(125),
+//				ServerVersion:  pulumi.String("20.6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
 // ```sh
-//  $ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+//
+//	$ pulumi import eventstorecloud:index/managedCluster:ManagedCluster example project_id:cluster_id
+//
 // ```
 type ManagedCluster struct {
 	pulumi.CustomResourceState
@@ -290,7 +296,7 @@ func (i *ManagedCluster) ToManagedClusterOutputWithContext(ctx context.Context) 
 // ManagedClusterArrayInput is an input type that accepts ManagedClusterArray and ManagedClusterArrayOutput values.
 // You can construct a concrete instance of `ManagedClusterArrayInput` via:
 //
-//          ManagedClusterArray{ ManagedClusterArgs{...} }
+//	ManagedClusterArray{ ManagedClusterArgs{...} }
 type ManagedClusterArrayInput interface {
 	pulumi.Input
 
@@ -315,7 +321,7 @@ func (i ManagedClusterArray) ToManagedClusterArrayOutputWithContext(ctx context.
 // ManagedClusterMapInput is an input type that accepts ManagedClusterMap and ManagedClusterMapOutput values.
 // You can construct a concrete instance of `ManagedClusterMapInput` via:
 //
-//          ManagedClusterMap{ "key": ManagedClusterArgs{...} }
+//	ManagedClusterMap{ "key": ManagedClusterArgs{...} }
 type ManagedClusterMapInput interface {
 	pulumi.Input
 

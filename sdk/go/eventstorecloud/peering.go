@@ -19,51 +19,56 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleProject, err := eventstorecloud.NewProject(ctx, "exampleProject", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNetwork, err := eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
-// 			ProjectId:        exampleProject.ID(),
-// 			ResourceProvider: pulumi.String("aws"),
-// 			Region:           pulumi.String("us-west-2"),
-// 			CidrBlock:        pulumi.String("172.21.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = eventstorecloud.NewPeering(ctx, "examplePeering", &eventstorecloud.PeeringArgs{
-// 			ProjectId:            exampleNetwork.ProjectId,
-// 			NetworkId:            exampleNetwork.ID(),
-// 			PeerResourceProvider: exampleNetwork.ResourceProvider,
-// 			PeerNetworkRegion:    exampleNetwork.Region,
-// 			PeerAccountId:        pulumi.String("<Customer AWS Account ID>"),
-// 			PeerNetworkId:        pulumi.String("<Customer VPC ID>"),
-// 			Routes: pulumi.StringArray{
-// 				pulumi.String("<Address space of the customer VPC>"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleProject, err := eventstorecloud.NewProject(ctx, "exampleProject", nil)
+//			if err != nil {
+//				return err
+//			}
+//			exampleNetwork, err := eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
+//				ProjectId:        exampleProject.ID(),
+//				ResourceProvider: pulumi.String("aws"),
+//				Region:           pulumi.String("us-west-2"),
+//				CidrBlock:        pulumi.String("172.21.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = eventstorecloud.NewPeering(ctx, "examplePeering", &eventstorecloud.PeeringArgs{
+//				ProjectId:            exampleNetwork.ProjectId,
+//				NetworkId:            exampleNetwork.ID(),
+//				PeerResourceProvider: exampleNetwork.ResourceProvider,
+//				PeerNetworkRegion:    exampleNetwork.Region,
+//				PeerAccountId:        pulumi.String("<Customer AWS Account ID>"),
+//				PeerNetworkId:        pulumi.String("<Customer VPC ID>"),
+//				Routes: pulumi.StringArray{
+//					pulumi.String("<Address space of the customer VPC>"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
 // ```sh
-//  $ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+//
+//	$ pulumi import eventstorecloud:index/peering:Peering example project_id:peering_id
+//
 // ```
 //
-//  ~> Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
+//	~> Keep in mind that additional operations might be required to activate the peering link. Check our [provisioning guidelines](https://developers.eventstore.com/cloud/provision/) for each of the supported cloud providers to know more.
 type Peering struct {
 	pulumi.CustomResourceState
 
@@ -248,7 +253,7 @@ func (i *Peering) ToPeeringOutputWithContext(ctx context.Context) PeeringOutput 
 // PeeringArrayInput is an input type that accepts PeeringArray and PeeringArrayOutput values.
 // You can construct a concrete instance of `PeeringArrayInput` via:
 //
-//          PeeringArray{ PeeringArgs{...} }
+//	PeeringArray{ PeeringArgs{...} }
 type PeeringArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +278,7 @@ func (i PeeringArray) ToPeeringArrayOutputWithContext(ctx context.Context) Peeri
 // PeeringMapInput is an input type that accepts PeeringMap and PeeringMapOutput values.
 // You can construct a concrete instance of `PeeringMapInput` via:
 //
-//          PeeringMap{ "key": PeeringArgs{...} }
+//	PeeringMap{ "key": PeeringArgs{...} }
 type PeeringMapInput interface {
 	pulumi.Input
 

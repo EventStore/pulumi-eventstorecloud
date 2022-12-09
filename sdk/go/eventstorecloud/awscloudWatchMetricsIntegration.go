@@ -173,7 +173,7 @@ func (i *AWSCloudWatchMetricsIntegration) ToAWSCloudWatchMetricsIntegrationOutpu
 // AWSCloudWatchMetricsIntegrationArrayInput is an input type that accepts AWSCloudWatchMetricsIntegrationArray and AWSCloudWatchMetricsIntegrationArrayOutput values.
 // You can construct a concrete instance of `AWSCloudWatchMetricsIntegrationArrayInput` via:
 //
-//          AWSCloudWatchMetricsIntegrationArray{ AWSCloudWatchMetricsIntegrationArgs{...} }
+//	AWSCloudWatchMetricsIntegrationArray{ AWSCloudWatchMetricsIntegrationArgs{...} }
 type AWSCloudWatchMetricsIntegrationArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +198,7 @@ func (i AWSCloudWatchMetricsIntegrationArray) ToAWSCloudWatchMetricsIntegrationA
 // AWSCloudWatchMetricsIntegrationMapInput is an input type that accepts AWSCloudWatchMetricsIntegrationMap and AWSCloudWatchMetricsIntegrationMapOutput values.
 // You can construct a concrete instance of `AWSCloudWatchMetricsIntegrationMapInput` via:
 //
-//          AWSCloudWatchMetricsIntegrationMap{ "key": AWSCloudWatchMetricsIntegrationArgs{...} }
+//	AWSCloudWatchMetricsIntegrationMap{ "key": AWSCloudWatchMetricsIntegrationArgs{...} }
 type AWSCloudWatchMetricsIntegrationMapInput interface {
 	pulumi.Input
 

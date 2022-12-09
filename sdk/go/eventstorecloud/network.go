@@ -19,34 +19,39 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleProject, err := eventstorecloud.NewProject(ctx, "exampleProject", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
-// 			ProjectId:        exampleProject.ID(),
-// 			ResourceProvider: pulumi.String("aws"),
-// 			Region:           pulumi.String("us-west-2"),
-// 			CidrBlock:        pulumi.String("172.21.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleProject, err := eventstorecloud.NewProject(ctx, "exampleProject", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = eventstorecloud.NewNetwork(ctx, "exampleNetwork", &eventstorecloud.NetworkArgs{
+//				ProjectId:        exampleProject.ID(),
+//				ResourceProvider: pulumi.String("aws"),
+//				Region:           pulumi.String("us-west-2"),
+//				CidrBlock:        pulumi.String("172.21.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
 // ```sh
-//  $ pulumi import eventstorecloud:index/network:Network example project_id:network_id
+//
+//	$ pulumi import eventstorecloud:index/network:Network example project_id:network_id
+//
 // ```
 type Network struct {
 	pulumi.CustomResourceState
@@ -187,7 +192,7 @@ func (i *Network) ToNetworkOutputWithContext(ctx context.Context) NetworkOutput 
 // NetworkArrayInput is an input type that accepts NetworkArray and NetworkArrayOutput values.
 // You can construct a concrete instance of `NetworkArrayInput` via:
 //
-//          NetworkArray{ NetworkArgs{...} }
+//	NetworkArray{ NetworkArgs{...} }
 type NetworkArrayInput interface {
 	pulumi.Input
 
@@ -212,7 +217,7 @@ func (i NetworkArray) ToNetworkArrayOutputWithContext(ctx context.Context) Netwo
 // NetworkMapInput is an input type that accepts NetworkMap and NetworkMapOutput values.
 // You can construct a concrete instance of `NetworkMapInput` via:
 //
-//          NetworkMap{ "key": NetworkArgs{...} }
+//	NetworkMap{ "key": NetworkArgs{...} }
 type NetworkMapInput interface {
 	pulumi.Input
 

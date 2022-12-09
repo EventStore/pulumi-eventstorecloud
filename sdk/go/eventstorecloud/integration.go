@@ -19,46 +19,51 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := eventstorecloud.NewIntegration(ctx, "opsgenieIssues", &eventstorecloud.IntegrationArgs{
-// 			ProjectId:   pulumi.Any(_var.Project_id),
-// 			Description: pulumi.String("create OpsGenie alerts from issues"),
-// 			Data: pulumi.AnyMap{
-// 				"sink":    pulumi.Any("opsGenie"),
-// 				"api_key": pulumi.Any("<secret OpsGenie key here>"),
-// 				"source":  pulumi.Any("issues"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = eventstorecloud.NewIntegration(ctx, "slackNotifications", &eventstorecloud.IntegrationArgs{
-// 			ProjectId:   pulumi.Any(_var.Project_id),
-// 			Description: pulumi.String("send Slack a message when a notification happens"),
-// 			Data: pulumi.AnyMap{
-// 				"sink":       pulumi.Any("slack"),
-// 				"token":      pulumi.Any("<secret token here>"),
-// 				"channel_id": pulumi.Any("#esc-cluster-notifications"),
-// 				"source":     pulumi.Any("notifications"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := eventstorecloud.NewIntegration(ctx, "opsgenieIssues", &eventstorecloud.IntegrationArgs{
+//				ProjectId:   pulumi.Any(_var.Project_id),
+//				Description: pulumi.String("create OpsGenie alerts from issues"),
+//				Data: pulumi.AnyMap{
+//					"sink":    pulumi.Any("opsGenie"),
+//					"api_key": pulumi.Any("<secret OpsGenie key here>"),
+//					"source":  pulumi.Any("issues"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = eventstorecloud.NewIntegration(ctx, "slackNotifications", &eventstorecloud.IntegrationArgs{
+//				ProjectId:   pulumi.Any(_var.Project_id),
+//				Description: pulumi.String("send Slack a message when a notification happens"),
+//				Data: pulumi.AnyMap{
+//					"sink":       pulumi.Any("slack"),
+//					"token":      pulumi.Any("<secret token here>"),
+//					"channel_id": pulumi.Any("#esc-cluster-notifications"),
+//					"source":     pulumi.Any("notifications"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
 // ```sh
-//  $ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id
+//
+//	$ pulumi import eventstorecloud:index/integration:Integration opsgenie_issues project_id:integration_id
+//
 // ```
 type Integration struct {
 	pulumi.CustomResourceState
@@ -176,7 +181,7 @@ func (i *Integration) ToIntegrationOutputWithContext(ctx context.Context) Integr
 // IntegrationArrayInput is an input type that accepts IntegrationArray and IntegrationArrayOutput values.
 // You can construct a concrete instance of `IntegrationArrayInput` via:
 //
-//          IntegrationArray{ IntegrationArgs{...} }
+//	IntegrationArray{ IntegrationArgs{...} }
 type IntegrationArrayInput interface {
 	pulumi.Input
 
@@ -201,7 +206,7 @@ func (i IntegrationArray) ToIntegrationArrayOutputWithContext(ctx context.Contex
 // IntegrationMapInput is an input type that accepts IntegrationMap and IntegrationMapOutput values.
 // You can construct a concrete instance of `IntegrationMapInput` via:
 //
-//          IntegrationMap{ "key": IntegrationArgs{...} }
+//	IntegrationMap{ "key": IntegrationArgs{...} }
 type IntegrationMapInput interface {
 	pulumi.Input
 

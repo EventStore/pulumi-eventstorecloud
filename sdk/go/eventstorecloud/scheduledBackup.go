@@ -19,32 +19,37 @@ import (
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := eventstorecloud.NewScheduledBackup(ctx, "daily", &eventstorecloud.ScheduledBackupArgs{
-// 			ProjectId:         pulumi.Any(eventstorecloud_project.Example.Id),
-// 			Schedule:          pulumi.String("0 12 * * */1"),
-// 			Description:       pulumi.String("Creates a backup once a day at 12:00"),
-// 			SourceClusterId:   pulumi.Any(eventstorecloud_managed_cluster.Example.Id),
-// 			BackupDescription: pulumi.String("{cluster} Daily Backup {datetime:RFC3339}"),
-// 			MaxBackupCount:    pulumi.Int(3),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := eventstorecloud.NewScheduledBackup(ctx, "daily", &eventstorecloud.ScheduledBackupArgs{
+//				ProjectId:         pulumi.Any(eventstorecloud_project.Example.Id),
+//				Schedule:          pulumi.String("0 12 * * */1"),
+//				Description:       pulumi.String("Creates a backup once a day at 12:00"),
+//				SourceClusterId:   pulumi.Any(eventstorecloud_managed_cluster.Example.Id),
+//				BackupDescription: pulumi.String("{cluster} Daily Backup {datetime:RFC3339}"),
+//				MaxBackupCount:    pulumi.Int(3),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
 // ```sh
-//  $ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
+//
+//	$ pulumi import eventstorecloud:index/scheduledBackup:ScheduledBackup daily project_id:backup_id
+//
 // ```
 type ScheduledBackup struct {
 	pulumi.CustomResourceState
@@ -201,7 +206,7 @@ func (i *ScheduledBackup) ToScheduledBackupOutputWithContext(ctx context.Context
 // ScheduledBackupArrayInput is an input type that accepts ScheduledBackupArray and ScheduledBackupArrayOutput values.
 // You can construct a concrete instance of `ScheduledBackupArrayInput` via:
 //
-//          ScheduledBackupArray{ ScheduledBackupArgs{...} }
+//	ScheduledBackupArray{ ScheduledBackupArgs{...} }
 type ScheduledBackupArrayInput interface {
 	pulumi.Input
 
@@ -226,7 +231,7 @@ func (i ScheduledBackupArray) ToScheduledBackupArrayOutputWithContext(ctx contex
 // ScheduledBackupMapInput is an input type that accepts ScheduledBackupMap and ScheduledBackupMapOutput values.
 // You can construct a concrete instance of `ScheduledBackupMapInput` via:
 //
-//          ScheduledBackupMap{ "key": ScheduledBackupArgs{...} }
+//	ScheduledBackupMap{ "key": ScheduledBackupArgs{...} }
 type ScheduledBackupMapInput interface {
 	pulumi.Input
 
