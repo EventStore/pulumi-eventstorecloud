@@ -53,7 +53,7 @@ namespace Pulumi.EventStoreCloud
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
-            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.7-alpha.1670580025+3f729087.dirty";
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.7";
             return dst;
         }
 
