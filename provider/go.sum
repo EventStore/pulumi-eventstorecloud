@@ -101,8 +101,8 @@ github.com/Azure/go-autorest/tracing v0.6.0/go.mod h1:+vhtPC754Xsa23ID7GlGsrdKBp
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/DataDog/datadog-go v3.2.0+incompatible/go.mod h1:LButxg5PwREeZtORoXG3tL4fMGNddJ+vMq1mwgfaqoQ=
-github.com/EventStore/terraform-provider-eventstorecloud v1.5.21 h1:ZMCMkabAI4GS5mGoRHii4I5P3h0RStn3vuiRx3KmMv8=
-github.com/EventStore/terraform-provider-eventstorecloud v1.5.21/go.mod h1:4BJvRyKhwKym+y+PlHJ0QOdt/kGvhl/3YxRHh2tsJ20=
+github.com/EventStore/terraform-provider-eventstorecloud v1.5.22 h1:K1ZgEkkB4J30qU92cyQwrIu4d55ktFGqulPp0EfoG1U=
+github.com/EventStore/terraform-provider-eventstorecloud v1.5.22/go.mod h1:4BJvRyKhwKym+y+PlHJ0QOdt/kGvhl/3YxRHh2tsJ20=
 github.com/GoogleCloudPlatform/cloudsql-proxy v1.22.0/go.mod h1:mAm5O/zik2RFmcpigNjg6nMotDL8ZXJaxKzgGVcSMFA=
 github.com/Masterminds/goutils v1.1.0 h1:zukEsf/1JZwCMgHiK3GZftabmxiCw4apj3a28RPBiVg=
 github.com/Masterminds/goutils v1.1.0/go.mod h1:8cTjp+g8YejhMuvIA5y2vz3BpJxksy863GQaJW2MFNU=
