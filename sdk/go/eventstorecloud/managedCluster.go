@@ -93,6 +93,8 @@ type ManagedCluster struct {
 	ProjectId pulumi.StringOutput `pulumi:"projectId"`
 	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel pulumi.StringPtrOutput `pulumi:"projectionLevel"`
+	// Protection from an accidental cluster deletion Defaults to `false`.
+	Protected pulumi.BoolPtrOutput `pulumi:"protected"`
 	// Region in which the cluster was created. Determined by the region of the Network
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Provider in which the cluster was created. Determined by the provider of the Network.
@@ -174,6 +176,8 @@ type managedClusterState struct {
 	ProjectId *string `pulumi:"projectId"`
 	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel *string `pulumi:"projectionLevel"`
+	// Protection from an accidental cluster deletion Defaults to `false`.
+	Protected *bool `pulumi:"protected"`
 	// Region in which the cluster was created. Determined by the region of the Network
 	Region *string `pulumi:"region"`
 	// Provider in which the cluster was created. Determined by the provider of the Network.
@@ -205,6 +209,8 @@ type ManagedClusterState struct {
 	ProjectId pulumi.StringPtrInput
 	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel pulumi.StringPtrInput
+	// Protection from an accidental cluster deletion Defaults to `false`.
+	Protected pulumi.BoolPtrInput
 	// Region in which the cluster was created. Determined by the region of the Network
 	Region pulumi.StringPtrInput
 	// Provider in which the cluster was created. Determined by the provider of the Network.
@@ -238,6 +244,8 @@ type managedClusterArgs struct {
 	ProjectId string `pulumi:"projectId"`
 	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel *string `pulumi:"projectionLevel"`
+	// Protection from an accidental cluster deletion Defaults to `false`.
+	Protected *bool `pulumi:"protected"`
 	// Server version to provision (find the list of valid values below)
 	ServerVersion string `pulumi:"serverVersion"`
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
@@ -264,6 +272,8 @@ type ManagedClusterArgs struct {
 	ProjectId pulumi.StringInput
 	// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
 	ProjectionLevel pulumi.StringPtrInput
+	// Protection from an accidental cluster deletion Defaults to `false`.
+	Protected pulumi.BoolPtrInput
 	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringInput
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
