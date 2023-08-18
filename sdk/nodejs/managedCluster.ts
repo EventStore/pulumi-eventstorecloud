@@ -111,6 +111,10 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     public readonly projectionLevel!: pulumi.Output<string | undefined>;
     /**
+     * Protection from an accidental cluster deletion Defaults to `false`.
+     */
+    public readonly protected!: pulumi.Output<boolean | undefined>;
+    /**
      * Region in which the cluster was created. Determined by the region of the Network
      */
     public /*out*/ readonly region!: pulumi.Output<string>;
@@ -150,6 +154,7 @@ export class ManagedCluster extends pulumi.CustomResource {
             resourceInputs["networkId"] = state ? state.networkId : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["projectionLevel"] = state ? state.projectionLevel : undefined;
+            resourceInputs["protected"] = state ? state.protected : undefined;
             resourceInputs["region"] = state ? state.region : undefined;
             resourceInputs["resourceProvider"] = state ? state.resourceProvider : undefined;
             resourceInputs["serverVersion"] = state ? state.serverVersion : undefined;
@@ -186,6 +191,7 @@ export class ManagedCluster extends pulumi.CustomResource {
             resourceInputs["networkId"] = args ? args.networkId : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["projectionLevel"] = args ? args.projectionLevel : undefined;
+            resourceInputs["protected"] = args ? args.protected : undefined;
             resourceInputs["serverVersion"] = args ? args.serverVersion : undefined;
             resourceInputs["topology"] = args ? args.topology : undefined;
             resourceInputs["dnsName"] = undefined /*out*/;
@@ -241,6 +247,10 @@ export interface ManagedClusterState {
      * Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
      */
     projectionLevel?: pulumi.Input<string>;
+    /**
+     * Protection from an accidental cluster deletion Defaults to `false`.
+     */
+    protected?: pulumi.Input<boolean>;
     /**
      * Region in which the cluster was created. Determined by the region of the Network
      */
@@ -299,6 +309,10 @@ export interface ManagedClusterArgs {
      * Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
      */
     projectionLevel?: pulumi.Input<string>;
+    /**
+     * Protection from an accidental cluster deletion Defaults to `false`.
+     */
+    protected?: pulumi.Input<boolean>;
     /**
      * Server version to provision (find the list of valid values below)
      */

@@ -10,7 +10,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`eventstorecloud` Terraform Provider](https://github.com/EventStore/terraform-provider-eventstorecloud).",
     "repository": "https://github.com/EventStore/pulumi-eventstorecloud",
-    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.8",
+    "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
     "publisher": "EventStore",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
@@ -454,6 +454,10 @@
                     "type": "string",
                     "description": "Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.\n"
                 },
+                "protected": {
+                    "type": "boolean",
+                    "description": "Protection from an accidental cluster deletion Defaults to `false`.\n"
+                },
                 "region": {
                     "type": "string",
                     "description": "Region in which the cluster was created. Determined by the region of the Network\n"
@@ -521,6 +525,10 @@
                     "type": "string",
                     "description": "Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.\n"
                 },
+                "protected": {
+                    "type": "boolean",
+                    "description": "Protection from an accidental cluster deletion Defaults to `false`.\n"
+                },
                 "serverVersion": {
                     "type": "string",
                     "description": "Server version to provision (find the list of valid values below)\n"
@@ -581,6 +589,10 @@
                     "projectionLevel": {
                         "type": "string",
                         "description": "Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.\n"
+                    },
+                    "protected": {
+                        "type": "boolean",
+                        "description": "Protection from an accidental cluster deletion Defaults to `false`.\n"
                     },
                     "region": {
                         "type": "string",

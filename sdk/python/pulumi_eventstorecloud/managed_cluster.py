@@ -23,7 +23,8 @@ class ManagedClusterArgs:
                  disk_iops: Optional[pulumi.Input[int]] = None,
                  disk_throughput: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 projection_level: Optional[pulumi.Input[str]] = None):
+                 projection_level: Optional[pulumi.Input[str]] = None,
+                 protected: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a ManagedCluster resource.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
@@ -37,6 +38,7 @@ class ManagedClusterArgs:
         :param pulumi.Input[int] disk_throughput: Throughput in MB/s for storage, required if disk_type is `gp3`
         :param pulumi.Input[str] name: Name of the managed cluster
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
+        :param pulumi.Input[bool] protected: Protection from an accidental cluster deletion Defaults to `false`.
         """
         pulumi.set(__self__, "disk_size", disk_size)
         pulumi.set(__self__, "disk_type", disk_type)
@@ -53,6 +55,8 @@ class ManagedClusterArgs:
             pulumi.set(__self__, "name", name)
         if projection_level is not None:
             pulumi.set(__self__, "projection_level", projection_level)
+        if protected is not None:
+            pulumi.set(__self__, "protected", protected)
 
     @property
     @pulumi.getter(name="diskSize")
@@ -186,6 +190,18 @@ class ManagedClusterArgs:
     def projection_level(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "projection_level", value)
 
+    @property
+    @pulumi.getter
+    def protected(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Protection from an accidental cluster deletion Defaults to `false`.
+        """
+        return pulumi.get(self, "protected")
+
+    @protected.setter
+    def protected(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "protected", value)
+
 
 @pulumi.input_type
 class _ManagedClusterState:
@@ -200,6 +216,7 @@ class _ManagedClusterState:
                  network_id: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[str]] = None,
                  projection_level: Optional[pulumi.Input[str]] = None,
+                 protected: Optional[pulumi.Input[bool]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  resource_provider: Optional[pulumi.Input[str]] = None,
                  server_version: Optional[pulumi.Input[str]] = None,
@@ -216,6 +233,7 @@ class _ManagedClusterState:
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
+        :param pulumi.Input[bool] protected: Protection from an accidental cluster deletion Defaults to `false`.
         :param pulumi.Input[str] region: Region in which the cluster was created. Determined by the region of the Network
         :param pulumi.Input[str] resource_provider: Provider in which the cluster was created. Determined by the provider of the Network.
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
@@ -241,6 +259,8 @@ class _ManagedClusterState:
             pulumi.set(__self__, "project_id", project_id)
         if projection_level is not None:
             pulumi.set(__self__, "projection_level", projection_level)
+        if protected is not None:
+            pulumi.set(__self__, "protected", protected)
         if region is not None:
             pulumi.set(__self__, "region", region)
         if resource_provider is not None:
@@ -372,6 +392,18 @@ class _ManagedClusterState:
 
     @property
     @pulumi.getter
+    def protected(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Protection from an accidental cluster deletion Defaults to `false`.
+        """
+        return pulumi.get(self, "protected")
+
+    @protected.setter
+    def protected(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "protected", value)
+
+    @property
+    @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
         Region in which the cluster was created. Determined by the region of the Network
@@ -433,6 +465,7 @@ class ManagedCluster(pulumi.CustomResource):
                  network_id: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[str]] = None,
                  projection_level: Optional[pulumi.Input[str]] = None,
+                 protected: Optional[pulumi.Input[bool]] = None,
                  server_version: Optional[pulumi.Input[str]] = None,
                  topology: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -480,6 +513,7 @@ class ManagedCluster(pulumi.CustomResource):
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
+        :param pulumi.Input[bool] protected: Protection from an accidental cluster deletion Defaults to `false`.
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
@@ -546,6 +580,7 @@ class ManagedCluster(pulumi.CustomResource):
                  network_id: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[str]] = None,
                  projection_level: Optional[pulumi.Input[str]] = None,
+                 protected: Optional[pulumi.Input[bool]] = None,
                  server_version: Optional[pulumi.Input[str]] = None,
                  topology: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -581,6 +616,7 @@ class ManagedCluster(pulumi.CustomResource):
                 raise TypeError("Missing required property 'project_id'")
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["projection_level"] = projection_level
+            __props__.__dict__["protected"] = protected
             if server_version is None and not opts.urn:
                 raise TypeError("Missing required property 'server_version'")
             __props__.__dict__["server_version"] = server_version
@@ -610,6 +646,7 @@ class ManagedCluster(pulumi.CustomResource):
             network_id: Optional[pulumi.Input[str]] = None,
             project_id: Optional[pulumi.Input[str]] = None,
             projection_level: Optional[pulumi.Input[str]] = None,
+            protected: Optional[pulumi.Input[bool]] = None,
             region: Optional[pulumi.Input[str]] = None,
             resource_provider: Optional[pulumi.Input[str]] = None,
             server_version: Optional[pulumi.Input[str]] = None,
@@ -631,6 +668,7 @@ class ManagedCluster(pulumi.CustomResource):
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
+        :param pulumi.Input[bool] protected: Protection from an accidental cluster deletion Defaults to `false`.
         :param pulumi.Input[str] region: Region in which the cluster was created. Determined by the region of the Network
         :param pulumi.Input[str] resource_provider: Provider in which the cluster was created. Determined by the provider of the Network.
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
@@ -650,6 +688,7 @@ class ManagedCluster(pulumi.CustomResource):
         __props__.__dict__["network_id"] = network_id
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["projection_level"] = projection_level
+        __props__.__dict__["protected"] = protected
         __props__.__dict__["region"] = region
         __props__.__dict__["resource_provider"] = resource_provider
         __props__.__dict__["server_version"] = server_version
@@ -735,6 +774,14 @@ class ManagedCluster(pulumi.CustomResource):
         Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         """
         return pulumi.get(self, "projection_level")
+
+    @property
+    @pulumi.getter
+    def protected(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Protection from an accidental cluster deletion Defaults to `false`.
+        """
+        return pulumi.get(self, "protected")
 
     @property
     @pulumi.getter

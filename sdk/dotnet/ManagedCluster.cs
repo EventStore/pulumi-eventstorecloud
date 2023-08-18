@@ -120,6 +120,12 @@ namespace Pulumi.EventStoreCloud
         public Output<string?> ProjectionLevel { get; private set; } = null!;
 
         /// <summary>
+        /// Protection from an accidental cluster deletion Defaults to `false`.
+        /// </summary>
+        [Output("protected")]
+        public Output<bool?> Protected { get; private set; } = null!;
+
+        /// <summary>
         /// Region in which the cluster was created. Determined by the region of the Network
         /// </summary>
         [Output("region")]
@@ -166,7 +172,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.8",
+                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -243,6 +249,12 @@ namespace Pulumi.EventStoreCloud
         /// </summary>
         [Input("projectionLevel")]
         public Input<string>? ProjectionLevel { get; set; }
+
+        /// <summary>
+        /// Protection from an accidental cluster deletion Defaults to `false`.
+        /// </summary>
+        [Input("protected")]
+        public Input<bool>? Protected { get; set; }
 
         /// <summary>
         /// Server version to provision (find the list of valid values below)
@@ -322,6 +334,12 @@ namespace Pulumi.EventStoreCloud
         /// </summary>
         [Input("projectionLevel")]
         public Input<string>? ProjectionLevel { get; set; }
+
+        /// <summary>
+        /// Protection from an accidental cluster deletion Defaults to `false`.
+        /// </summary>
+        [Input("protected")]
+        public Input<bool>? Protected { get; set; }
 
         /// <summary>
         /// Region in which the cluster was created. Determined by the region of the Network
