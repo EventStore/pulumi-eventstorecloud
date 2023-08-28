@@ -17,3 +17,5 @@ yarn.lock
 *.log
 
 **/schema-embed.json
+**/version.txt
+
