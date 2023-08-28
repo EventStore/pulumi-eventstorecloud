@@ -15,3 +15,5 @@ yarn.lock
 **/.DS_Store
 .vscode/
 *.log
+
+**/schema-embed.json

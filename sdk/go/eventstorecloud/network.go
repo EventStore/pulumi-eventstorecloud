@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -87,7 +88,7 @@ func NewNetwork(ctx *pulumi.Context,
 	if args.ResourceProvider == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceProvider'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Network
 	err := ctx.RegisterResource("eventstorecloud:index/network:Network", name, args, &resource, opts...)
 	if err != nil {
@@ -251,6 +252,31 @@ func (o NetworkOutput) ToNetworkOutput() NetworkOutput {
 
 func (o NetworkOutput) ToNetworkOutputWithContext(ctx context.Context) NetworkOutput {
 	return o
+}
+
+// Address space of the network in CIDR block notation
+func (o NetworkOutput) CidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v *Network) pulumi.StringOutput { return v.CidrBlock }).(pulumi.StringOutput)
+}
+
+// Human-friendly name for the network
+func (o NetworkOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Network) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Project ID
+func (o NetworkOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Network) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Provider region in which to provision the network
+func (o NetworkOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v *Network) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
+}
+
+// Cloud Provider in which to provision the network.
+func (o NetworkOutput) ResourceProvider() pulumi.StringOutput {
+	return o.ApplyT(func(v *Network) pulumi.StringOutput { return v.ResourceProvider }).(pulumi.StringOutput)
 }
 
 type NetworkArrayOutput struct{ *pulumi.OutputState }

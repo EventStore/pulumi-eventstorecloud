@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -120,7 +121,7 @@ func NewPeering(ctx *pulumi.Context,
 	if args.Routes == nil {
 		return nil, errors.New("invalid value for required argument 'Routes'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Peering
 	err := ctx.RegisterResource("eventstorecloud:index/peering:Peering", name, args, &resource, opts...)
 	if err != nil {
@@ -312,6 +313,51 @@ func (o PeeringOutput) ToPeeringOutput() PeeringOutput {
 
 func (o PeeringOutput) ToPeeringOutputWithContext(ctx context.Context) PeeringOutput {
 	return o
+}
+
+// Human-friendly name for the network
+func (o PeeringOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Network ID
+func (o PeeringOutput) NetworkId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.NetworkId }).(pulumi.StringOutput)
+}
+
+// Account identifier in which to the peer network exists
+func (o PeeringOutput) PeerAccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.PeerAccountId }).(pulumi.StringOutput)
+}
+
+// Network identifier of the peer network exists
+func (o PeeringOutput) PeerNetworkId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.PeerNetworkId }).(pulumi.StringOutput)
+}
+
+// Provider region in which to the peer network exists
+func (o PeeringOutput) PeerNetworkRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.PeerNetworkRegion }).(pulumi.StringOutput)
+}
+
+// Cloud Provider in which the target network exists
+func (o PeeringOutput) PeerResourceProvider() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.PeerResourceProvider }).(pulumi.StringOutput)
+}
+
+// Project ID
+func (o PeeringOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Metadata about the remote end of the peering connection
+func (o PeeringOutput) ProviderMetadata() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringMapOutput { return v.ProviderMetadata }).(pulumi.StringMapOutput)
+}
+
+// Routes to create from the Event Store network to the peer network
+func (o PeeringOutput) Routes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Peering) pulumi.StringArrayOutput { return v.Routes }).(pulumi.StringArrayOutput)
 }
 
 type PeeringArrayOutput struct{ *pulumi.OutputState }

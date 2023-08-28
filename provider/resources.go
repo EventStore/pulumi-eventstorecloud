@@ -70,20 +70,6 @@ func makeResource(mod string, res string) tokens.Type {
 	return makeType(mod, res)
 }
 
-// boolRef returns a reference to the bool argument.
-func boolRef(b bool) *bool {
-	return &b
-}
-
-// stringValue gets a string value from a property map if present, else ""
-func stringValue(vars resource.PropertyMap, prop resource.PropertyKey) string {
-	val, ok := vars[prop]
-	if ok && val.IsString() {
-		return val.StringValue()
-	}
-	return ""
-}
-
 // preConfigureCallback is called before the providerConfigure function of the underlying provider.
 // It should validate that the provider can be configured, and provide actionable errors in the case
 // it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
@@ -91,9 +77,6 @@ func stringValue(vars resource.PropertyMap, prop resource.PropertyKey) string {
 func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
 	return nil
 }
-
-// managedByPulumi is a default used for some managed resources, in the absence of something more meaningful.
-var managedByPulumi = &tfbridge.DefaultInfo{Value: "Managed by Pulumi"}
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
@@ -111,6 +94,7 @@ func Provider() tfbridge.ProviderInfo {
 		License:              "Apache-2.0",
 		Homepage:             "https://eventstore.com",
 		Repository:           "https://github.com/EventStore/pulumi-eventstorecloud",
+		PluginDownloadURL:    "github://api.github.com/EventStore",
 		GitHubOrg:            "EventStore",
 		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
@@ -159,7 +143,6 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			Namespaces: namespaceMap,
 		},
-		PluginDownloadURL: fmt.Sprintf("https://github.com/EventStore/pulumi-eventstorecloud/releases/download/%s", version.Version),
 	}
 
 	prov.SetAutonaming(255, "-")

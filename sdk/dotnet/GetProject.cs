@@ -19,29 +19,29 @@ namespace Pulumi.EventStoreCloud
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using EventStoreCloud = Pulumi.EventStoreCloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = EventStoreCloud.GetProject.Invoke(new()
         ///     {
-        ///         var example = Output.Create(EventStoreCloud.GetProject.InvokeAsync(new EventStoreCloud.GetProjectArgs
-        ///         {
-        ///             Name = "Example Project",
-        ///         }));
-        ///         this.ProjectId = example.Apply(example =&gt; example.Id);
-        ///     }
+        ///         Name = "Example Project",
+        ///     });
         /// 
-        ///     [Output("projectId")]
-        ///     public Output&lt;string&gt; ProjectId { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["projectId"] = example.Apply(getProjectResult =&gt; getProjectResult.Id),
+        ///     };
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetProjectResult> InvokeAsync(GetProjectArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectArgs(), options.WithDefaults());
 
         /// <summary>
         /// Retrieves data for an existing `Project` resource
@@ -51,33 +51,33 @@ namespace Pulumi.EventStoreCloud
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using EventStoreCloud = Pulumi.EventStoreCloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = EventStoreCloud.GetProject.Invoke(new()
         ///     {
-        ///         var example = Output.Create(EventStoreCloud.GetProject.InvokeAsync(new EventStoreCloud.GetProjectArgs
-        ///         {
-        ///             Name = "Example Project",
-        ///         }));
-        ///         this.ProjectId = example.Apply(example =&gt; example.Id);
-        ///     }
+        ///         Name = "Example Project",
+        ///     });
         /// 
-        ///     [Output("projectId")]
-        ///     public Output&lt;string&gt; ProjectId { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["projectId"] = example.Apply(getProjectResult =&gt; getProjectResult.Id),
+        ///     };
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetProjectResult> Invoke(GetProjectInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProjectResult>("eventstorecloud:index/getProject:getProject", args ?? new GetProjectInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProjectArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectArgs : global::Pulumi.InvokeArgs
     {
         [Input("name", required: true)]
         public string Name { get; set; } = null!;
@@ -85,9 +85,10 @@ namespace Pulumi.EventStoreCloud
         public GetProjectArgs()
         {
         }
+        public static new GetProjectArgs Empty => new GetProjectArgs();
     }
 
-    public sealed class GetProjectInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -95,6 +96,7 @@ namespace Pulumi.EventStoreCloud
         public GetProjectInvokeArgs()
         {
         }
+        public static new GetProjectInvokeArgs Empty => new GetProjectInvokeArgs();
     }
 
 

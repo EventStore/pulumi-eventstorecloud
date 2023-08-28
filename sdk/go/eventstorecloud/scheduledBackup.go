@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -93,7 +94,7 @@ func NewScheduledBackup(ctx *pulumi.Context,
 	if args.SourceClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'SourceClusterId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ScheduledBackup
 	err := ctx.RegisterResource("eventstorecloud:index/scheduledBackup:ScheduledBackup", name, args, &resource, opts...)
 	if err != nil {
@@ -265,6 +266,36 @@ func (o ScheduledBackupOutput) ToScheduledBackupOutput() ScheduledBackupOutput {
 
 func (o ScheduledBackupOutput) ToScheduledBackupOutputWithContext(ctx context.Context) ScheduledBackupOutput {
 	return o
+}
+
+// backup_description
+func (o ScheduledBackupOutput) BackupDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledBackup) pulumi.StringOutput { return v.BackupDescription }).(pulumi.StringOutput)
+}
+
+// Human readable description of the job
+func (o ScheduledBackupOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledBackup) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+}
+
+// The maximum number of backups to keep for this job
+func (o ScheduledBackupOutput) MaxBackupCount() pulumi.IntOutput {
+	return o.ApplyT(func(v *ScheduledBackup) pulumi.IntOutput { return v.MaxBackupCount }).(pulumi.IntOutput)
+}
+
+// ID of the project in which the backup exists
+func (o ScheduledBackupOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledBackup) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Schedule for the backup, defined using restricted subset of cron
+func (o ScheduledBackupOutput) Schedule() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledBackup) pulumi.StringOutput { return v.Schedule }).(pulumi.StringOutput)
+}
+
+// the ID of the cluster to back up
+func (o ScheduledBackupOutput) SourceClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledBackup) pulumi.StringOutput { return v.SourceClusterId }).(pulumi.StringOutput)
 }
 
 type ScheduledBackupArrayOutput struct{ *pulumi.OutputState }

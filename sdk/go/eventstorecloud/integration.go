@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -92,7 +93,7 @@ func NewIntegration(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Integration
 	err := ctx.RegisterResource("eventstorecloud:index/integration:Integration", name, args, &resource, opts...)
 	if err != nil {
@@ -240,6 +241,21 @@ func (o IntegrationOutput) ToIntegrationOutput() IntegrationOutput {
 
 func (o IntegrationOutput) ToIntegrationOutputWithContext(ctx context.Context) IntegrationOutput {
 	return o
+}
+
+// Data for the integration
+func (o IntegrationOutput) Data() pulumi.MapOutput {
+	return o.ApplyT(func(v *Integration) pulumi.MapOutput { return v.Data }).(pulumi.MapOutput)
+}
+
+// Human readable description of the integration
+func (o IntegrationOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *Integration) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+}
+
+// ID of the project to which the integration applies
+func (o IntegrationOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Integration) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
 }
 
 type IntegrationArrayOutput struct{ *pulumi.OutputState }

@@ -15,7 +15,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', PLUGIN_VERSION, '--server', 'https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'eventstorecloud', PLUGIN_VERSION, '--server', 'github://api.github.com/EventStore'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print(f"""
@@ -38,6 +38,7 @@ def readme():
 
 
 setup(name='pulumi_eventstorecloud',
+      python_requires='>=3.7',
       version=VERSION,
       description="A Pulumi package for creating and managing Event Store Cloud resources.",
       long_description=readme(),

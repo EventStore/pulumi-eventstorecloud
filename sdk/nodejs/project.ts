@@ -11,9 +11,9 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ * import * as eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
- * const chickenWindow = new eventstorecloud.Project("chicken_window", {});
+ * const chickenWindow = new eventstorecloud.Project("chickenWindow", {});
  * ```
  *
  * ## Import

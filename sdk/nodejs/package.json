@@ -23,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "pluginDownloadURL": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9"
+        "name": "eventstorecloud",
+        "server": "github://api.github.com/EventStore"
     }
 }

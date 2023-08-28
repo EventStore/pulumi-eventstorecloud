@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi_eventstorecloud from "@eventstore/pulumi-eventstorecloud";
+ * import * as eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
  * const daily = new eventstorecloud.ScheduledBackup("daily", {
  *     projectId: eventstorecloud_project.example.id,

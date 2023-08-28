@@ -20,11 +20,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getProject(args: GetProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("eventstorecloud:index/getProject:getProject", {
         "name": args.name,
     }, opts);
@@ -47,9 +44,23 @@ export interface GetProjectResult {
     readonly id: string;
     readonly name: string;
 }
-
+/**
+ * Retrieves data for an existing `Project` resource
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ *
+ * const example = eventstorecloud.getProject({
+ *     name: "Example Project",
+ * });
+ * export const projectId = example.then(example => example.id);
+ * ```
+ */
 export function getProjectOutput(args: GetProjectOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectResult> {
-    return pulumi.output(args).apply(a => getProject(a, opts))
+    return pulumi.output(args).apply((a: any) => getProject(a, opts))
 }
 
 /**

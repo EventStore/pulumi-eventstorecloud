@@ -53,7 +53,7 @@ namespace Pulumi.EventStoreCloud
         {
             var dst = src ?? new global::Pulumi.InvokeOptions{};
             dst.Version = src?.Version ?? Version;
-            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9";
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "github://api.github.com/EventStore";
             return dst;
         }
 
@@ -75,7 +75,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    internal sealed class EventStoreCloudResourceTypeAttribute : Pulumi.ResourceTypeAttribute
+    internal sealed class EventStoreCloudResourceTypeAttribute : global::Pulumi.ResourceTypeAttribute
     {
         public EventStoreCloudResourceTypeAttribute(string type) : base(type, Utilities.Version)
         {

@@ -4,9 +4,12 @@
 package config
 
 import (
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
+
+var _ = internal.GetEnvOrDefault
 
 func GetClientId(ctx *pulumi.Context) string {
 	return config.Get(ctx, "eventstorecloud:clientId")

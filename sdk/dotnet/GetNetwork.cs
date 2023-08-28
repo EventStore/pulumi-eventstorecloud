@@ -19,30 +19,30 @@ namespace Pulumi.EventStoreCloud
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using EventStoreCloud = Pulumi.EventStoreCloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = EventStoreCloud.GetNetwork.Invoke(new()
         ///     {
-        ///         var example = Output.Create(EventStoreCloud.GetNetwork.InvokeAsync(new EventStoreCloud.GetNetworkArgs
-        ///         {
-        ///             Name = "Example Network",
-        ///             ProjectId = @var.Project_id,
-        ///         }));
-        ///         this.NetworkCidr = example.Apply(example =&gt; example.CidrBlock);
-        ///     }
+        ///         Name = "Example Network",
+        ///         ProjectId = @var.Project_id,
+        ///     });
         /// 
-        ///     [Output("networkCidr")]
-        ///     public Output&lt;string&gt; NetworkCidr { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["networkCidr"] = example.Apply(getNetworkResult =&gt; getNetworkResult.CidrBlock),
+        ///     };
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Task<GetNetworkResult> InvokeAsync(GetNetworkArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkArgs(), options.WithDefaults());
 
         /// <summary>
         /// Retrieves data for an existing `Network` resource
@@ -52,34 +52,34 @@ namespace Pulumi.EventStoreCloud
         /// {{% example %}}
         /// 
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using EventStoreCloud = Pulumi.EventStoreCloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = EventStoreCloud.GetNetwork.Invoke(new()
         ///     {
-        ///         var example = Output.Create(EventStoreCloud.GetNetwork.InvokeAsync(new EventStoreCloud.GetNetworkArgs
-        ///         {
-        ///             Name = "Example Network",
-        ///             ProjectId = @var.Project_id,
-        ///         }));
-        ///         this.NetworkCidr = example.Apply(example =&gt; example.CidrBlock);
-        ///     }
+        ///         Name = "Example Network",
+        ///         ProjectId = @var.Project_id,
+        ///     });
         /// 
-        ///     [Output("networkCidr")]
-        ///     public Output&lt;string&gt; NetworkCidr { get; set; }
-        /// }
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["networkCidr"] = example.Apply(getNetworkResult =&gt; getNetworkResult.CidrBlock),
+        ///     };
+        /// });
         /// ```
         /// {{% /example %}}
         /// {{% /examples %}}
         /// </summary>
         public static Output<GetNetworkResult> Invoke(GetNetworkInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNetworkResult>("eventstorecloud:index/getNetwork:getNetwork", args ?? new GetNetworkInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNetworkArgs : Pulumi.InvokeArgs
+    public sealed class GetNetworkArgs : global::Pulumi.InvokeArgs
     {
         [Input("name", required: true)]
         public string Name { get; set; } = null!;
@@ -90,9 +90,10 @@ namespace Pulumi.EventStoreCloud
         public GetNetworkArgs()
         {
         }
+        public static new GetNetworkArgs Empty => new GetNetworkArgs();
     }
 
-    public sealed class GetNetworkInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNetworkInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -103,6 +104,7 @@ namespace Pulumi.EventStoreCloud
         public GetNetworkInvokeArgs()
         {
         }
+        public static new GetNetworkInvokeArgs Empty => new GetNetworkInvokeArgs();
     }
 
 

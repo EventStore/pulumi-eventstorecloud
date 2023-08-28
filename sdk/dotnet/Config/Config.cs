@@ -30,7 +30,7 @@ namespace Pulumi.EventStoreCloud
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("eventstorecloud");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("eventstorecloud");
 
         private static readonly __Value<string?> _clientId = new __Value<string?>(() => __config.Get("clientId"));
         public static string? ClientId

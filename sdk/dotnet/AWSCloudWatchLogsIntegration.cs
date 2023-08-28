@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.EventStoreCloud
 {
     [EventStoreCloudResourceType("eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration")]
-    public partial class AWSCloudWatchLogsIntegration : Pulumi.CustomResource
+    public partial class AWSCloudWatchLogsIntegration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The access key ID of IAM credentials which have permissions to create and write to the log group
@@ -77,7 +77,12 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
+                AdditionalSecretOutputs =
+                {
+                    "accessKeyId",
+                    "secretAccessKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -99,13 +104,23 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class AWSCloudWatchLogsIntegrationArgs : Pulumi.ResourceArgs
+    public sealed class AWSCloudWatchLogsIntegrationArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeyId")]
+        private Input<string>? _accessKeyId;
+
         /// <summary>
         /// The access key ID of IAM credentials which have permissions to create and write to the log group
         /// </summary>
-        [Input("accessKeyId")]
-        public Input<string>? AccessKeyId { get; set; }
+        public Input<string>? AccessKeyId
+        {
+            get => _accessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("clusterIds", required: true)]
         private InputList<string>? _clusterIds;
@@ -143,24 +158,45 @@ namespace Pulumi.EventStoreCloud
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
+        [Input("secretAccessKey")]
+        private Input<string>? _secretAccessKey;
+
         /// <summary>
         /// The secret access key of IAM credentials which will be used to write to the log groups
         /// </summary>
-        [Input("secretAccessKey")]
-        public Input<string>? SecretAccessKey { get; set; }
+        public Input<string>? SecretAccessKey
+        {
+            get => _secretAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AWSCloudWatchLogsIntegrationArgs()
         {
         }
+        public static new AWSCloudWatchLogsIntegrationArgs Empty => new AWSCloudWatchLogsIntegrationArgs();
     }
 
-    public sealed class AWSCloudWatchLogsIntegrationState : Pulumi.ResourceArgs
+    public sealed class AWSCloudWatchLogsIntegrationState : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeyId")]
+        private Input<string>? _accessKeyId;
+
         /// <summary>
         /// The access key ID of IAM credentials which have permissions to create and write to the log group
         /// </summary>
-        [Input("accessKeyId")]
-        public Input<string>? AccessKeyId { get; set; }
+        public Input<string>? AccessKeyId
+        {
+            get => _accessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("clusterIds")]
         private InputList<string>? _clusterIds;
@@ -198,14 +234,25 @@ namespace Pulumi.EventStoreCloud
         [Input("region")]
         public Input<string>? Region { get; set; }
 
+        [Input("secretAccessKey")]
+        private Input<string>? _secretAccessKey;
+
         /// <summary>
         /// The secret access key of IAM credentials which will be used to write to the log groups
         /// </summary>
-        [Input("secretAccessKey")]
-        public Input<string>? SecretAccessKey { get; set; }
+        public Input<string>? SecretAccessKey
+        {
+            get => _secretAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AWSCloudWatchLogsIntegrationState()
         {
         }
+        public static new AWSCloudWatchLogsIntegrationState Empty => new AWSCloudWatchLogsIntegrationState();
     }
 }
