@@ -50,5 +50,17 @@ export function getVersion(): string {
 
 /** @internal */
 export function resourceOptsDefaults(): any {
-    return { version: getVersion(), pluginDownloadURL: "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9" };
+    return { version: getVersion(), pluginDownloadURL: "github://api.github.com/EventStore" };
+}
+
+/** @internal */
+export function lazyLoad(exports: any, props: string[], loadModule: any) {
+    for (let property of props) {
+        Object.defineProperty(exports, property, {
+            enumerable: true,
+            get: function() {
+                return loadModule()[property];
+            },
+        });
+    }
 }

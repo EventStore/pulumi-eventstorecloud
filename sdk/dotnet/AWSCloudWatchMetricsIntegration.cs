@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.EventStoreCloud
 {
     [EventStoreCloudResourceType("eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration")]
-    public partial class AWSCloudWatchMetricsIntegration : Pulumi.CustomResource
+    public partial class AWSCloudWatchMetricsIntegration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// AWS IAM access key
@@ -77,7 +77,12 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
+                AdditionalSecretOutputs =
+                {
+                    "accessKeyId",
+                    "secretAccessKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -99,13 +104,23 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class AWSCloudWatchMetricsIntegrationArgs : Pulumi.ResourceArgs
+    public sealed class AWSCloudWatchMetricsIntegrationArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeyId")]
+        private Input<string>? _accessKeyId;
+
         /// <summary>
         /// AWS IAM access key
         /// </summary>
-        [Input("accessKeyId")]
-        public Input<string>? AccessKeyId { get; set; }
+        public Input<string>? AccessKeyId
+        {
+            get => _accessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("clusterIds", required: true)]
         private InputList<string>? _clusterIds;
@@ -143,24 +158,45 @@ namespace Pulumi.EventStoreCloud
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
+        [Input("secretAccessKey")]
+        private Input<string>? _secretAccessKey;
+
         /// <summary>
         /// AWS IAM secret access key
         /// </summary>
-        [Input("secretAccessKey")]
-        public Input<string>? SecretAccessKey { get; set; }
+        public Input<string>? SecretAccessKey
+        {
+            get => _secretAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AWSCloudWatchMetricsIntegrationArgs()
         {
         }
+        public static new AWSCloudWatchMetricsIntegrationArgs Empty => new AWSCloudWatchMetricsIntegrationArgs();
     }
 
-    public sealed class AWSCloudWatchMetricsIntegrationState : Pulumi.ResourceArgs
+    public sealed class AWSCloudWatchMetricsIntegrationState : global::Pulumi.ResourceArgs
     {
+        [Input("accessKeyId")]
+        private Input<string>? _accessKeyId;
+
         /// <summary>
         /// AWS IAM access key
         /// </summary>
-        [Input("accessKeyId")]
-        public Input<string>? AccessKeyId { get; set; }
+        public Input<string>? AccessKeyId
+        {
+            get => _accessKeyId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKeyId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("clusterIds")]
         private InputList<string>? _clusterIds;
@@ -198,14 +234,25 @@ namespace Pulumi.EventStoreCloud
         [Input("region")]
         public Input<string>? Region { get; set; }
 
+        [Input("secretAccessKey")]
+        private Input<string>? _secretAccessKey;
+
         /// <summary>
         /// AWS IAM secret access key
         /// </summary>
-        [Input("secretAccessKey")]
-        public Input<string>? SecretAccessKey { get; set; }
+        public Input<string>? SecretAccessKey
+        {
+            get => _secretAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AWSCloudWatchMetricsIntegrationState()
         {
         }
+        public static new AWSCloudWatchMetricsIntegrationState Empty => new AWSCloudWatchMetricsIntegrationState();
     }
 }

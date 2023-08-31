@@ -21,11 +21,8 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getNetwork(args: GetNetworkArgs, opts?: pulumi.InvokeOptions): Promise<GetNetworkResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("eventstorecloud:index/getNetwork:getNetwork", {
         "name": args.name,
         "projectId": args.projectId,
@@ -63,9 +60,24 @@ export interface GetNetworkResult {
      */
     readonly resourceProvider: string;
 }
-
+/**
+ * Retrieves data for an existing `Network` resource
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as eventstorecloud from "@pulumi/eventstorecloud";
+ *
+ * const example = eventstorecloud.getNetwork({
+ *     name: "Example Network",
+ *     projectId: _var.project_id,
+ * });
+ * export const networkCidr = example.then(example => example.cidrBlock);
+ * ```
+ */
 export function getNetworkOutput(args: GetNetworkOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNetworkResult> {
-    return pulumi.output(args).apply(a => getNetwork(a, opts))
+    return pulumi.output(args).apply((a: any) => getNetwork(a, opts))
 }
 
 /**

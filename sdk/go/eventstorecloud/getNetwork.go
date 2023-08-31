@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -20,14 +21,13 @@ import (
 // import (
 //
 //	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-//	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			example, err := eventstorecloud.LookupNetwork(ctx, &GetNetworkArgs{
+//			example, err := eventstorecloud.LookupNetwork(ctx, &eventstorecloud.LookupNetworkArgs{
 //				Name:      "Example Network",
 //				ProjectId: _var.Project_id,
 //			}, nil)
@@ -41,7 +41,7 @@ import (
 //
 // ```
 func LookupNetwork(ctx *pulumi.Context, args *LookupNetworkArgs, opts ...pulumi.InvokeOption) (*LookupNetworkResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupNetworkResult
 	err := ctx.Invoke("eventstorecloud:index/getNetwork:getNetwork", args, &rv, opts...)
 	if err != nil {

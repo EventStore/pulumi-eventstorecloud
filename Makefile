@@ -1,5 +1,6 @@
 PROJECT_NAME := Event Store Cloud Package
 
+SHELL            := /bin/bash
 PACK             := eventstorecloud
 ORG              := EventStore
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
@@ -22,10 +23,10 @@ EMPTY_TO_AVOID_SED := ""
 prepare::
 	@if test -z "${NAME}"; then echo "NAME not set"; exit 1; fi
 	@if test -z "${REPOSITORY}"; then echo "REPOSITORY not set"; exit 1; fi
-	@if test ! -d "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
+	@if test ! -d "provider/cmd/pulumi-tfgen-e${EMPTY_TO_AVOID_SED}ventstorecloud"; then "Project already prepared"; exit 1; fi
 
-	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${NAME}
-	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
+	mv "provider/cmd/pulumi-tfgen-e${EMPTY_TO_AVOID_SED}ventstorecloud" provider/cmd/pulumi-tfgen-${NAME}
+	mv "provider/cmd/pulumi-resource-e${EMPTY_TO_AVOID_SED}ventstorecloud" provider/cmd/pulumi-resource-${NAME}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
 		sed -i 's,github.com/EventStore/pulumi-eventstorecloud,${REPOSITORY},g' provider/go.mod; \
@@ -40,8 +41,7 @@ prepare::
 
 .PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup
 
-development:: install_plugins provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
-#development:: install_plugins provider lint_provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
+development:: install_plugins provider lint_provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
 
 # Required for the codegen action that runs in pulumi/pulumi and pulumi/pulumi-terraform-bridge
 build:: install_plugins provider build_sdks install_sdks
@@ -75,7 +75,7 @@ build_python:: install_plugins tfgen # build the python sdk
         cat ../../readme/README.md ../../readme/python.md > ./README.md && \
         python3 setup.py clean --all 2>/dev/null && \
         rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
-        sed -i.bak -e "s/\$${VERSION}/$(PYPI_VERSION)/g" -e "s/\$${PLUGIN_VERSION}/$(VERSION)/g" ./bin/setup.py && \
+        sed -i.bak -e 's/^VERSION = .*/VERSION = "$(PYPI_VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
         rm ./bin/setup.py.bak && \
         cd ./bin && python3 setup.py build sdist
 

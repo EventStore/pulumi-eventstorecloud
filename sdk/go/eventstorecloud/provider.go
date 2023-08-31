@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -51,7 +52,14 @@ func NewProvider(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Token != nil {
+		args.Token = pulumi.ToSecret(args.Token).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"token",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:eventstorecloud", name, args, &resource, opts...)
 	if err != nil {
@@ -114,6 +122,30 @@ func (o ProviderOutput) ToProviderOutput() ProviderOutput {
 
 func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) ProviderOutput {
 	return o
+}
+
+func (o ProviderOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
+}
+
+func (o ProviderOutput) IdentityProviderUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.IdentityProviderUrl }).(pulumi.StringOutput)
+}
+
+func (o ProviderOutput) OrganizationId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.OrganizationId }).(pulumi.StringOutput)
+}
+
+func (o ProviderOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.Token }).(pulumi.StringOutput)
+}
+
+func (o ProviderOutput) TokenStore() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.TokenStore }).(pulumi.StringOutput)
+}
+
+func (o ProviderOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.Url }).(pulumi.StringOutput)
 }
 
 func init() {

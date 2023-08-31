@@ -15,19 +15,16 @@ namespace Pulumi.EventStoreCloud
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var chickenWindow = new EventStoreCloud.Project("chickenWindow", new EventStoreCloud.ProjectArgs
-    ///         {
-    ///         });
-    ///     }
+    ///     var chickenWindow = new EventStoreCloud.Project("chickenWindow");
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -37,7 +34,7 @@ namespace Pulumi.EventStoreCloud
     /// ```
     /// </summary>
     [EventStoreCloudResourceType("eventstorecloud:index/project:Project")]
-    public partial class Project : Pulumi.CustomResource
+    public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Human-friendly name for the project
@@ -68,7 +65,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -90,7 +87,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class ProjectArgs : Pulumi.ResourceArgs
+    public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Human-friendly name for the project
@@ -101,9 +98,10 @@ namespace Pulumi.EventStoreCloud
         public ProjectArgs()
         {
         }
+        public static new ProjectArgs Empty => new ProjectArgs();
     }
 
-    public sealed class ProjectState : Pulumi.ResourceArgs
+    public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Human-friendly name for the project
@@ -114,5 +112,6 @@ namespace Pulumi.EventStoreCloud
         public ProjectState()
         {
         }
+        public static new ProjectState Empty => new ProjectState();
     }
 }

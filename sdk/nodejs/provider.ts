@@ -22,7 +22,7 @@ export class Provider extends pulumi.ProviderResource {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === Provider.__pulumiType;
+        return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
     public readonly clientId!: pulumi.Output<string>;
@@ -64,11 +64,13 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["clientId"] = args ? args.clientId : undefined;
             resourceInputs["identityProviderUrl"] = args ? args.identityProviderUrl : undefined;
             resourceInputs["organizationId"] = args ? args.organizationId : undefined;
-            resourceInputs["token"] = args ? args.token : undefined;
+            resourceInputs["token"] = args?.token ? pulumi.secret(args.token) : undefined;
             resourceInputs["tokenStore"] = args ? args.tokenStore : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["token"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }

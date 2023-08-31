@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -21,14 +22,13 @@ import (
 // import (
 //
 //	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-//	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := eventstorecloud.LookupProject(ctx, &GetProjectArgs{
+//			_, err := eventstorecloud.LookupProject(ctx, &eventstorecloud.LookupProjectArgs{
 //				Name: "Example Project",
 //			}, nil)
 //			if err != nil {
@@ -133,7 +133,7 @@ func NewManagedCluster(ctx *pulumi.Context,
 	if args.Topology == nil {
 		return nil, errors.New("invalid value for required argument 'Topology'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ManagedCluster
 	err := ctx.RegisterResource("eventstorecloud:index/managedCluster:ManagedCluster", name, args, &resource, opts...)
 	if err != nil {
@@ -365,6 +365,81 @@ func (o ManagedClusterOutput) ToManagedClusterOutput() ManagedClusterOutput {
 
 func (o ManagedClusterOutput) ToManagedClusterOutputWithContext(ctx context.Context) ManagedClusterOutput {
 	return o
+}
+
+// Number of IOPS for storage, required if diskType is `gp3`
+func (o ManagedClusterOutput) DiskIops() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.IntPtrOutput { return v.DiskIops }).(pulumi.IntPtrOutput)
+}
+
+// Size of the data disks, in gigabytes
+func (o ManagedClusterOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.IntOutput { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Throughput in MB/s for storage, required if diskType is `gp3`
+func (o ManagedClusterOutput) DiskThroughput() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.IntPtrOutput { return v.DiskThroughput }).(pulumi.IntPtrOutput)
+}
+
+// Storage class of the data disks (find the list of valid values below)
+func (o ManagedClusterOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// DNS address of the cluster
+func (o ManagedClusterOutput) DnsName() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.DnsName }).(pulumi.StringOutput)
+}
+
+// Instance type of the managed cluster (find the list of valid values below)
+func (o ManagedClusterOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Name of the managed cluster
+func (o ManagedClusterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// ID of the network in which the managed cluster exists
+func (o ManagedClusterOutput) NetworkId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.NetworkId }).(pulumi.StringOutput)
+}
+
+// ID of the project in which the managed cluster exists
+func (o ManagedClusterOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
+func (o ManagedClusterOutput) ProjectionLevel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringPtrOutput { return v.ProjectionLevel }).(pulumi.StringPtrOutput)
+}
+
+// Protection from an accidental cluster deletion Defaults to `false`.
+func (o ManagedClusterOutput) Protected() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.BoolPtrOutput { return v.Protected }).(pulumi.BoolPtrOutput)
+}
+
+// Region in which the cluster was created. Determined by the region of the Network
+func (o ManagedClusterOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
+}
+
+// Provider in which the cluster was created. Determined by the provider of the Network.
+func (o ManagedClusterOutput) ResourceProvider() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.ResourceProvider }).(pulumi.StringOutput)
+}
+
+// Server version to provision (find the list of valid values below)
+func (o ManagedClusterOutput) ServerVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.ServerVersion }).(pulumi.StringOutput)
+}
+
+// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
+func (o ManagedClusterOutput) Topology() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.Topology }).(pulumi.StringOutput)
 }
 
 type ManagedClusterArrayOutput struct{ *pulumi.OutputState }

@@ -98,15 +98,17 @@ export class AWSCloudWatchMetricsIntegration extends pulumi.CustomResource {
             if ((!args || args.region === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'region'");
             }
-            resourceInputs["accessKeyId"] = args ? args.accessKeyId : undefined;
+            resourceInputs["accessKeyId"] = args?.accessKeyId ? pulumi.secret(args.accessKeyId) : undefined;
             resourceInputs["clusterIds"] = args ? args.clusterIds : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["namespace"] = args ? args.namespace : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["region"] = args ? args.region : undefined;
-            resourceInputs["secretAccessKey"] = args ? args.secretAccessKey : undefined;
+            resourceInputs["secretAccessKey"] = args?.secretAccessKey ? pulumi.secret(args.secretAccessKey) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["accessKeyId", "secretAccessKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AWSCloudWatchMetricsIntegration.__pulumiType, name, resourceInputs, opts);
     }
 }

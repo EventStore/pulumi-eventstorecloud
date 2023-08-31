@@ -15,25 +15,24 @@ namespace Pulumi.EventStoreCloud
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var daily = new EventStoreCloud.ScheduledBackup("daily", new()
     ///     {
-    ///         var daily = new EventStoreCloud.ScheduledBackup("daily", new EventStoreCloud.ScheduledBackupArgs
-    ///         {
-    ///             ProjectId = eventstorecloud_project.Example.Id,
-    ///             Schedule = "0 12 * * */1",
-    ///             Description = "Creates a backup once a day at 12:00",
-    ///             SourceClusterId = eventstorecloud_managed_cluster.Example.Id,
-    ///             BackupDescription = "{cluster} Daily Backup {datetime:RFC3339}",
-    ///             MaxBackupCount = 3,
-    ///         });
-    ///     }
+    ///         ProjectId = eventstorecloud_project.Example.Id,
+    ///         Schedule = "0 12 * * */1",
+    ///         Description = "Creates a backup once a day at 12:00",
+    ///         SourceClusterId = eventstorecloud_managed_cluster.Example.Id,
+    ///         BackupDescription = "{cluster} Daily Backup {datetime:RFC3339}",
+    ///         MaxBackupCount = 3,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -43,7 +42,7 @@ namespace Pulumi.EventStoreCloud
     /// ```
     /// </summary>
     [EventStoreCloudResourceType("eventstorecloud:index/scheduledBackup:ScheduledBackup")]
-    public partial class ScheduledBackup : Pulumi.CustomResource
+    public partial class ScheduledBackup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// backup_description
@@ -104,7 +103,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -126,7 +125,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class ScheduledBackupArgs : Pulumi.ResourceArgs
+    public sealed class ScheduledBackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// backup_description
@@ -167,9 +166,10 @@ namespace Pulumi.EventStoreCloud
         public ScheduledBackupArgs()
         {
         }
+        public static new ScheduledBackupArgs Empty => new ScheduledBackupArgs();
     }
 
-    public sealed class ScheduledBackupState : Pulumi.ResourceArgs
+    public sealed class ScheduledBackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// backup_description
@@ -210,5 +210,6 @@ namespace Pulumi.EventStoreCloud
         public ScheduledBackupState()
         {
         }
+        public static new ScheduledBackupState Empty => new ScheduledBackupState();
     }
 }

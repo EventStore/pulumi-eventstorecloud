@@ -15,39 +15,39 @@ namespace Pulumi.EventStoreCloud
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var opsgenieIssues = new EventStoreCloud.Integration("opsgenieIssues", new()
     ///     {
-    ///         var opsgenieIssues = new EventStoreCloud.Integration("opsgenieIssues", new EventStoreCloud.IntegrationArgs
+    ///         ProjectId = @var.Project_id,
+    ///         Description = "create OpsGenie alerts from issues",
+    ///         Data = 
     ///         {
-    ///             ProjectId = @var.Project_id,
-    ///             Description = "create OpsGenie alerts from issues",
-    ///             Data = 
-    ///             {
-    ///                 { "sink", "opsGenie" },
-    ///                 { "api_key", "&lt;secret OpsGenie key here&gt;" },
-    ///                 { "source", "issues" },
-    ///             },
-    ///         });
-    ///         var slackNotifications = new EventStoreCloud.Integration("slackNotifications", new EventStoreCloud.IntegrationArgs
-    ///         {
-    ///             ProjectId = @var.Project_id,
-    ///             Description = "send Slack a message when a notification happens",
-    ///             Data = 
-    ///             {
-    ///                 { "sink", "slack" },
-    ///                 { "token", "&lt;secret token here&gt;" },
-    ///                 { "channel_id", "#esc-cluster-notifications" },
-    ///                 { "source", "notifications" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "sink", "opsGenie" },
+    ///             { "api_key", "&lt;secret OpsGenie key here&gt;" },
+    ///             { "source", "issues" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var slackNotifications = new EventStoreCloud.Integration("slackNotifications", new()
+    ///     {
+    ///         ProjectId = @var.Project_id,
+    ///         Description = "send Slack a message when a notification happens",
+    ///         Data = 
+    ///         {
+    ///             { "sink", "slack" },
+    ///             { "token", "&lt;secret token here&gt;" },
+    ///             { "channel_id", "#esc-cluster-notifications" },
+    ///             { "source", "notifications" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -57,7 +57,7 @@ namespace Pulumi.EventStoreCloud
     /// ```
     /// </summary>
     [EventStoreCloudResourceType("eventstorecloud:index/integration:Integration")]
-    public partial class Integration : Pulumi.CustomResource
+    public partial class Integration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Data for the integration
@@ -100,7 +100,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -122,7 +122,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class IntegrationArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationArgs : global::Pulumi.ResourceArgs
     {
         [Input("data", required: true)]
         private InputMap<object>? _data;
@@ -151,9 +151,10 @@ namespace Pulumi.EventStoreCloud
         public IntegrationArgs()
         {
         }
+        public static new IntegrationArgs Empty => new IntegrationArgs();
     }
 
-    public sealed class IntegrationState : Pulumi.ResourceArgs
+    public sealed class IntegrationState : global::Pulumi.ResourceArgs
     {
         [Input("data")]
         private InputMap<object>? _data;
@@ -182,5 +183,6 @@ namespace Pulumi.EventStoreCloud
         public IntegrationState()
         {
         }
+        public static new IntegrationState Empty => new IntegrationState();
     }
 }

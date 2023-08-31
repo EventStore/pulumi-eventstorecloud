@@ -15,26 +15,24 @@ namespace Pulumi.EventStoreCloud
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var exampleProject = new EventStoreCloud.Project("exampleProject", new EventStoreCloud.ProjectArgs
-    ///         {
-    ///         });
-    ///         var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new EventStoreCloud.NetworkArgs
-    ///         {
-    ///             ProjectId = exampleProject.Id,
-    ///             ResourceProvider = "aws",
-    ///             Region = "us-west-2",
-    ///             CidrBlock = "172.21.0.0/16",
-    ///         });
-    ///     }
+    ///     var exampleProject = new EventStoreCloud.Project("exampleProject");
     /// 
-    /// }
+    ///     var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new()
+    ///     {
+    ///         ProjectId = exampleProject.Id,
+    ///         ResourceProvider = "aws",
+    ///         Region = "us-west-2",
+    ///         CidrBlock = "172.21.0.0/16",
+    ///     });
+    /// 
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -44,7 +42,7 @@ namespace Pulumi.EventStoreCloud
     /// ```
     /// </summary>
     [EventStoreCloudResourceType("eventstorecloud:index/network:Network")]
-    public partial class Network : Pulumi.CustomResource
+    public partial class Network : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Address space of the network in CIDR block notation
@@ -99,7 +97,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -121,7 +119,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class NetworkArgs : Pulumi.ResourceArgs
+    public sealed class NetworkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Address space of the network in CIDR block notation
@@ -156,9 +154,10 @@ namespace Pulumi.EventStoreCloud
         public NetworkArgs()
         {
         }
+        public static new NetworkArgs Empty => new NetworkArgs();
     }
 
-    public sealed class NetworkState : Pulumi.ResourceArgs
+    public sealed class NetworkState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Address space of the network in CIDR block notation
@@ -193,5 +192,6 @@ namespace Pulumi.EventStoreCloud
         public NetworkState()
         {
         }
+        public static new NetworkState Empty => new NetworkState();
     }
 }

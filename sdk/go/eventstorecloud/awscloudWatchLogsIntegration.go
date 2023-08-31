@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -52,7 +53,18 @@ func NewAWSCloudWatchLogsIntegration(ctx *pulumi.Context,
 	if args.Region == nil {
 		return nil, errors.New("invalid value for required argument 'Region'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.AccessKeyId != nil {
+		args.AccessKeyId = pulumi.ToSecret(args.AccessKeyId).(pulumi.StringPtrInput)
+	}
+	if args.SecretAccessKey != nil {
+		args.SecretAccessKey = pulumi.ToSecret(args.SecretAccessKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"accessKeyId",
+		"secretAccessKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AWSCloudWatchLogsIntegration
 	err := ctx.RegisterResource("eventstorecloud:index/aWSCloudWatchLogsIntegration:AWSCloudWatchLogsIntegration", name, args, &resource, opts...)
 	if err != nil {
@@ -232,6 +244,41 @@ func (o AWSCloudWatchLogsIntegrationOutput) ToAWSCloudWatchLogsIntegrationOutput
 
 func (o AWSCloudWatchLogsIntegrationOutput) ToAWSCloudWatchLogsIntegrationOutputWithContext(ctx context.Context) AWSCloudWatchLogsIntegrationOutput {
 	return o
+}
+
+// The access key ID of IAM credentials which have permissions to create and write to the log group
+func (o AWSCloudWatchLogsIntegrationOutput) AccessKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringPtrOutput { return v.AccessKeyId }).(pulumi.StringPtrOutput)
+}
+
+// Clusters to be used with this integration
+func (o AWSCloudWatchLogsIntegrationOutput) ClusterIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringArrayOutput { return v.ClusterIds }).(pulumi.StringArrayOutput)
+}
+
+// Human readable description of the integration
+func (o AWSCloudWatchLogsIntegrationOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+}
+
+// Name of the CloudWatch group
+func (o AWSCloudWatchLogsIntegrationOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringOutput { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// ID of the project to which the integration applies
+func (o AWSCloudWatchLogsIntegrationOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// AWS region for group
+func (o AWSCloudWatchLogsIntegrationOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
+}
+
+// The secret access key of IAM credentials which will be used to write to the log groups
+func (o AWSCloudWatchLogsIntegrationOutput) SecretAccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AWSCloudWatchLogsIntegration) pulumi.StringPtrOutput { return v.SecretAccessKey }).(pulumi.StringPtrOutput)
 }
 
 type AWSCloudWatchLogsIntegrationArrayOutput struct{ *pulumi.OutputState }

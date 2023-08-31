@@ -15,39 +15,40 @@ namespace Pulumi.EventStoreCloud
     /// ## Example Usage
     /// 
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using EventStoreCloud = Pulumi.EventStoreCloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleProject = EventStoreCloud.GetProject.Invoke(new()
     ///     {
-    ///         var exampleProject = Output.Create(EventStoreCloud.GetProject.InvokeAsync(new EventStoreCloud.GetProjectArgs
-    ///         {
-    ///             Name = "Example Project",
-    ///         }));
-    ///         var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new EventStoreCloud.NetworkArgs
-    ///         {
-    ///             ProjectId = eventstorecloud_project.Example.Id,
-    ///             ResourceProvider = "aws",
-    ///             Region = "us-west-2",
-    ///             CidrBlock = "172.21.0.0/16",
-    ///         });
-    ///         var exampleManagedCluster = new EventStoreCloud.ManagedCluster("exampleManagedCluster", new EventStoreCloud.ManagedClusterArgs
-    ///         {
-    ///             ProjectId = exampleNetwork.ProjectId,
-    ///             NetworkId = exampleNetwork.Id,
-    ///             Topology = "three-node-multi-zone",
-    ///             InstanceType = "F1",
-    ///             DiskSize = 24,
-    ///             DiskType = "gp3",
-    ///             DiskIops = 3000,
-    ///             DiskThroughput = 125,
-    ///             ServerVersion = "20.6",
-    ///         });
-    ///     }
+    ///         Name = "Example Project",
+    ///     });
     /// 
-    /// }
+    ///     var exampleNetwork = new EventStoreCloud.Network("exampleNetwork", new()
+    ///     {
+    ///         ProjectId = eventstorecloud_project.Example.Id,
+    ///         ResourceProvider = "aws",
+    ///         Region = "us-west-2",
+    ///         CidrBlock = "172.21.0.0/16",
+    ///     });
+    /// 
+    ///     var exampleManagedCluster = new EventStoreCloud.ManagedCluster("exampleManagedCluster", new()
+    ///     {
+    ///         ProjectId = exampleNetwork.ProjectId,
+    ///         NetworkId = exampleNetwork.Id,
+    ///         Topology = "three-node-multi-zone",
+    ///         InstanceType = "F1",
+    ///         DiskSize = 24,
+    ///         DiskType = "gp3",
+    ///         DiskIops = 3000,
+    ///         DiskThroughput = 125,
+    ///         ServerVersion = "20.6",
+    ///     });
+    /// 
+    /// });
     /// ```
     /// 
     /// ## Import
@@ -57,7 +58,7 @@ namespace Pulumi.EventStoreCloud
     /// ```
     /// </summary>
     [EventStoreCloudResourceType("eventstorecloud:index/managedCluster:ManagedCluster")]
-    public partial class ManagedCluster : Pulumi.CustomResource
+    public partial class ManagedCluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Number of IOPS for storage, required if disk_type is `gp3`
@@ -172,7 +173,7 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -194,7 +195,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class ManagedClusterArgs : Pulumi.ResourceArgs
+    public sealed class ManagedClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of IOPS for storage, required if disk_type is `gp3`
@@ -271,9 +272,10 @@ namespace Pulumi.EventStoreCloud
         public ManagedClusterArgs()
         {
         }
+        public static new ManagedClusterArgs Empty => new ManagedClusterArgs();
     }
 
-    public sealed class ManagedClusterState : Pulumi.ResourceArgs
+    public sealed class ManagedClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of IOPS for storage, required if disk_type is `gp3`
@@ -368,5 +370,6 @@ namespace Pulumi.EventStoreCloud
         public ManagedClusterState()
         {
         }
+        public static new ManagedClusterState Empty => new ManagedClusterState();
     }
 }

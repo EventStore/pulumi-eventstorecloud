@@ -5,17 +5,61 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./awscloudWatchLogsIntegration";
-export * from "./awscloudWatchMetricsIntegration";
-export * from "./getNetwork";
-export * from "./getProject";
-export * from "./integration";
-export * from "./managedCluster";
-export * from "./network";
-export * from "./peering";
-export * from "./project";
-export * from "./provider";
-export * from "./scheduledBackup";
+export { AWSCloudWatchLogsIntegrationArgs, AWSCloudWatchLogsIntegrationState } from "./awscloudWatchLogsIntegration";
+export type AWSCloudWatchLogsIntegration = import("./awscloudWatchLogsIntegration").AWSCloudWatchLogsIntegration;
+export const AWSCloudWatchLogsIntegration: typeof import("./awscloudWatchLogsIntegration").AWSCloudWatchLogsIntegration = null as any;
+utilities.lazyLoad(exports, ["AWSCloudWatchLogsIntegration"], () => require("./awscloudWatchLogsIntegration"));
+
+export { AWSCloudWatchMetricsIntegrationArgs, AWSCloudWatchMetricsIntegrationState } from "./awscloudWatchMetricsIntegration";
+export type AWSCloudWatchMetricsIntegration = import("./awscloudWatchMetricsIntegration").AWSCloudWatchMetricsIntegration;
+export const AWSCloudWatchMetricsIntegration: typeof import("./awscloudWatchMetricsIntegration").AWSCloudWatchMetricsIntegration = null as any;
+utilities.lazyLoad(exports, ["AWSCloudWatchMetricsIntegration"], () => require("./awscloudWatchMetricsIntegration"));
+
+export { GetNetworkArgs, GetNetworkResult, GetNetworkOutputArgs } from "./getNetwork";
+export const getNetwork: typeof import("./getNetwork").getNetwork = null as any;
+export const getNetworkOutput: typeof import("./getNetwork").getNetworkOutput = null as any;
+utilities.lazyLoad(exports, ["getNetwork","getNetworkOutput"], () => require("./getNetwork"));
+
+export { GetProjectArgs, GetProjectResult, GetProjectOutputArgs } from "./getProject";
+export const getProject: typeof import("./getProject").getProject = null as any;
+export const getProjectOutput: typeof import("./getProject").getProjectOutput = null as any;
+utilities.lazyLoad(exports, ["getProject","getProjectOutput"], () => require("./getProject"));
+
+export { IntegrationArgs, IntegrationState } from "./integration";
+export type Integration = import("./integration").Integration;
+export const Integration: typeof import("./integration").Integration = null as any;
+utilities.lazyLoad(exports, ["Integration"], () => require("./integration"));
+
+export { ManagedClusterArgs, ManagedClusterState } from "./managedCluster";
+export type ManagedCluster = import("./managedCluster").ManagedCluster;
+export const ManagedCluster: typeof import("./managedCluster").ManagedCluster = null as any;
+utilities.lazyLoad(exports, ["ManagedCluster"], () => require("./managedCluster"));
+
+export { NetworkArgs, NetworkState } from "./network";
+export type Network = import("./network").Network;
+export const Network: typeof import("./network").Network = null as any;
+utilities.lazyLoad(exports, ["Network"], () => require("./network"));
+
+export { PeeringArgs, PeeringState } from "./peering";
+export type Peering = import("./peering").Peering;
+export const Peering: typeof import("./peering").Peering = null as any;
+utilities.lazyLoad(exports, ["Peering"], () => require("./peering"));
+
+export { ProjectArgs, ProjectState } from "./project";
+export type Project = import("./project").Project;
+export const Project: typeof import("./project").Project = null as any;
+utilities.lazyLoad(exports, ["Project"], () => require("./project"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
+export { ScheduledBackupArgs, ScheduledBackupState } from "./scheduledBackup";
+export type ScheduledBackup = import("./scheduledBackup").ScheduledBackup;
+export const ScheduledBackup: typeof import("./scheduledBackup").ScheduledBackup = null as any;
+utilities.lazyLoad(exports, ["ScheduledBackup"], () => require("./scheduledBackup"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -23,16 +67,6 @@ import * as config from "./config";
 export {
     config,
 };
-
-// Import resources to register:
-import { AWSCloudWatchLogsIntegration } from "./awscloudWatchLogsIntegration";
-import { AWSCloudWatchMetricsIntegration } from "./awscloudWatchMetricsIntegration";
-import { Integration } from "./integration";
-import { ManagedCluster } from "./managedCluster";
-import { Network } from "./network";
-import { Peering } from "./peering";
-import { Project } from "./project";
-import { ScheduledBackup } from "./scheduledBackup";
 
 const _module = {
     version: utilities.getVersion(),
@@ -67,9 +101,6 @@ pulumi.runtime.registerResourceModule("eventstorecloud", "index/network", _modul
 pulumi.runtime.registerResourceModule("eventstorecloud", "index/peering", _module)
 pulumi.runtime.registerResourceModule("eventstorecloud", "index/project", _module)
 pulumi.runtime.registerResourceModule("eventstorecloud", "index/scheduledBackup", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("eventstorecloud", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

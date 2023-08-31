@@ -11,8 +11,8 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  * import * as eventstorecloud from "@pulumi/eventstorecloud";
- * import * as pulumi_eventstorecloud from "@eventstore/pulumi-eventstorecloud";
  *
  * const exampleProject = eventstorecloud.getProject({
  *     name: "Example Project",

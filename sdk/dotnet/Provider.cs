@@ -16,7 +16,7 @@ namespace Pulumi.EventStoreCloud
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
     [EventStoreCloudResourceType("pulumi:providers:eventstorecloud")]
-    public partial class Provider : Pulumi.ProviderResource
+    public partial class Provider : global::Pulumi.ProviderResource
     {
         [Output("clientId")]
         public Output<string> ClientId { get; private set; } = null!;
@@ -54,7 +54,11 @@ namespace Pulumi.EventStoreCloud
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9",
+                PluginDownloadURL = "github://api.github.com/EventStore",
+                AdditionalSecretOutputs =
+                {
+                    "token",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -63,7 +67,7 @@ namespace Pulumi.EventStoreCloud
         }
     }
 
-    public sealed class ProviderArgs : Pulumi.ResourceArgs
+    public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         [Input("clientId", required: true)]
         public Input<string> ClientId { get; set; } = null!;
@@ -75,7 +79,16 @@ namespace Pulumi.EventStoreCloud
         public Input<string> OrganizationId { get; set; } = null!;
 
         [Input("token", required: true)]
-        public Input<string> Token { get; set; } = null!;
+        private Input<string>? _token;
+        public Input<string>? Token
+        {
+            get => _token;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _token = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tokenStore", required: true)]
         public Input<string> TokenStore { get; set; } = null!;
@@ -86,5 +99,6 @@ namespace Pulumi.EventStoreCloud
         public ProviderArgs()
         {
         }
+        public static new ProviderArgs Empty => new ProviderArgs();
     }
 }

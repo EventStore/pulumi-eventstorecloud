@@ -1,5 +1,5 @@
 {
   "resource": true,
   "name": "eventstorecloud",
-  "server": "https://github.com/EventStore/pulumi-eventstorecloud/releases/download/0.2.9"
+  "server": "github://api.github.com/EventStore"
 }

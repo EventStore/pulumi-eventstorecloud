@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -57,7 +58,7 @@ func NewProject(ctx *pulumi.Context,
 		args = &ProjectArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Project
 	err := ctx.RegisterResource("eventstorecloud:index/project:Project", name, args, &resource, opts...)
 	if err != nil {
@@ -189,6 +190,11 @@ func (o ProjectOutput) ToProjectOutput() ProjectOutput {
 
 func (o ProjectOutput) ToProjectOutputWithContext(ctx context.Context) ProjectOutput {
 	return o
+}
+
+// Human-friendly name for the project
+func (o ProjectOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
 type ProjectArrayOutput struct{ *pulumi.OutputState }

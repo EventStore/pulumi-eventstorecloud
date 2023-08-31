@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -20,14 +21,13 @@ import (
 // import (
 //
 //	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud"
-//	"github.com/pulumi/pulumi-eventstorecloud/sdk/go/eventstorecloud"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			example, err := eventstorecloud.LookupProject(ctx, &GetProjectArgs{
+//			example, err := eventstorecloud.LookupProject(ctx, &eventstorecloud.LookupProjectArgs{
 //				Name: "Example Project",
 //			}, nil)
 //			if err != nil {
@@ -40,7 +40,7 @@ import (
 //
 // ```
 func LookupProject(ctx *pulumi.Context, args *LookupProjectArgs, opts ...pulumi.InvokeOption) (*LookupProjectResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupProjectResult
 	err := ctx.Invoke("eventstorecloud:index/getProject:getProject", args, &rv, opts...)
 	if err != nil {

@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -52,7 +53,18 @@ func NewAWSCloudWatchMetricsIntegration(ctx *pulumi.Context,
 	if args.Region == nil {
 		return nil, errors.New("invalid value for required argument 'Region'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.AccessKeyId != nil {
+		args.AccessKeyId = pulumi.ToSecret(args.AccessKeyId).(pulumi.StringPtrInput)
+	}
+	if args.SecretAccessKey != nil {
+		args.SecretAccessKey = pulumi.ToSecret(args.SecretAccessKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"accessKeyId",
+		"secretAccessKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AWSCloudWatchMetricsIntegration
 	err := ctx.RegisterResource("eventstorecloud:index/aWSCloudWatchMetricsIntegration:AWSCloudWatchMetricsIntegration", name, args, &resource, opts...)
 	if err != nil {
@@ -232,6 +244,41 @@ func (o AWSCloudWatchMetricsIntegrationOutput) ToAWSCloudWatchMetricsIntegration
 
 func (o AWSCloudWatchMetricsIntegrationOutput) ToAWSCloudWatchMetricsIntegrationOutputWithContext(ctx context.Context) AWSCloudWatchMetricsIntegrationOutput {
 	return o
+}
+
+// AWS IAM access key
+func (o AWSCloudWatchMetricsIntegrationOutput) AccessKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringPtrOutput { return v.AccessKeyId }).(pulumi.StringPtrOutput)
+}
+
+// Clusters to be used with this integration
+func (o AWSCloudWatchMetricsIntegrationOutput) ClusterIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringArrayOutput { return v.ClusterIds }).(pulumi.StringArrayOutput)
+}
+
+// Human readable description of the integration
+func (o AWSCloudWatchMetricsIntegrationOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+}
+
+// Name of the CloudWatch namespace
+func (o AWSCloudWatchMetricsIntegrationOutput) Namespace() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// ID of the project to which the integration applies
+func (o AWSCloudWatchMetricsIntegrationOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// AWS region for group
+func (o AWSCloudWatchMetricsIntegrationOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
+}
+
+// AWS IAM secret access key
+func (o AWSCloudWatchMetricsIntegrationOutput) SecretAccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AWSCloudWatchMetricsIntegration) pulumi.StringPtrOutput { return v.SecretAccessKey }).(pulumi.StringPtrOutput)
 }
 
 type AWSCloudWatchMetricsIntegrationArrayOutput struct{ *pulumi.OutputState }
