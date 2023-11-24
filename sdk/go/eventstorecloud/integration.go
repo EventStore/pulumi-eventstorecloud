@@ -31,7 +31,7 @@ import (
 //			_, err := eventstorecloud.NewIntegration(ctx, "opsgenieIssues", &eventstorecloud.IntegrationArgs{
 //				ProjectId:   pulumi.Any(_var.Project_id),
 //				Description: pulumi.String("create OpsGenie alerts from issues"),
-//				Data: pulumi.AnyMap{
+//				Data: pulumi.Map{
 //					"sink":    pulumi.Any("opsGenie"),
 //					"api_key": pulumi.Any("<secret OpsGenie key here>"),
 //					"source":  pulumi.Any("issues"),
@@ -43,7 +43,7 @@ import (
 //			_, err = eventstorecloud.NewIntegration(ctx, "slackNotifications", &eventstorecloud.IntegrationArgs{
 //				ProjectId:   pulumi.Any(_var.Project_id),
 //				Description: pulumi.String("send Slack a message when a notification happens"),
-//				Data: pulumi.AnyMap{
+//				Data: pulumi.Map{
 //					"sink":       pulumi.Any("slack"),
 //					"token":      pulumi.Any("<secret token here>"),
 //					"channel_id": pulumi.Any("#esc-cluster-notifications"),
