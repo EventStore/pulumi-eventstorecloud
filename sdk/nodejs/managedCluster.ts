@@ -32,7 +32,7 @@ import * as utilities from "./utilities";
  *     diskType: "gp3",
  *     diskIops: 3000,
  *     diskThroughput: 125,
- *     serverVersion: "20.6",
+ *     serverVersion: "23.10",
  * });
  * ```
  *
@@ -52,12 +52,18 @@ export class ManagedCluster extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ManagedClusterState, opts?: pulumi.CustomResourceOptions): ManagedCluster {
+    public static get(
+        name: string,
+        id: pulumi.Input<pulumi.ID>,
+        state?: ManagedClusterState,
+        opts?: pulumi.CustomResourceOptions
+    ): ManagedCluster {
         return new ManagedCluster(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'eventstorecloud:index/managedCluster:ManagedCluster';
+    public static readonly __pulumiType =
+        "eventstorecloud:index/managedCluster:ManagedCluster";
 
     /**
      * Returns true if the given object is an instance of ManagedCluster.  This is designed to work even
@@ -67,7 +73,7 @@ export class ManagedCluster extends pulumi.CustomResource {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === ManagedCluster.__pulumiType;
+        return obj["__pulumiType"] === ManagedCluster.__pulumiType;
     }
 
     /**
@@ -89,7 +95,7 @@ export class ManagedCluster extends pulumi.CustomResource {
     /**
      * DNS address of the cluster
      */
-    public /*out*/ readonly dnsName!: pulumi.Output<string>;
+    public readonly /*out*/ dnsName!: pulumi.Output<string>;
     /**
      * Instance type of the managed cluster (find the list of valid values below)
      */
@@ -117,15 +123,19 @@ export class ManagedCluster extends pulumi.CustomResource {
     /**
      * Region in which the cluster was created. Determined by the region of the Network
      */
-    public /*out*/ readonly region!: pulumi.Output<string>;
+    public readonly /*out*/ region!: pulumi.Output<string>;
     /**
      * Provider in which the cluster was created. Determined by the provider of the Network.
      */
-    public /*out*/ readonly resourceProvider!: pulumi.Output<string>;
+    public readonly /*out*/ resourceProvider!: pulumi.Output<string>;
     /**
      * Server version to provision (find the list of valid values below)
      */
     public readonly serverVersion!: pulumi.Output<string>;
+    /**
+     * Server version tag to provision (find the list of valid values below)
+     */
+    public readonly serverVersionTag!: pulumi.Output<string>;
     /**
      * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
@@ -138,26 +148,47 @@ export class ManagedCluster extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ManagedClusterArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: ManagedClusterArgs | ManagedClusterState, opts?: pulumi.CustomResourceOptions) {
+    constructor(
+        name: string,
+        args: ManagedClusterArgs,
+        opts?: pulumi.CustomResourceOptions
+    );
+    constructor(
+        name: string,
+        argsOrState?: ManagedClusterArgs | ManagedClusterState,
+        opts?: pulumi.CustomResourceOptions
+    ) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ManagedClusterState | undefined;
             resourceInputs["diskIops"] = state ? state.diskIops : undefined;
             resourceInputs["diskSize"] = state ? state.diskSize : undefined;
-            resourceInputs["diskThroughput"] = state ? state.diskThroughput : undefined;
+            resourceInputs["diskThroughput"] = state
+                ? state.diskThroughput
+                : undefined;
             resourceInputs["diskType"] = state ? state.diskType : undefined;
             resourceInputs["dnsName"] = state ? state.dnsName : undefined;
-            resourceInputs["instanceType"] = state ? state.instanceType : undefined;
+            resourceInputs["instanceType"] = state
+                ? state.instanceType
+                : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["networkId"] = state ? state.networkId : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
-            resourceInputs["projectionLevel"] = state ? state.projectionLevel : undefined;
+            resourceInputs["projectionLevel"] = state
+                ? state.projectionLevel
+                : undefined;
             resourceInputs["protected"] = state ? state.protected : undefined;
             resourceInputs["region"] = state ? state.region : undefined;
-            resourceInputs["resourceProvider"] = state ? state.resourceProvider : undefined;
-            resourceInputs["serverVersion"] = state ? state.serverVersion : undefined;
+            resourceInputs["resourceProvider"] = state
+                ? state.resourceProvider
+                : undefined;
+            resourceInputs["serverVersion"] = state
+                ? state.serverVersion
+                : undefined;
+            resourceInputs["serverVersionTag"] = state
+                ? state.serverVersionTag
+                : undefined;
             resourceInputs["topology"] = state ? state.topology : undefined;
         } else {
             const args = argsOrState as ManagedClusterArgs | undefined;
@@ -184,15 +215,26 @@ export class ManagedCluster extends pulumi.CustomResource {
             }
             resourceInputs["diskIops"] = args ? args.diskIops : undefined;
             resourceInputs["diskSize"] = args ? args.diskSize : undefined;
-            resourceInputs["diskThroughput"] = args ? args.diskThroughput : undefined;
+            resourceInputs["diskThroughput"] = args
+                ? args.diskThroughput
+                : undefined;
             resourceInputs["diskType"] = args ? args.diskType : undefined;
-            resourceInputs["instanceType"] = args ? args.instanceType : undefined;
+            resourceInputs["instanceType"] = args
+                ? args.instanceType
+                : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["networkId"] = args ? args.networkId : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
-            resourceInputs["projectionLevel"] = args ? args.projectionLevel : undefined;
+            resourceInputs["projectionLevel"] = args
+                ? args.projectionLevel
+                : undefined;
             resourceInputs["protected"] = args ? args.protected : undefined;
-            resourceInputs["serverVersion"] = args ? args.serverVersion : undefined;
+            resourceInputs["serverVersion"] = args
+                ? args.serverVersion
+                : undefined;
+            resourceInputs["serverVersionTag"] = args
+                ? args.serverVersionTag
+                : undefined;
             resourceInputs["topology"] = args ? args.topology : undefined;
             resourceInputs["dnsName"] = undefined /*out*/;
             resourceInputs["region"] = undefined /*out*/;
@@ -264,6 +306,10 @@ export interface ManagedClusterState {
      */
     serverVersion?: pulumi.Input<string>;
     /**
+     * Server version tag to provision (find the list of valid values below)
+     */
+    serverVersionTag?: pulumi.Input<string>;
+    /**
      * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
     topology?: pulumi.Input<string>;
@@ -317,6 +363,10 @@ export interface ManagedClusterArgs {
      * Server version to provision (find the list of valid values below)
      */
     serverVersion: pulumi.Input<string>;
+    /**
+     * Server version tag to provision (find the list of valid values below)
+     */
+    serverVersionTag?: pulumi.Input<string>;
     /**
      * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */

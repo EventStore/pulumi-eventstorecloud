@@ -45,7 +45,7 @@ namespace Pulumi.EventStoreCloud
     ///         DiskType = "gp3",
     ///         DiskIops = 3000,
     ///         DiskThroughput = 125,
-    ///         ServerVersion = "20.6",
+    ///         ServerVersion = "23.10",
     ///     });
     /// 
     /// });
@@ -143,6 +143,12 @@ namespace Pulumi.EventStoreCloud
         /// </summary>
         [Output("serverVersion")]
         public Output<string> ServerVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// Server version tag to provision (find the list of valid values below). If the given tag is higher, this will prompt an in-place upgrade.
+        /// </summary>
+        [Output("serverVersionTag")]
+        public Output<string> ServerVersionTag { get; private set; } = null!;
 
         /// <summary>
         /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
@@ -264,6 +270,12 @@ namespace Pulumi.EventStoreCloud
         public Input<string> ServerVersion { get; set; } = null!;
 
         /// <summary>
+        /// Server version tag to provision (find the list of valid values below). If the given tag is higher, this will prompt an in-place upgrade.
+        /// </summary>
+        [Input("serverVersionTag")]
+        public Input<string>? ServerVersionTag { get; set; } = null!;
+
+        /// <summary>
         /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         /// </summary>
         [Input("topology", required: true)]
@@ -360,6 +372,12 @@ namespace Pulumi.EventStoreCloud
         /// </summary>
         [Input("serverVersion")]
         public Input<string>? ServerVersion { get; set; }
+
+        /// <summary>
+        /// Server version tag to provision (find the list of valid values below). If the given tag is higher, this will prompt an in-place upgrade.
+        /// </summary>
+        [Input("serverVersionTag")]
+        public Input<string>? ServerVersionTag { get; set; }
 
         /// <summary>
         /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)

@@ -531,6 +531,10 @@
                     "type": "string",
                     "description": "Server version to provision (find the list of valid values below)\n"
                 },
+                "serverVersionTag": {
+                    "type": "string",
+                    "description": "Server version tag to provision (find the list of valid values below). If the provided tag is higher, this will prompt an in-place upgrade.\n"
+                },
                 "topology": {
                     "type": "string",
                     "description": "Topology of the managed cluster (`single-node` or `three-node-multi-zone`)\n"
@@ -597,6 +601,11 @@
                 "serverVersion": {
                     "type": "string",
                     "description": "Server version to provision (find the list of valid values below)\n",
+                    "willReplaceOnChanges": true
+                },
+                "serverVersionTag": {
+                    "type": "string",
+                    "description": "Server version tag to provision (find the list of valid values below)\n",
                     "willReplaceOnChanges": true
                 },
                 "topology": {
@@ -676,6 +685,11 @@
                     "serverVersion": {
                         "type": "string",
                         "description": "Server version to provision (find the list of valid values below)\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "serverVersionTag": {
+                        "type": "string",
+                        "description": "Server version tag to provision (find the list of valid values below)\n",
                         "willReplaceOnChanges": true
                     },
                     "topology": {
