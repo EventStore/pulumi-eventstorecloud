@@ -7,7 +7,7 @@ replace github.com/hashicorp/go-getter => github.com/hashicorp/go-getter v1.4.0
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230710100801-03a71d0fca3d
 
 require (
-	github.com/EventStore/terraform-provider-eventstorecloud v1.5.26
+	github.com/EventStore/terraform-provider-eventstorecloud v1.5.28
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.57.0
 	github.com/pulumi/pulumi/sdk/v3 v3.76.1
 )

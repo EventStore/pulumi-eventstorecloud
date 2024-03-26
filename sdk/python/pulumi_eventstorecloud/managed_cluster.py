@@ -20,13 +20,13 @@ class ManagedClusterArgs:
                  network_id: pulumi.Input[str],
                  project_id: pulumi.Input[str],
                  server_version: pulumi.Input[str],
-                 server_version_tag: pulumi.Input[str],
                  topology: pulumi.Input[str],
                  disk_iops: Optional[pulumi.Input[int]] = None,
                  disk_throughput: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  projection_level: Optional[pulumi.Input[str]] = None,
-                 protected: Optional[pulumi.Input[bool]] = None):
+                 protected: Optional[pulumi.Input[bool]] = None,
+                 server_version_tag: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ManagedCluster resource.
         :param pulumi.Input[int] disk_size: Size of the data disks, in gigabytes
@@ -35,13 +35,13 @@ class ManagedClusterArgs:
         :param pulumi.Input[str] network_id: ID of the network in which the managed cluster exists
         :param pulumi.Input[str] project_id: ID of the project in which the managed cluster exists
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
-        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). If the tag is higher than the current tag, this will prompt an in-place upgrade.
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         :param pulumi.Input[int] disk_iops: Number of IOPS for storage, required if disk_type is `gp3`
         :param pulumi.Input[int] disk_throughput: Throughput in MB/s for storage, required if disk_type is `gp3`
         :param pulumi.Input[str] name: Name of the managed cluster
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         :param pulumi.Input[bool] protected: Protection from an accidental cluster deletion Defaults to `false`.
+        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         """
         pulumi.set(__self__, "disk_size", disk_size)
         pulumi.set(__self__, "disk_type", disk_type)
@@ -136,18 +136,6 @@ class ManagedClusterArgs:
         pulumi.set(self, "server_version", value)
 
     @property
-    @pulumi.getter(name="serverVersionTag")
-    def server_version_tag(self) -> pulumi.Input[str]:
-        """
-        Server version tag to provision (find the list of valid values below). If the tag is higher than the current tag, this will prompt an in-place upgrade.
-        """
-        return pulumi.get(self, "server_version_tag")
-
-    @server_version_tag.setter
-    def server_version_tag(self, value: pulumi.Input[str]):
-        pulumi.set(self, "server_version_tag", value)
-
-    @property
     @pulumi.getter
     def topology(self) -> pulumi.Input[str]:
         """
@@ -219,6 +207,18 @@ class ManagedClusterArgs:
     def protected(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "protected", value)
 
+    @property
+    @pulumi.getter(name="serverVersionTag")
+    def server_version_tag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+        """
+        return pulumi.get(self, "server_version_tag")
+
+    @server_version_tag.setter
+    def server_version_tag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "server_version_tag", value)
+
 
 @pulumi.input_type
 class _ManagedClusterState:
@@ -255,7 +255,7 @@ class _ManagedClusterState:
         :param pulumi.Input[str] region: Region in which the cluster was created. Determined by the region of the Network
         :param pulumi.Input[str] resource_provider: Provider in which the cluster was created. Determined by the provider of the Network.
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
-        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). If the tag is higher than the current tag, this will prompt an in-place upgrade.
+        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         if disk_iops is not None:
@@ -463,7 +463,7 @@ class _ManagedClusterState:
     @pulumi.getter(name="serverVersionTag")
     def server_version_tag(self) -> Optional[pulumi.Input[str]]:
         """
-        Server version tag to provision (find the list of valid values below). If the given tag is higher than the current, this will prompt an in-place upgrade.
+        Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         """
         return pulumi.get(self, "server_version_tag")
 
@@ -549,7 +549,7 @@ class ManagedCluster(pulumi.CustomResource):
         :param pulumi.Input[str] projection_level: Determines whether to run no projections, system projections only, or system and user projections (find the list of valid values below) Defaults to `off`.
         :param pulumi.Input[bool] protected: Protection from an accidental cluster deletion Defaults to `false`.
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
-        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). If the given tag is higher than the current, this will prompt an in-place upgrade.
+        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         ...
@@ -705,7 +705,7 @@ class ManagedCluster(pulumi.CustomResource):
         :param pulumi.Input[str] region: Region in which the cluster was created. Determined by the region of the Network
         :param pulumi.Input[str] resource_provider: Provider in which the cluster was created. Determined by the provider of the Network.
         :param pulumi.Input[str] server_version: Server version to provision (find the list of valid values below)
-        :param pulumi.Input[str] server_version_tag: Server version to provision (find the list of valid values below). If the given tag is higher than the current, this will prompt an in-place upgrade.
+        :param pulumi.Input[str] server_version_tag: Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         :param pulumi.Input[str] topology: Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -846,10 +846,9 @@ class ManagedCluster(pulumi.CustomResource):
     @pulumi.getter(name="serverVersionTag")
     def server_version_tag(self) -> pulumi.Output[str]:
         """
-        Server version tag to provision (find the list of valid values below). If the given tag is higher than the current, this will prompt an in-place upgrade.
+        Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         """
         return pulumi.get(self, "server_version_tag")
-
 
     @property
     @pulumi.getter

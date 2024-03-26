@@ -145,7 +145,7 @@ namespace Pulumi.EventStoreCloud
         public Output<string> ServerVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Server version tag to provision (find the list of valid values below). If the given tag is higher, this will prompt an in-place upgrade.
+        /// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         /// </summary>
         [Output("serverVersionTag")]
         public Output<string> ServerVersionTag { get; private set; } = null!;
@@ -270,10 +270,10 @@ namespace Pulumi.EventStoreCloud
         public Input<string> ServerVersion { get; set; } = null!;
 
         /// <summary>
-        /// Server version tag to provision (find the list of valid values below). If the given tag is higher, this will prompt an in-place upgrade.
+        /// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         /// </summary>
         [Input("serverVersionTag")]
-        public Input<string>? ServerVersionTag { get; set; } = null!;
+        public Input<string>? ServerVersionTag { get; set; }
 
         /// <summary>
         /// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
@@ -374,7 +374,7 @@ namespace Pulumi.EventStoreCloud
         public Input<string>? ServerVersion { get; set; }
 
         /// <summary>
-        /// Server version tag to provision (find the list of valid values below). If the given tag is higher, this will prompt an in-place upgrade.
+        /// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
         /// </summary>
         [Input("serverVersionTag")]
         public Input<string>? ServerVersionTag { get; set; }
