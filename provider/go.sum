@@ -693,6 +693,8 @@ github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym
 github.com/DataDog/datadog-go v3.2.0+incompatible/go.mod h1:LButxg5PwREeZtORoXG3tL4fMGNddJ+vMq1mwgfaqoQ=
 github.com/EventStore/terraform-provider-eventstorecloud v1.5.26 h1:zHoCr6VknEpxbe+Veb8dDBKR1k2tA1xzkCLpV/nhkew=
 github.com/EventStore/terraform-provider-eventstorecloud v1.5.26/go.mod h1:4BJvRyKhwKym+y+PlHJ0QOdt/kGvhl/3YxRHh2tsJ20=
+github.com/EventStore/terraform-provider-eventstorecloud v1.5.28 h1:Zce5TWutqX9ZVeuFYT0yD5pJoLk/FoatQ4KuJ+sa5AE=
+github.com/EventStore/terraform-provider-eventstorecloud v1.5.28/go.mod h1:4BJvRyKhwKym+y+PlHJ0QOdt/kGvhl/3YxRHh2tsJ20=
 github.com/GoogleCloudPlatform/cloudsql-proxy v1.31.2/go.mod h1:qR6jVnZTKDCW3j+fC9mOEPHm++1nKDMkqbbkD6KNsfo=
 github.com/HdrHistogram/hdrhistogram-go v1.1.2 h1:5IcZpTvzydCQeHzK4Ef/D5rrSqwxob0t8PQPMybUNFM=
 github.com/JohnCGriffin/overflow v0.0.0-20211019200055-46fa312c352c/go.mod h1:X0CRv0ky0k6m906ixxpzmDRLvX58TFUKS2eePweuyxk=

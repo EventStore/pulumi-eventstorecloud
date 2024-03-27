@@ -32,7 +32,7 @@ import * as utilities from "./utilities";
  *     diskType: "gp3",
  *     diskIops: 3000,
  *     diskThroughput: 125,
- *     serverVersion: "20.6",
+ *     serverVersion: "23.10",
  * });
  * ```
  *
@@ -127,6 +127,10 @@ export class ManagedCluster extends pulumi.CustomResource {
      */
     public readonly serverVersion!: pulumi.Output<string>;
     /**
+     * Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+     */
+    public readonly serverVersionTag!: pulumi.Output<string>;
+    /**
      * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
     public readonly topology!: pulumi.Output<string>;
@@ -158,6 +162,7 @@ export class ManagedCluster extends pulumi.CustomResource {
             resourceInputs["region"] = state ? state.region : undefined;
             resourceInputs["resourceProvider"] = state ? state.resourceProvider : undefined;
             resourceInputs["serverVersion"] = state ? state.serverVersion : undefined;
+            resourceInputs["serverVersionTag"] = state ? state.serverVersionTag : undefined;
             resourceInputs["topology"] = state ? state.topology : undefined;
         } else {
             const args = argsOrState as ManagedClusterArgs | undefined;
@@ -193,6 +198,7 @@ export class ManagedCluster extends pulumi.CustomResource {
             resourceInputs["projectionLevel"] = args ? args.projectionLevel : undefined;
             resourceInputs["protected"] = args ? args.protected : undefined;
             resourceInputs["serverVersion"] = args ? args.serverVersion : undefined;
+            resourceInputs["serverVersionTag"] = args ? args.serverVersionTag : undefined;
             resourceInputs["topology"] = args ? args.topology : undefined;
             resourceInputs["dnsName"] = undefined /*out*/;
             resourceInputs["region"] = undefined /*out*/;
@@ -264,6 +270,10 @@ export interface ManagedClusterState {
      */
     serverVersion?: pulumi.Input<string>;
     /**
+     * Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+     */
+    serverVersionTag?: pulumi.Input<string>;
+    /**
      * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
     topology?: pulumi.Input<string>;
@@ -317,6 +327,10 @@ export interface ManagedClusterArgs {
      * Server version to provision (find the list of valid values below)
      */
     serverVersion: pulumi.Input<string>;
+    /**
+     * Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+     */
+    serverVersionTag?: pulumi.Input<string>;
     /**
      * Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
      */
