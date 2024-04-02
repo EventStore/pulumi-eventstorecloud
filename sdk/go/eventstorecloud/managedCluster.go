@@ -52,7 +52,7 @@ import (
 //				DiskType:       pulumi.String("gp3"),
 //				DiskIops:       pulumi.Int(3000),
 //				DiskThroughput: pulumi.Int(125),
-//				ServerVersion:  pulumi.String("20.6"),
+//				ServerVersion:  pulumi.String("23.10"),
 //			})
 //			if err != nil {
 //				return err
@@ -101,6 +101,8 @@ type ManagedCluster struct {
 	ResourceProvider pulumi.StringOutput `pulumi:"resourceProvider"`
 	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringOutput `pulumi:"serverVersion"`
+	// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+	ServerVersionTag pulumi.StringOutput `pulumi:"serverVersionTag"`
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology pulumi.StringOutput `pulumi:"topology"`
 }
@@ -184,6 +186,8 @@ type managedClusterState struct {
 	ResourceProvider *string `pulumi:"resourceProvider"`
 	// Server version to provision (find the list of valid values below)
 	ServerVersion *string `pulumi:"serverVersion"`
+	// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+	ServerVersionTag *string `pulumi:"serverVersionTag"`
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology *string `pulumi:"topology"`
 }
@@ -217,6 +221,8 @@ type ManagedClusterState struct {
 	ResourceProvider pulumi.StringPtrInput
 	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringPtrInput
+	// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+	ServerVersionTag pulumi.StringPtrInput
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology pulumi.StringPtrInput
 }
@@ -248,6 +254,8 @@ type managedClusterArgs struct {
 	Protected *bool `pulumi:"protected"`
 	// Server version to provision (find the list of valid values below)
 	ServerVersion string `pulumi:"serverVersion"`
+	// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+	ServerVersionTag *string `pulumi:"serverVersionTag"`
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology string `pulumi:"topology"`
 }
@@ -276,6 +284,8 @@ type ManagedClusterArgs struct {
 	Protected pulumi.BoolPtrInput
 	// Server version to provision (find the list of valid values below)
 	ServerVersion pulumi.StringInput
+	// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+	ServerVersionTag pulumi.StringPtrInput
 	// Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
 	Topology pulumi.StringInput
 }
@@ -435,6 +445,11 @@ func (o ManagedClusterOutput) ResourceProvider() pulumi.StringOutput {
 // Server version to provision (find the list of valid values below)
 func (o ManagedClusterOutput) ServerVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.ServerVersion }).(pulumi.StringOutput)
+}
+
+// Server version tag to provision (find the list of valid values below). A higher server*version*tag will prompt an upgrade.
+func (o ManagedClusterOutput) ServerVersionTag() pulumi.StringOutput {
+	return o.ApplyT(func(v *ManagedCluster) pulumi.StringOutput { return v.ServerVersionTag }).(pulumi.StringOutput)
 }
 
 // Topology of the managed cluster (`single-node` or `three-node-multi-zone`)
