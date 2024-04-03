@@ -1,0 +1,11 @@
+{
+    "name": "pulumi-eventstorecloud",
+    "version": "0.0.1",
+    "repository": "git@github.com/EventStore/pulumi-eventstorecloud",
+    "author": "Brock Shelton <brock.shelton@eventstore.com>",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "js-yaml": "^4.1.0",
+        "markdownlint": "^0.28.0"
+    }
+}

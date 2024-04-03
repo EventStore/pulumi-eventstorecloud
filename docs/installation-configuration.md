@@ -8,9 +8,9 @@ layout: package
 
 The Event Store Cloud provider is available as a package in all Pulumi languages:
 
--   JavaScript/TypeScript: [`@eventstore/pulumi-eventstorecloud`](https://www.npmjs.com/package/@eventstore/pulumi-eventstorecloud)
--   Go: [`github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud`](https://github.com/EventStore/pulumi-eventstorecloud)
--   .NET: [`Pulumi.EventStoreCloud`](https://www.nuget.org/packages/Pulumi.EventStoreCloud)
+- JavaScript/TypeScript: [`@eventstore/pulumi-eventstorecloud`](https://www.npmjs.com/package/@eventstore/pulumi-eventstorecloud)
+- Go: [`github.com/EventStore/pulumi-eventstorecloud/sdk/go/eventstorecloud`](https://github.com/EventStore/pulumi-eventstorecloud)
+- .NET: [`Pulumi.EventStoreCloud`](https://www.nuget.org/packages/Pulumi.EventStoreCloud)
 
 ## Setup
 
@@ -33,8 +33,8 @@ First, you need an [access token](https://developers.eventstore.com/cloud/automa
 
 Then, go to the list of organizations you have access to in Event Store Cloud console, choose the organization that you will be provisioning resources for, and look the organization id in the settings.
 
--   `<YOUR_ACCESS_TOKEN>`: your access token
--   `<YOUR_ORGANIZATION_ID>`: the Event Store Cloud organization id
+- `<YOUR_ACCESS_TOKEN>`: your access token
+- `<YOUR_ORGANIZATION_ID>`: the Event Store Cloud organization id
 
 Once the credentials are obtained, there are two ways to communicate your authorization tokens to Pulumi:
 
