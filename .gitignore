@@ -18,4 +18,6 @@ yarn.lock
 
 **/schema-embed.json
 **/version.txt
+pulumi-eventstorecloud.sln
 
+node_modules
