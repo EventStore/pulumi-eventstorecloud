@@ -1,3 +1,4 @@
+version: 2
 archives:
 - id: archive
   name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
@@ -23,11 +24,11 @@ builds:
   - -X github.com/EventStore/pulumi-eventstorecloud/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-eventstorecloud/
 changelog:
-  skip: true
+  disable: true
 release:
   disable: false
   extra_files:
     - glob: sdk/python/bin/dist/pulumi_eventstorecloud-*.tar.gz
     - glob: nuget/*.nupkg
 snapshot:
-  name_template: '{{ .Tag }}-SNAPSHOT'
+  version_template: '{{ .Tag }}-SNAPSHOT'

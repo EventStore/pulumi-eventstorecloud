@@ -107,6 +107,7 @@ func Provider() tfbridge.ProviderInfo {
 			"eventstorecloud_integration":                       {Tok: makeResource(mainMod, "Integration")},
 			"eventstorecloud_integration_awscloudwatch_logs":    {Tok: makeResource(mainMod, "AWSCloudWatchLogsIntegration")},
 			"eventstorecloud_integration_awscloudwatch_metrics": {Tok: makeResource(mainMod, "AWSCloudWatchMetricsIntegration")},
+			"eventstorecloud_acl":                               {Tok: makeResource(mainMod, "Acl")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"eventstorecloud_project": {Tok: makeDataSource(mainMod, "getProject")},
